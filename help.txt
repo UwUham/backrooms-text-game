@@ -1,0 +1,6 @@
+u, up, n, forward: move up one space on the board.
+l, left, w: move left one space on the board.
+d, down, s: move down one space on the board.
+r, right, e: move right one space on the board.
+look, what: if there is an object in front of you, examine it.
+room: look at a map of the room.
