@@ -1,13 +1,22 @@
-import sys, os, random, time, gamefunctions
+import sys, os, random, time, gamefunctions as game
 
 weaponsinBag = ["knife", "shovel", "power of friendship"]
 weaponinHand = ["double ended dildo"]
+
+def bagadd():
+    if len(weaponsinBag) == 3:
+        game.clrprint("Not enough space for this item.")
+    elif len(weaponsinBag) > 3:
+        game.clrprint("How did you even get this many items? Pick a number, from 0 to", len(weaponsinBag) - 1,  "and we'll remove that item, and that'll repeat until you have three items again.")
+        while len(weaponsinBag) > 3:
+            num = input("> ")
+            weaponsinBag.pop(num)
 
 def fight():
     print()
 
 def weapons():
-    print("You have:")
+    game.clrprint("You have:")
     for i in weaponsinBag:
         print(i)
     print("Items in bag: " + str(len(weaponsinBag)))
@@ -23,9 +32,10 @@ def weapons():
     weaponsinBag.append(weaponinHand[0])
     weaponinHand.pop(0)
     weaponsinBag.pop(choicenum)
-    print("Placed the", handweapon, "back in the bag!")
+    game.clrprint("Placed the", handweapon, "back in the bag!")
     handweapon = weaponinHand[0]
-    print("Pulled out the", handweapon)
+    time.sleep(0.7)
+    print("Pulled out the", handweapon + "!")
          
 
 def defend():
