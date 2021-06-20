@@ -1,0 +1,4 @@
+room1: Bedroom
+room2: Corridor
+room3: Living Room
+room4: Lobby
