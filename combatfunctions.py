@@ -1,9 +1,30 @@
-import sys, os, random, time, gamefunctions as game
+import sys, os, random, time, gamefunctions as game, json
 
-weaponsinBag = ["knife", "shovel", "power of friendship"]
+names = ["Olivia", "Noah",
+"Emma", "Liam",
+"Amelia", "Oliver",
+"Ava", "Elijah",
+"Sophia", "Lucas",
+"Charlotte", "Mason",
+"Isabella", "Levi",
+"Mia", "Asher",
+"Luna", "James",
+"Harper", "Mateo",
+"Evelyn", "Aiden",
+"Gianna", "Benjamin",
+"Aria", "Logan",
+"Ella", "Leo",
+"Ellie", "Wyatt"
+]
+
+weaponatkstat = {
+    "blunt knife": 5#,
+}
+
+weaponsinBag = ["blunt knife", "shovel", "power of friendship"]
 weaponinHand = ["double ended dildo"]
 
-def bagadd():
+def bagadd(item):
     if len(weaponsinBag) == 3:
         game.clrprint("Not enough space for this item.")
     elif len(weaponsinBag) > 3:
@@ -11,9 +32,25 @@ def bagadd():
         while len(weaponsinBag) > 3:
             num = input("> ")
             weaponsinBag.pop(num)
+    else:
+        weaponsinBag.append(item)
 
 def fight():
-    print()
+    firstgoer = random.randint(0, 2)
+    handweapon = weaponinHand[0]
+    index = random.randrange(1.0, 3.0)
+    
+    if firstgoer == 0:
+        game.clrprint("YOU attack first!")
+        time.sleep(0.7)
+        print("Attacked with", handweapon.upper(), "for", int(index * int(weaponatkstat[handweapon])), "damage!")
+        if index == 2.0:
+            print("Critical hit!")
+        input("Press ENTER to continue")
+    else:
+        print("lol u lost")
+        input("Press ENTER to continue")
+
 
 def weapons():
     game.clrprint("You have:")
@@ -32,13 +69,19 @@ def weapons():
     weaponsinBag.append(weaponinHand[0])
     weaponinHand.pop(0)
     weaponsinBag.pop(choicenum)
-    game.clrprint("Placed the", handweapon, "back in the bag!")
+    game.clrprint("Placed the " + handweapon + " back in the bag!")
     handweapon = weaponinHand[0]
     time.sleep(0.7)
     print("Pulled out the", handweapon + "!")
+    input("Press ENTER to continue")
          
 
 def defend():
     print()
 
 weapons()
+fight()
+fight()
+fight()
+fight()
+fight()
