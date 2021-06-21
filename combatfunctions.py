@@ -95,6 +95,7 @@ def fight(entityName, entityWeapon):
             print("Critical hit!")
             damagedealt = weaponatkstat[handweapon] * 2
         input("Press ENTER to continue")
+    game.clear()
 
 
 def weapons():
@@ -138,7 +139,7 @@ def defend(entityName, entityWeapon):
     elif weapondefstat[weaponinHand[0]] <= int(weaponatkstat[entityWeapon])/2:
         damagetaken = weaponatkstat[entityWeapon]
         damagedealt = 0
-        game.clrprint("Defense failed, " + damagetaken + " damage taken.")
+        game.clrprint("Defense failed, " + str(damagetaken) + " damage taken.")
     else:
         damagetaken = weaponatkstat[entityWeapon]/2
         damagedealt = 0
@@ -146,29 +147,32 @@ def defend(entityName, entityWeapon):
 
 def combat(entityName, entityWeapon, entityHP):
     global YourHP
-    game.clrprint(entityName + " wants to fight!")
+    game.clrprint(entityName.upper() + " wants to fight!")
     while entityHP > 1:
         print("What would you like to do? (fight, defend, weapons, help)")
         run = input("> ")
         if run == "help":
-           print('''
+            print('''
 fight - attack the entity.\n
 defend - protect yourself from the entity.\n
-weapons - switch your held weapon with one in your bag (if available)''')
+weapons - switch your held weapon with one in your bag (if available)\n''')
+            input("Press ENTER to continue.")
         elif run == "fight":
            fight(entityName, entityWeapon)
            entityHP = entityHP - damagedealt
            YourHP = YourHP - damagetaken
+           input("Press ENTER to continue.")
         elif run == "defend":
            defend(entityName, entityWeapon)
            entityHP = entityHP - damagedealt
            YourHP = YourHP - damagetaken
-           run = input("> ")
+           input("Press ENTER to continue.")
         elif run == "weapons":
            weapons()
         else:
             print("Not a valid choice.")
             input("Press ENTER to continue.")
             game.clear()
+    game.clrprint("Successfully defeated " + entityName.upper() + "!")
 
 combat(random.choice(names), "entity fist", 30)
