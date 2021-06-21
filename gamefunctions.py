@@ -4,6 +4,8 @@ room1condition1 = False
 room2condition = False
 room3condition = False
 FirstTime1 = True
+FirstTime2 = True
+FirstTime3 = True
 roomstate = [1, 1]
 help = open("help.txt", "r")
 
@@ -70,7 +72,44 @@ def command(query):
         if roomstate[0] == 1 or roomstate[0] == 3:
             roomstate[0] = 2
             if FirstTime1 == True:
+                FirstTime1 = False
                 dialogue = open("./dialogue.txt", "r")
+                clrprint(dialogue.readline())
+                clrprint(dialogue.readline())
+                clrprint(dialogue.readline())
+                input("Press ENTER to continue.")
+                clrprint(dialogue.readline())
+                clrprint(dialogue.readline())
+            input("Press ENTER to continue.")
+            dialogue.close()
+    elif ask == "lobby":
+        global FirstTime2
+        if roomstate[0] == 2 or roomstate[0] == 4:
+            roomstate[0] = 3
+            if FirstTime2 == True:
+                FirstTime2 = False
+                dialogue = open("./dialogue.txt", "r")
+                clrprint(dialogue.readline())
+                clrprint(dialogue.readline())
+                clrprint(dialogue.readline())
+                clrprint(dialogue.readline())
+                clrprint(dialogue.readline())
+                input("Press ENTER to continue.")
+                clrprint(dialogue.readline())
+                clrprint(dialogue.readline())
+            input("Press ENTER to continue.")
+            dialogue.close()
+    elif ask == "living room":
+        global FirstTime3
+        if roomstate[0] == 3 or roomstate[0] == 5 or roomstate[0] == 6 or roomstate[0] == 7 or roomstate[0] == 8:
+            roomstate[0] = 3
+            if FirstTime3 == True:
+                FirstTime3 = False
+                dialogue = open("./dialogue.txt", "r")
+                clrprint(dialogue.readline())
+                clrprint(dialogue.readline())
+                clrprint(dialogue.readline())
+                clrprint(dialogue.readline())
                 clrprint(dialogue.readline())
                 clrprint(dialogue.readline())
                 clrprint(dialogue.readline())
