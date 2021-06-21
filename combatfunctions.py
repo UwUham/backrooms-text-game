@@ -157,16 +157,17 @@ fight - attack the entity.\n
 defend - protect yourself from the entity.\n
 weapons - switch your held weapon with one in your bag (if available)\n''')
             input("Press ENTER to continue.")
+            game.clear()
         elif run == "fight":
            fight(entityName, entityWeapon)
            entityHP = entityHP - damagedealt
            YourHP = YourHP - damagetaken
-           input("Press ENTER to continue.")
         elif run == "defend":
            defend(entityName, entityWeapon)
            entityHP = entityHP - damagedealt
            YourHP = YourHP - damagetaken
            input("Press ENTER to continue.")
+           game.clear()
         elif run == "weapons":
            weapons()
         else:
@@ -174,5 +175,3 @@ weapons - switch your held weapon with one in your bag (if available)\n''')
             input("Press ENTER to continue.")
             game.clear()
     game.clrprint("Successfully defeated " + entityName.upper() + "!")
-
-combat(random.choice(names), "entity fist", 30)
