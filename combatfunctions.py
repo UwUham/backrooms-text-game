@@ -1,10 +1,9 @@
 global damagedealt, damagetaken, YourHP
 damagedealt = 0
 damagetaken = 0
-YourHP = 30
+YourHP = 100
 
-import sys, os, random, time, gamefunctions as game, json
-
+import sys, os, random, time, gamefunctions as game
 
 
 names = ["Olivia", "Noah",
@@ -28,19 +27,21 @@ weaponatkstat = {
     "blunt knife": 5,
     "entity fist": 3,
     "shield": 0,
-    "lightsaber": 10
+    "lightsaber": 10,
+    "key": 0
 }
 
 weapondefstat = {
     "blunt knife": 0,
     "entity fist": 5,
     "shield": 10,
-    "lightsaber": 1
+    "lightsaber": 1,
+    "key": 0
 }
 
 
-weaponsinBag = ["entity fist", "shield", "lightsaber"]
-weaponinHand = ["blunt knife"]
+weaponsinBag = []
+weaponinHand = []
 
 def bagadd(item):
     if len(weaponsinBag) == 3:
@@ -49,7 +50,11 @@ def bagadd(item):
         game.clrprint("How did you even get this many items? Pick a number, from 0 to", len(weaponsinBag) - 1,  "and we'll remove that item, and that'll repeat until you have three items again.")
         while len(weaponsinBag) > 3:
             num = input("> ")
-            weaponsinBag.pop(num)
+            if num.isdigit():
+                num = int(num)
+                weaponsinBag.pop(num)
+            else:
+                print("Nice try, but no. Quit messing with the game and pay the price.")
     else:
         weaponsinBag.append(item)
 
@@ -181,11 +186,13 @@ weapons - switch your held weapon with one in your bag (if available)\n''')
     elif YourHP <= 0:
         game.clrprint("Defeated by " + entityName.upper() + "!")
         lost = True
-    YourHP = 30
-    print("Health restored!")
+    if YourHP < 50:
+        print("Health restored to 50!")
+        YourHP = 50
     if entityHP <= 0:
         input("Press ENTER to continue.")
     elif lost == True:
         input("Press ENTER to try again.")
         lost = False
+        YourHP = 100
         combat(entityName, entityWeapon, entityHP)

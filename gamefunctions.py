@@ -1,6 +1,6 @@
 import sys, os, combatfunctions as combat
-global room1condition
 room1condition = False
+room2condition = False
 roomstate = [1, 1]
 platform = sys.platform
 help = open("help.txt", "r")
@@ -35,13 +35,18 @@ def command(query):
         room = open("./roommaps/room" + str(roomstate[0]) + "-" + str(roomstate[1]) + ".txt", "r")
         clrprint(room.read())
         room.close()
-    elif ask.startswith("take"):
-        global room1condition
-        if roomstate[0] == 1:
+    elif ask.startswith("take"): #command to pick up items
+        global room1condition, room2condition
+        if roomstate[0] == 1: #handlers for individual rooms: eg room1
             if ask.endswith("blunt knife") and room1condition == False:
                 clrprint("Took the blunt knife.")
                 combat.bagadd("blunt knife")
                 room1condition = True
+        if roomstate[0] == 2: #same but for room2
+            if ask.endswith("key") and room2condition == False:
+                clrprint("Took the key.")
+                combat.bagadd("key")
+                room2condition = True
     elif ask == "what" or ask == "look":
         meta = open("./roommaps/meta.txt", "r")
         for i in meta:
