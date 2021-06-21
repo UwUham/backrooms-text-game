@@ -189,5 +189,3 @@ weapons - switch your held weapon with one in your bag (if available)\n''')
         input("Press ENTER to try again.")
         lost = False
         combat(entityName, entityWeapon, entityHP)
-
-combat("penis man", "lightsaber", 10)
