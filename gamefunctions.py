@@ -3,6 +3,7 @@ room1condition = False
 room1condition1 = False
 room2condition = False
 room3condition = False
+FirstTime1 = True
 roomstate = [1, 1]
 help = open("help.txt", "r")
 
@@ -20,8 +21,6 @@ def clrprint(text):
     os.system(clearcmd)
     print(text)
 
-
-
 def roomstatechange(x):
     global roomstate
     roomstate = x
@@ -34,6 +33,7 @@ def command(query):
         room = open("./roommaps/room" + str(roomstate[0]) + "-" + str(roomstate[1]) + ".txt", "r")
         clrprint(room.read())
         room.close()
+        input("Press ENTER to continue.")
     elif ask.startswith("take"): #command to pick up items
         global room1condition, room1condition1, room2condition, room3condition
         if roomstate[0] == 1: #handlers for individual rooms: eg room1
@@ -55,17 +55,36 @@ def command(query):
                 clrprint("Took the kitchen knife.")
                 combat.bagadd("kitchen knife")
                 room3condition = True
+        input("Press ENTER to continue.")
     elif ask == "what" or ask == "look":
         meta = open("./roommaps/meta.txt", "r")
         for i in meta:
-            if i.startswith("room" + str(roomstate[0])) and room1condition == False:
+            if i.startswith("room" + str(roomstate[0])):
                 clrprint(i[7:-1])
+        meta.close()
+        input("Press ENTER to continue.")
     elif ask == "bag":
         combat.weapons()
+    elif ask == "corridor":
+        global FirstTime1
+        if roomstate[0] == 1 or roomstate[0] == 3:
+            roomstate[0] = 2
+            if FirstTime1 == True:
+                dialogue = open("./dialogue.txt", "r")
+                clrprint(dialogue.readline())
+                clrprint(dialogue.readline())
+                clrprint(dialogue.readline())
+                input("Press ENTER to continue.")
+                clrprint(dialogue.readline())
+                clrprint(dialogue.readline())
+            input("Press ENTER to continue.")
+            dialogue.close()
+    clear()
     command("> ")
 
 def start():
     dialogue = open("./dialogue.txt", "r")
     clrprint(dialogue.readline())
     clrprint(dialogue.readline())
+    dialogue.close()
     command("> ")
