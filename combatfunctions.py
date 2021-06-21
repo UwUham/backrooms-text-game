@@ -25,18 +25,22 @@ names = ["Olivia", "Noah",
 
 weaponatkstat = {
     "blunt knife": 5,
-    "entity fist": 3,
+    "entity fist": 10,
     "shield": 0,
     "lightsaber": 10,
-    "key": 0
+    "key": 0,
+    "kitchen knife": 20,
+    "entity tentacle": 30
 }
 
 weapondefstat = {
-    "blunt knife": 0,
-    "entity fist": 5,
+    "blunt knife": 15,
+    "entity fist": 10,
     "shield": 10,
     "lightsaber": 1,
-    "key": 0
+    "key": 0,
+    "kitchen knife": 15,
+    "entity tentacle": 5
 }
 
 
@@ -104,33 +108,45 @@ def fight(entityName, entityWeapon):
 
 
 def weapons():
-    swap = True
-    game.clrprint("You have:")
-    for i in weaponsinBag:
-        print(i)
-    print("Items in bag: " + str(len(weaponsinBag)))
-    choice = input("Select a weapon (any weapon that was listed or none): ").lower()
-    if choice == weaponsinBag[0].lower():
-        choicenum = 0
-    elif choice == weaponsinBag[1].lower():
-        choicenum = 1
-    elif choice == weaponsinBag[2].lower():
-        choicenum = 2
-    elif choice == "none":
-        swap = False
+    if len(weaponsinBag) != 0:
+        swap = True
+        game.clrprint("You have:")
+        for i in weaponsinBag:
+            print(i)
+        print("Items in bag: " + str(len(weaponsinBag)))
+        choice = input("Select an item (any weapon that was listed or none): ").lower()
+        if choice == weaponsinBag[0].lower():
+            choicenum = 0
+        elif len(weaponsinBag) >= 2:
+            if choice == weaponsinBag[1].lower():
+                choicenum = 1
+        elif len(weaponsinBag) >= 3:    
+            if choice == weaponsinBag[2].lower():
+                choicenum = 2
+        elif choice == "none":
+            swap = False
+        else:
+            print("Not a valid choice.")
+            swap = False
+        if swap == True:
+            if len(weaponinHand) == 1:
+                handweapon = weaponinHand[0]
+                weaponinHand.append(weaponsinBag[choicenum])
+                weaponsinBag.append(weaponinHand[0])
+                weaponinHand.pop(0)
+                weaponsinBag.pop(choicenum)
+                game.clrprint("Placed the " + handweapon + " back in the bag!")
+                handweapon = weaponinHand[0]
+                time.sleep(0.7)
+                print("Pulled out the", handweapon + "!")
+            elif len(weaponinHand) == 0:
+                weaponinHand.append(weaponsinBag[choicenum])
+                weaponsinBag.pop(0)
+                handweapon = weaponinHand[0]
+                time.sleep(0.7)
+                print("Pulled out the", handweapon + "!")
     else:
-        print("Not a valid choice.")
-        swap = False
-    if swap == True:
-        handweapon = weaponinHand[0]
-        weaponinHand.append(weaponsinBag[choicenum])
-        weaponsinBag.append(weaponinHand[0])
-        weaponinHand.pop(0)
-        weaponsinBag.pop(choicenum)
-        game.clrprint("Placed the " + handweapon + " back in the bag!")
-        handweapon = weaponinHand[0]
-        time.sleep(0.7)
-        print("Pulled out the", handweapon + "!")
+        game.clrprint("Your bag is empty!")
     input("Press ENTER to continue.")
     game.clear()
          
