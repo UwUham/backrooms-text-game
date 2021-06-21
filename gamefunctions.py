@@ -4,22 +4,23 @@ room1condition1 = False
 room2condition = False
 room3condition = False
 roomstate = [1, 1]
-platform = sys.platform
 help = open("help.txt", "r")
+
+platform = sys.platform
 print(platform)
-
-
 if platform == "linux" or platform == "linux2" or platform == "darwin":
     clearcmd = "clear"
 elif platform == "win32" or platform == "win64":
     clearcmd = "cls"
 
+def clear():
+    os.system(clearcmd)
+
 def clrprint(text):
     os.system(clearcmd)
     print(text)
 
-def clear():
-    os.system(clearcmd)
+
 
 def roomstatechange(x):
     global roomstate
@@ -61,4 +62,10 @@ def command(query):
                 clrprint(i[7:-1])
     elif ask == "bag":
         combat.weapons()
+    command("> ")
+
+def start():
+    dialogue = open("./dialogue.txt", "r")
+    clrprint(dialogue.readline())
+    clrprint(dialogue.readline())
     command("> ")

@@ -202,9 +202,9 @@ weapons - switch your held weapon with one in your bag (if available)\n''')
     elif YourHP <= 0:
         game.clrprint("Defeated by " + entityName.upper() + "!")
         lost = True
-    if YourHP < 50:
-        print("Health restored to 50!")
-        YourHP = 50
+    if YourHP < 30:
+        print("Health restored to 30!")
+        YourHP = 30
     if entityHP <= 0:
         input("Press ENTER to continue.")
     elif lost == True:
