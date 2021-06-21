@@ -19,7 +19,7 @@ def roomnumchange(x):
     roomnum = x
 
 def clear():
-    os.system(clear)
+    os.system(clearcmd)
 
 def roomstatechange(x):
     global roomstate
