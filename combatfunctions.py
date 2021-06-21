@@ -150,8 +150,8 @@ def combat(entityName, entityWeapon, entityHP):
     game.clrprint(entityName.upper() + " wants to fight!")
     while entityHP > 0 and YourHP > 0:
         print("What would you like to do? (fight, defend, weapons, help)")
-        print("Your health: " + YourHP)
-        print("Entity health: " + entityHP)
+        print("Your health: " + str(YourHP))
+        print("Entity health: " + str(entityHP))
         run = input("> ")
         if run == "help":
             print('''
@@ -176,7 +176,18 @@ weapons - switch your held weapon with one in your bag (if available)\n''')
             print("Not a valid choice.")
             input("Press ENTER to continue.")
             game.clear()
-    game.clrprint("Successfully defeated " + entityName.upper() + "!")
+    if entityHP <= 0:
+        game.clrprint("Successfully defeated " + entityName.upper() + "!")
+    elif YourHP <= 0:
+        game.clrprint("Defeated by " + entityName.upper() + "!")
+        lost = True
     YourHP = 30
     print("Health restored!")
-    input("Press ENTER to continue.")
+    if entityHP <= 0:
+        input("Press ENTER to continue.")
+    elif lost == True:
+        input("Press ENTER to try again.")
+        lost = False
+        combat(entityName, entityWeapon, entityHP)
+
+combat("penis man", "lightsaber", 10)
