@@ -102,10 +102,12 @@ def command(query):
     elif ask == "living room":
         global FirstTime3
         if roomstate[0] == 3 or roomstate[0] == 5 or roomstate[0] == 6 or roomstate[0] == 7 or roomstate[0] == 8:
-            roomstate[0] = 3
+            roomstate[0] = 4
             if FirstTime3 == True:
                 FirstTime3 = False
                 dialogue = open("./dialogue.txt", "r")
+                clrprint(dialogue.readline())
+                clrprint(dialogue.readline())
                 clrprint(dialogue.readline())
                 clrprint(dialogue.readline())
                 clrprint(dialogue.readline())
