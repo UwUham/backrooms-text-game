@@ -6,22 +6,6 @@ YourHP = 100
 import sys, os, random, time, gamefunctions as game
 
 
-names = ["Olivia", "Noah",
-"Emma",
-"Amelia", "Oliver",
-"Ava", "Elijah",
-"Sophia", "Lucas",
-"Charlotte", "Mason",
-"Isabella", "Levi",
-"Mia", "Asher",
-"Luna", "James",
-"Harper", "Mateo",
-"Evelyn", "Aiden",
-"Gianna", "Benjamin",
-"Aria", "Logan",
-"Ella", "Leo",
-"Ellie", "Wyatt"
-]
 
 weaponatkstat = {
     "blunt knife": 5,
@@ -153,18 +137,21 @@ def weapons():
 
 def defend(entityName, entityWeapon):
     global damagedealt, damagetaken
-    if weapondefstat[weaponinHand[0]] > weaponatkstat[entityWeapon]:
-        damagedealt = weaponatkstat[entityWeapon]/2
-        damagetaken = 0
-        game.clrprint("Fully defended against " + entityName + " and reflected " + str(damagedealt) + " damage back.")
-    elif weapondefstat[weaponinHand[0]] <= int(weaponatkstat[entityWeapon])/2:
-        damagetaken = weaponatkstat[entityWeapon]
-        damagedealt = 0
-        game.clrprint("Defense failed, " + str(damagetaken) + " damage taken.")
+    if len(weaponinHand) == 1:
+        if weapondefstat[weaponinHand[0]] > weaponatkstat[entityWeapon]:
+            damagedealt = weaponatkstat[entityWeapon]/2
+            damagetaken = 0
+            game.clrprint("Fully defended against " + entityName + " and reflected " + str(damagedealt) + " damage back.")
+        elif weapondefstat[weaponinHand[0]] <= int(weaponatkstat[entityWeapon])/2:
+            damagetaken = weaponatkstat[entityWeapon]
+            damagedealt = 0
+            game.clrprint("Defense failed, " + str(damagetaken) + " damage taken.")
+        else:
+            damagetaken = weaponatkstat[entityWeapon]/2
+            damagedealt = 0
+            game.clrprint("Defended against " + entityName + " partially and took " + damagetaken + " damage.")
     else:
-        damagetaken = weaponatkstat[entityWeapon]/2
-        damagedealt = 0
-        game.clrprint("Defended against " + entityName + " partially and took " + damagetaken + " damage.")
+        game.clrprint("bro you need a weapon")
 
 def combat(entityName, entityWeapon, entityHP):
     global YourHP

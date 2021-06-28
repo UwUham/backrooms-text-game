@@ -2,3 +2,8 @@ room1: Bedroom
 room2: Corridor
 room3: Living Room
 room4: Lobby
+room5: Storage Room
+room6: Office
+room7: Hall
+room8: Infirmary
+room9: Demise
