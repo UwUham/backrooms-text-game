@@ -1,6 +1,8 @@
+import random
 import sys, os, combatfunctions as combat
 room1condition = False
 room1condition1 = False
+room2entity = True
 room2condition = False
 room3condition = False
 FirstTime1 = True
@@ -8,6 +10,23 @@ FirstTime2 = True
 FirstTime3 = True
 roomstate = [1, 1]
 help = open("help.txt", "r")
+
+names = ["Olivia", "Noah",
+"Emma",
+"Amelia", "Oliver",
+"Ava", "Elijah",
+"Sophia", "Lucas",
+"Charlotte", "Mason",
+"Isabella", "Levi",
+"Mia", "Asher",
+"Luna", "James",
+"Harper", "Mateo",
+"Evelyn", "Aiden",
+"Gianna", "Benjamin",
+"Aria", "Logan",
+"Ella", "Leo",
+"Ellie", "Wyatt"
+]
 
 platform = sys.platform
 print(platform)
@@ -83,16 +102,21 @@ def command(query):
             input("Press ENTER to continue.")
             dialogue.close()
     elif ask == "lobby":
-        global FirstTime2
+        global FirstTime2, room2entity
+        if room2entity == True:
+            combat.combat(random.choice(names), "entity fist", 50)
+            room2entity = False
         if roomstate[0] == 2 or roomstate[0] == 4:
             roomstate[0] = 3
             if FirstTime2 == True:
                 FirstTime2 = False
                 dialogue = open("./dialogue.txt", "r")
-                clrprint(dialogue.readline())
-                clrprint(dialogue.readline())
-                clrprint(dialogue.readline())
-                clrprint(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
                 clrprint(dialogue.readline())
                 input("Press ENTER to continue.")
                 clrprint(dialogue.readline())
@@ -106,6 +130,8 @@ def command(query):
             if FirstTime3 == True:
                 FirstTime3 = False
                 dialogue = open("./dialogue.txt", "r")
+                clrprint(dialogue.readline())
+                clrprint(dialogue.readline())
                 clrprint(dialogue.readline())
                 clrprint(dialogue.readline())
                 clrprint(dialogue.readline())
