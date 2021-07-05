@@ -1,6 +1,7 @@
-u, up, n, forward: move up one space on the board.
-l, left, w: move left one space on the board.
-d, down, s: move down one space on the board.
-r, right, e: move right one space on the board.
-look, what: if there is an object in front of you, examine it.
-room: look at a map of the room.
+help: Shows this message. If used during combat, shows a message specific to combat commands.
+map: Shows a map of where you've been so far.
+what, look: Read a descriptive analysis of the room.
+take: Take an item mentoined in the descriptive analysis.
+bag: Look inside your bag and take out an item.
+-------------------------------------------------
+Say the name of a room to enter it.
