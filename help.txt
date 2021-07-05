@@ -1,7 +1,8 @@
 help: Shows this message. If used during combat, shows a message specific to combat commands.
 map: Shows a map of where you've been so far.
 what, look: Read a descriptive analysis of the room.
-take: Take an item mentoined in the descriptive analysis.
+take: Take an item mentioned in the descriptive analysis. (eg cube, key, blunt knife)
 bag: Look inside your bag and take out an item.
+puzzle: If the analysis of a room mentions a puzzle, this starts the puzzle.
 -------------------------------------------------
 Say the name of a room to enter it.

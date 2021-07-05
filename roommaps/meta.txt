@@ -1,6 +1,6 @@
 room1: You're in your bedroom. At least you think so. There's a blunt knife on the floor, but it still looks like it could do a little damage. The south door leads to the corridor, and for some reason you feel like you can go there just by saying "corridor". Your bed is in the corner of your room, as it always has been. There's not much you can do with it though. On it, you see a mysterious cube with inscriptions.
 room2: You're in the corridor. You can't see around the corner, but you don't feel alone anymore. That's scary. There's a key on the floor with two little wings on it. The corridor leads out to a lobby.
-room3: It seems you have entered the lobby of this ehtereal plane, which seperates the corridor you just came from and the narrow hall, which is located on the other side of a locked door in front of you. In the corner of the dark, disorienting room, a cubic box, with a cubic hole on its top lies, as if in wait as it calls out to you. A wave of horror waves over you as you realise the twisted, maniacal nature of this room... it's a puzzle section! 
+room3: It seems you have entered the lobby of this ehtereal plane, which seperates the corridor you just came from and the narrow hall, which is located on the other side of a locked door in front of you. In the corner of the dark, disorienting room, a cubic box, with a cubic hole on its top lies, as if in wait as it calls out to you. A wave of horror waves over you as you realise the twisted, maniacal nature of this room... it's a puzzle section!
 room4: 
 room5: 
 room6: 

@@ -8,6 +8,7 @@ room3condition = False
 FirstTime1 = True
 FirstTime2 = True
 FirstTime3 = True
+FirstTime4 = True
 roomstate = [1, 1]
 help = open("help.txt", "r")
 
@@ -29,7 +30,6 @@ names = ["Olivia", "Noah",
 ]
 
 platform = sys.platform
-print(platform)
 if platform == "linux" or platform == "linux2" or platform == "darwin":
     clearcmd = "clear"
 elif platform == "win32" or platform == "win64":
@@ -50,6 +50,7 @@ def command(query):
     ask = input(query)
     if ask == "help": #help command
         clrprint(help.read())
+        input("Press ENTER to continue.")
     elif ask == "map": # command to look at the map
         room = open("./roommaps/room" + str(roomstate[0]) + "-" + str(roomstate[1]) + ".txt", "r")
         clrprint(room.read())
@@ -93,14 +94,16 @@ def command(query):
             if FirstTime1 == True:
                 FirstTime1 = False
                 dialogue = open("./dialogue.txt", "r")
-                clrprint(dialogue.readline())
-                clrprint(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
                 clrprint(dialogue.readline())
                 input("Press ENTER to continue.")
-                clrprint(dialogue.readline())
+                print(dialogue.readline())
                 clrprint(dialogue.readline())
             input("Press ENTER to continue.")
             dialogue.close()
+        else:
+            clrprint("You can't get there from here.")
     elif ask == "lobby":
         global FirstTime2, room2entity
         if room2entity == True:
@@ -119,10 +122,12 @@ def command(query):
                 print(dialogue.readline())
                 clrprint(dialogue.readline())
                 input("Press ENTER to continue.")
-                clrprint(dialogue.readline())
+                print(dialogue.readline())
                 clrprint(dialogue.readline())
             input("Press ENTER to continue.")
             dialogue.close()
+        else:
+            clrprint("You can't get there from here.")
     elif ask == "living room":
         global FirstTime3
         if roomstate[0] == 3 or roomstate[0] == 5 or roomstate[0] == 6 or roomstate[0] == 7 or roomstate[0] == 8:
@@ -130,22 +135,62 @@ def command(query):
             if FirstTime3 == True:
                 FirstTime3 = False
                 dialogue = open("./dialogue.txt", "r")
-                clrprint(dialogue.readline())
-                clrprint(dialogue.readline())
-                clrprint(dialogue.readline())
-                clrprint(dialogue.readline())
-                clrprint(dialogue.readline())
-                clrprint(dialogue.readline())
-                clrprint(dialogue.readline())
-                clrprint(dialogue.readline())
-                clrprint(dialogue.readline())
-                clrprint(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
                 clrprint(dialogue.readline())
                 input("Press ENTER to continue.")
-                clrprint(dialogue.readline())
+                print(dialogue.readline())
                 clrprint(dialogue.readline())
             input("Press ENTER to continue.")
             dialogue.close()
+        else:
+            clrprint("You can't get there from here.")
+    elif ask == "storage room":
+        global FirstTime4
+        if roomstate[0] == 4:
+            roomstate[0] = 5
+            if FirstTime4 == True:
+                FirstTime4 = False
+                dialogue = open("./dialogue.txt", "r")
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                clrprint(dialogue.readline())
+                input("Press ENTER to continue.")
+                print(dialogue.readline())
+                clrprint(dialogue.readline())
+            input("Press ENTER to continue.")
+            dialogue.close()
+        else:
+            clrprint("You can't get there from here.")
+    elif ask == "puzzle":
+        if roomstate[0] == 3:
+            clrprint("Puzzle Section: Lobby")
+            PuzzleCleared = False
+            while PuzzleCleared == False:
+                puzzle_ask = input("> ")
+                if puzzle_ask == "penis":
+                    cleartext = open('./roommaps/puzzles.txt', "r")
+                    print(cleartext.readline())
+                    clrprint(cleartext.readline())
+
     clear()
     command("> ")
 
