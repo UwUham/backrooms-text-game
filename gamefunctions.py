@@ -190,6 +190,10 @@ def command(query):
                     cleartext = open('./roommaps/puzzles.txt', "r")
                     print(cleartext.readline())
                     clrprint(cleartext.readline())
+                    PuzzleCleared = True
+                else:
+                    clrprint("That's not the answer.")
+                input("Press ENTER to continue.")
 
     clear()
     command("> ")
