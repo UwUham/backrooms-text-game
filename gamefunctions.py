@@ -224,6 +224,10 @@ def command(query):
         PuzzleCleared == False
         if roomstate[0] == 3:
             clrprint("Puzzle Section: Lobby")
+        if roomstate[0] == 5:
+            clrprint("Puzzle Section: Storage Room")
+        if roomstate[0] == 6:
+            clrprint("Puzzle Section: Office")
         while PuzzleCleared == False:
             puzzle_ask = input("> ")
             if roomstate[0] == 3:
@@ -271,6 +275,7 @@ def command(query):
                 clrprint("That's not the answer.")
             input("Press ENTER to continue.")
             clear()
+        PuzzleCleared = False
 
     clear()
     command("> ")

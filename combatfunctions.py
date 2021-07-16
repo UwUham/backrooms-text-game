@@ -166,6 +166,7 @@ def defend(entityName, entityWeapon):
 
 def combat(entityName, entityWeapon, entityHP):
     global YourHP
+    entityHPcache = entityHP
     game.clrprint(entityName.upper() + " wants to fight!")
     while entityHP > 0 and YourHP > 0:
         print("What would you like to do? (fight, defend, weapons, help)")
@@ -209,4 +210,4 @@ weapons - switch your held weapon with one in your bag (if available)\n''')
         input("Press ENTER to try again.")
         lost = False
         YourHP = 100
-        combat(entityName, entityWeapon, entityHP)
+        combat(entityName, entityWeapon, entityHPcache)
