@@ -10,9 +10,12 @@ FirstTime2 = True
 FirstTime3 = True
 FirstTime4 = True
 FirstTime5 = True
+FirstTime6 = True
+FirstTime7 = True
 PuzzleCleared = False
 DoorUnlocked = False
 VaultOpen = False
+Computer = False
 lobbyfight = False
 roomstate = [1, 1]
 help = open("help.txt", "r")
@@ -49,13 +52,13 @@ def clrprint(text):
     print(text)
 
 def command(query):
-    global room1condition, room1condition1, room2condition, room2entity, room3condition, FirstTime1, FirstTime2, FirstTime3, FirstTime4, FirstTime5, PuzzleCleared, DoorUnlocked, VaultOpen, lobbyfight
+    global room1condition, room1condition1, room2condition, room2entity, room3condition, FirstTime1, FirstTime2, FirstTime3, FirstTime4, FirstTime5, FirstTime6, FirstTime7, PuzzleCleared, DoorUnlocked, VaultOpen, lobbyfight, Computer
     ask = input(query)
     if ask == "help": #help command
         clrprint(help.read())
         input("Press ENTER to continue.")
     elif ask == "map": # command to look at the map
-        room = open("./roommaps/room" + str(roomstate[0]) + "-" + str(roomstate[1]) + ".txt", "r")
+        room = open("./roommaps/room" + str(roomstate[1]) + "-" + str(roomstate[0]) + ".txt", "r")
         clrprint(room.read())
         room.close()
         input("Press ENTER to continue.")
@@ -99,6 +102,7 @@ def command(query):
         if roomstate[0] == 1 or roomstate[0] == 3:
             roomstate[0] = 2
             if FirstTime1 == True:
+                roomstate[1] = roomstate[0]
                 FirstTime1 = False
                 dialogue = open("./dialogue.txt", "r")
                 print(dialogue.readline())
@@ -119,6 +123,7 @@ def command(query):
         if roomstate[0] == 2 or roomstate[0] == 4:
             roomstate[0] = 3
             if FirstTime2 == True:
+                roomstate[1] = roomstate[0]
                 FirstTime2 = False
                 dialogue = open("./dialogue.txt", "r")
                 print(dialogue.readline())
@@ -141,6 +146,7 @@ def command(query):
             if DoorUnlocked == True:
                 roomstate[0] = 4
                 if FirstTime3 == True:
+                    roomstate[1] = roomstate[0]
                     FirstTime3 = False
                     dialogue = open("./dialogue.txt", "r")
                     print(dialogue.readline())
@@ -168,6 +174,7 @@ def command(query):
         if roomstate[0] == 4 and lobbyfight == True:
             roomstate[0] = 5
             if FirstTime4 == True:
+                roomstate[1] = roomstate[0]
                 FirstTime4 = False
                 dialogue = open("./dialogue.txt", "r")
                 print(dialogue.readline())
@@ -199,8 +206,103 @@ def command(query):
         if roomstate[0] == 4 and VaultOpen == True:
             roomstate[0] = 6
             if FirstTime5 == True:
+                roomstate[1] = roomstate[0]
                 FirstTime5 = False
                 dialogue = open("./dialogue.txt", "r")
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                clrprint(dialogue.readline())
+                input("Press ENTER to continue.")
+                print(dialogue.readline())
+                clrprint(dialogue.readline())
+                dialogue.close()
+            input("Press ENTER to continue.")
+    elif ask == "hall":
+        if roomstate[0] == 4 and Computer == True:
+            roomstate[0] = 7
+            if FirstTime6 == True:
+                roomstate[1] = roomstate[0]
+                FirstTime6 = False
+                dialogue = open("./dialogue.txt", "r")
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                clrprint(dialogue.readline())
+                input("Press ENTER to continue.")
+                print(dialogue.readline())
+                clrprint(dialogue.readline())
+                dialogue.close()
+            input("Press ENTER to continue.")
+    elif ask == "infirmary":
+        if roomstate[0] == 7:
+            roomstate[0] = 8
+            if FirstTime7 == True:
+                roomstate[1] = roomstate[0]
+                FirstTime7 = False
+                dialogue = open("./dialogue.txt", "r")
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                clrprint(dialogue.readline())
+                input("Press ENTER to continue.")
+                print(dialogue.readline())
+                clrprint(dialogue.readline())
+                dialogue.close()
+            input("Press ENTER to continue.")
+    elif ask == "demise":
+        if roomstate[0] == 7:
+            roomstate[0] = 8
+            if FirstTime7 == True:
+                roomstate[1] = roomstate[0]
+                FirstTime7 = False
+                dialogue = open("./dialogue.txt", "r")
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
                 print(dialogue.readline())
                 print(dialogue.readline())
                 print(dialogue.readline())
@@ -267,6 +369,7 @@ def command(query):
                         arch_start()
                         input("Press ENTER to continue.")
                         clrprint("Seeing the screen flash to life fills you with determination. Back in the living room, you hear a door fly open.")
+                        Computer == True
             elif puzzle_ask == "exit":
                 clrprint("You step away from the puzzle and return to exploration.")
                 input("Press ENTER to continue.")

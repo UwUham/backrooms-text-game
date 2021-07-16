@@ -58,48 +58,54 @@ def PlayerIsHoldingKitchenKnifeForJoesBirthdayIn1982(var):
         print(var)
 
 def fight(entityName, entityWeapon):
-    global damagetaken, damagedealt
-    firstgoer = random.randint(0, 2)
-    handweapon = weaponinHand[0]
-    index = random.randrange(1, 3)
-    
-    if firstgoer == 0:
-        game.clrprint("YOU attack first!")
-        time.sleep(0.7)
-        print("Attacked with", handweapon.upper(), "for", int(index * int(weaponatkstat[handweapon])), "damage!")
-        damagedealt = weaponatkstat[handweapon]
-        if index == 2:
-            print("Critical hit!")
-            damagedealt = int(weaponatkstat[handweapon]) * 2
-        input("Press ENTER to continue")
+    if len(weaponinHand) == 1:
+        global damagetaken, damagedealt
+        firstgoer = random.randint(0, 2)
+        handweapon = weaponinHand[0]
         index = random.randrange(1, 3)
-        game.clrprint(entityName.upper() + " attacks!")
-        time.sleep(0.7)
-        print(entityName.upper(), weaponflavours[entityWeapon], "for", int(index * int(weaponatkstat[entityWeapon])), "damage!")
-        damagetaken = weaponatkstat[entityWeapon]
-        if index == 2:
-            print("Critical hit!")
-            damagetaken = weaponatkstat[entityWeapon] * 2
-        input("Press ENTER to continue")
+
+        if firstgoer == 0:
+            game.clrprint("YOU attack first!")
+            time.sleep(0.7)
+            print("Attacked with", handweapon.upper(), "for", int(index * int(weaponatkstat[handweapon])), "damage!")
+            damagedealt = weaponatkstat[handweapon]
+            if index == 2:
+                print("Critical hit!")
+                damagedealt = int(weaponatkstat[handweapon]) * 2
+            input("Press ENTER to continue")
+            index = random.randrange(1, 3)
+            game.clrprint(entityName.upper() + " attacks!")
+            time.sleep(0.7)
+            print(entityName.upper(), weaponflavours[entityWeapon], "for", int(index * int(weaponatkstat[entityWeapon])), "damage!")
+            damagetaken = weaponatkstat[entityWeapon]
+            if index == 2:
+                print("Critical hit!")
+                damagetaken = weaponatkstat[entityWeapon] * 2
+            input("Press ENTER to continue")
+        else:
+            game.clrprint(entityName.upper() + " attacks first!")
+            time.sleep(0.7)
+            print(entityName.upper(), weaponflavours[entityWeapon], "for", int(index * int(weaponatkstat[entityWeapon])), "damage!")
+            damagetaken = weaponatkstat[entityWeapon]
+            if index == 2.0:
+                print("Critical hit!")
+                damagetaken = weaponatkstat[entityWeapon] * 2
+            input("Press ENTER to continue")
+            index = random.randrange(1, 3)
+            game.clrprint("YOU attack!")
+            time.sleep(0.7)
+            print("Attacked with", handweapon.upper(), "for", int(index * int(weaponatkstat[handweapon])), "damage!")
+            damagedealt = weaponatkstat[handweapon]
+            if index == 2:
+                print("Critical hit!")
+                damagedealt = weaponatkstat[handweapon] * 2
+            input("Press ENTER to continue")
+        game.clear()
+    elif weaponsinBag > 0:
+        game.clrprint("Select a weapon first.")
     else:
-        game.clrprint(entityName.upper() + " attacks first!")
-        time.sleep(0.7)
-        print(entityName.upper(), weaponflavours[entityWeapon], "for", int(index * int(weaponatkstat[entityWeapon])), "damage!")
-        damagetaken = weaponatkstat[entityWeapon]
-        if index == 2.0:
-            print("Critical hit!")
-            damagetaken = weaponatkstat[entityWeapon] * 2
-        input("Press ENTER to continue")
-        index = random.randrange(1, 3)
-        game.clrprint("YOU attack!")
-        time.sleep(0.7)
-        print("Attacked with", handweapon.upper(), "for", int(index * int(weaponatkstat[handweapon])), "damage!")
-        damagedealt = weaponatkstat[handweapon]
-        if index == 2:
-            print("Critical hit!")
-            damagedealt = weaponatkstat[handweapon] * 2
-        input("Press ENTER to continue")
-    game.clear()
+        game.clrprint("You fought without a weapon and lost.")
+        damagetaken = 100
 
 
 def weapons():
@@ -161,8 +167,11 @@ def defend(entityName, entityWeapon):
             damagetaken = weaponatkstat[entityWeapon]/2
             damagedealt = 0
             game.clrprint("Defended against " + entityName + " partially and took " + damagetaken + " damage.")
-    else:
+    elif weaponsinBag > 0:
         game.clrprint("Select a weapon first.")
+    else:
+        game.clrprint("You fought without a weapon and lost.")
+        damagetaken = 100
 
 def combat(entityName, entityWeapon, entityHP):
     global YourHP

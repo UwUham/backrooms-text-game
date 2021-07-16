@@ -5,5 +5,5 @@ room4: You look around what seems to be the living room, and there is one door o
 room5: In the storage room, you see a vault with a digital keypad. It seems that you can solve this puzzle by figuring out the code.
 room6: Past the suspicious printer and broken laptops is an old desktop PC, presumably part of another puzzle. There isn't much else to say, but you should get started.
 room7: You're in a hallway, and even though the door is mere metres away it feels as though you will never reach the exit. However the infirmary ahead is slowly nearing and with enough perseverance you can overcome this illusion and face your final challenge.
-room8: The infirmary spans endlessly in both directions, however if you try to go more than a few metres in either direction you encounter a strong wind that pushes you back to the center. There's a hospital bed that you can "sleep" in and 
+room8: The infirmary spans endlessly in both directions, however if you try to go more than a few metres in either direction you encounter a strong wind that pushes you back to the center. There's a hospital bed that you can "sleep" in and a scalpel that seems quite a bit more pointy than your current knife. When you're ready, go to meet your "demise".
 room9: THE SYSTEM lies dead in front of you. You are free to 'escape', if you wish. You know what you have to do.
