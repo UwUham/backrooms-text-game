@@ -3,7 +3,7 @@ damagedealt = 0
 damagetaken = 0
 YourHP = 100
 
-import sys, os, random, time, gamefunctions as game
+import random, time, gamefunctions as game
 
 
 
@@ -25,6 +25,11 @@ weapondefstat = {
     "key": 0,
     "kitchen knife": 15,
     "entity tentacle": 5
+}
+
+weaponflavours = {
+"entity tentacle": "'s tentacles surround you, and tightly holding you in place the entity manages to get a few valuable hits in",
+"entity fist": " punches you"
 }
 
 
@@ -50,21 +55,21 @@ def fight(entityName, entityWeapon):
     global damagetaken, damagedealt
     firstgoer = random.randint(0, 2)
     handweapon = weaponinHand[0]
-    index = random.randrange(1.0, 3.0)
+    index = random.randrange(1, 3)
     
     if firstgoer == 0:
         game.clrprint("YOU attack first!")
         time.sleep(0.7)
         print("Attacked with", handweapon.upper(), "for", int(index * int(weaponatkstat[handweapon])), "damage!")
         damagedealt = weaponatkstat[handweapon]
-        if index == 2.0:
+        if index == 2:
             print("Critical hit!")
             damagedealt = int(weaponatkstat[handweapon]) * 2
         input("Press ENTER to continue")
         index = random.randrange(1, 3)
         game.clrprint(entityName.upper() + " attacks!")
         time.sleep(0.7)
-        print(entityName.upper(), "attacks with", entityWeapon.upper(), "for", int(index * int(weaponatkstat[entityWeapon])), "damage!")
+        print(entityName.upper(), weaponflavours[entityWeapon], "for", int(index * int(weaponatkstat[entityWeapon])), "damage!")
         damagetaken = weaponatkstat[entityWeapon]
         if index == 2:
             print("Critical hit!")
@@ -73,7 +78,7 @@ def fight(entityName, entityWeapon):
     else:
         game.clrprint(entityName.upper() + " attacks first!")
         time.sleep(0.7)
-        print(entityName.upper(), "attacks with", entityWeapon.upper(), "for", int(index * int(weaponatkstat[entityWeapon])), "damage!")
+        print(entityName.upper(), weaponflavours[entityWeapon], "for", int(index * int(weaponatkstat[entityWeapon])), "damage!")
         damagetaken = weaponatkstat[entityWeapon]
         if index == 2.0:
             print("Critical hit!")
@@ -151,7 +156,7 @@ def defend(entityName, entityWeapon):
             damagedealt = 0
             game.clrprint("Defended against " + entityName + " partially and took " + damagetaken + " damage.")
     else:
-        game.clrprint("bro you need a weapon")
+        game.clrprint("Select a weapon first.")
 
 def combat(entityName, entityWeapon, entityHP):
     global YourHP

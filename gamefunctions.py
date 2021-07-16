@@ -1,3 +1,4 @@
+from math import trunc
 import random
 import sys, os, combatfunctions as combat
 room1condition = False
@@ -10,6 +11,7 @@ FirstTime2 = True
 FirstTime3 = True
 FirstTime4 = True
 PuzzleCleared = False
+lobbyfight = False
 roomstate = [1, 1]
 help = open("help.txt", "r")
 
@@ -44,6 +46,7 @@ def clrprint(text):
     print(text)
 
 def command(query):
+    global room1condition, room1condition1, room2condition, room2entity, room3condition, FirstTime1, FirstTime2, FirstTime3, FirstTime4, PuzzleCleared, lobbyfight
     ask = input(query)
     if ask == "help": #help command
         clrprint(help.read())
@@ -54,7 +57,6 @@ def command(query):
         room.close()
         input("Press ENTER to continue.")
     elif ask.startswith("take"): #command to pick up items
-        global room1condition, room1condition1, room2condition, room3condition
         if roomstate[0] == 1: #handlers for individual rooms: eg room1
             if ask.endswith("blunt knife") and room1condition == False:
                 clrprint("Took the blunt knife.")
@@ -82,10 +84,15 @@ def command(query):
                 clrprint(i[7:-1])
         meta.close()
         input("Press ENTER to continue.")
+        if roomstate[0] == 4 and lobbyfight == False:
+            combat.combat(random.choice(names), "entity tentacle", 40)
+            lobbyfight = True
+        elif lobbyfight == True:
+            clrprint("The entity fades in front of you, as though simply looking at you killed them.")
+            input("Press ENTER to continue.")
     elif ask == "bag":
         combat.weapons()
     elif ask == "corridor":
-        global FirstTime1
         if roomstate[0] == 1 or roomstate[0] == 3:
             roomstate[0] = 2
             if FirstTime1 == True:
@@ -103,7 +110,6 @@ def command(query):
             clrprint("You can't get there from here.")
             input("Press ENTER to continue.")
     elif ask == "lobby":
-        global FirstTime2, room2entity
         if room2entity == True:
             combat.combat(random.choice(names), "entity fist", 50)
             room2entity = False
@@ -128,7 +134,6 @@ def command(query):
             clrprint("You can't get there from here.")
             input("Press ENTER to continue.")
     elif ask == "living room":
-        global FirstTime3, PuzzleCleared
         if roomstate[0] == 3 or roomstate[0] == 5 or roomstate[0] == 6 or roomstate[0] == 7 or roomstate[0] == 8:
             if PuzzleCleared == True:
                 roomstate[0] = 4
@@ -144,10 +149,9 @@ def command(query):
                     print(dialogue.readline())
                     print(dialogue.readline())
                     print(dialogue.readline())
-                    print(dialogue.readline())
-                    print(dialogue.readline())
                     clrprint(dialogue.readline())
                     input("Press ENTER to continue.")
+                    print(dialogue.readline())
                     clrprint(dialogue.readline())
                 input("Press ENTER to continue.")
                 dialogue.close()
@@ -158,7 +162,6 @@ def command(query):
             clrprint("You can't get there from here.")
             input("Press ENTER to continue.")
     elif ask == "storage room":
-        global FirstTime4
         if roomstate[0] == 4:
             roomstate[0] = 5
             if FirstTime4 == True:
@@ -182,22 +185,62 @@ def command(query):
                 clrprint(dialogue.readline())
             input("Press ENTER to continue.")
             dialogue.close()
+
         else:
             clrprint("You can't get there from here.")
             input("Press ENTER to continue.")
+    elif ask == "office":
+        if PuzzleCleared == True:
+            dialogue = open("./dialogue.txt", "r")
+            print(dialogue.readline())
+            print(dialogue.readline())
+            print(dialogue.readline())
+            print(dialogue.readline())
+            print(dialogue.readline())
+            print(dialogue.readline())
+            print(dialogue.readline())
+            print(dialogue.readline())
+            print(dialogue.readline())
+            print(dialogue.readline())
+            print(dialogue.readline())
+            print(dialogue.readline())
+            print(dialogue.readline())
+            print(dialogue.readline())
+            clrprint(dialogue.readline())
+            input("Press ENTER to continue.")
+            print(dialogue.readline())
+            clrprint(dialogue.readline())
+            input("Press ENTER to continue.")
+            dialogue.close()
+        elif PuzzleCleared == False:
+            clrprint("The door is locked.")
     elif ask == "puzzle":
         if roomstate[0] == 3:
             clrprint("Puzzle Section: Lobby")
-            while PuzzleCleared == False:
-                puzzle_ask = input("> ")
-                if puzzle_ask == "penis":
+        while PuzzleCleared == False:
+            puzzle_ask = input("> ")
+            if roomstate[0] == 3:
+                if "mind" in puzzle_ask.lower():
                     cleartext = open('./roommaps/puzzles.txt', "r")
                     print(cleartext.readline())
                     clrprint(cleartext.readline())
                     PuzzleCleared = True
-                else:
-                    clrprint("That's not the answer.")
+                elif puzzle_ask == "inspect":
+                    clrprint("You are presented with a cube, and although it looks completely smooth at first, if you squint your eyes you can just make out a faint enscription: \"WHAT STATE CAN YOU LEAVE OR ENTER WITHOUT CHANGING YOUR ADDRESS?\"")
+                elif puzzle_ask == "hint":
+                    clrprint("You rack your mind but in your current state you can't think of anything.")
+            elif puzzle_ask == "exit":
+                clrprint("You step away from the puzzle and return to exploration.")
                 input("Press ENTER to continue.")
+                break
+            elif puzzle_ask == "help":
+                clrprint('''inspect - recieve a description on the puzzle.
+                exit - step away from the puzzle and come back later.
+                hint - gives you a hint if one is available.''')
+            else:
+                clrprint("That's not the answer.")
+            input("Press ENTER to continue.")
+            clear()
 
     clear()
     command("> ")
