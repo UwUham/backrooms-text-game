@@ -1,6 +1,5 @@
-from math import trunc
-import random
-import sys, os, combatfunctions as combat
+import random, sys, os, combatfunctions as combat
+from terminal import arch_start
 room1condition = False
 room1condition1 = False
 room2entity = True
@@ -10,7 +9,10 @@ FirstTime1 = True
 FirstTime2 = True
 FirstTime3 = True
 FirstTime4 = True
+FirstTime5 = True
 PuzzleCleared = False
+DoorUnlocked = False
+VaultOpen = False
 lobbyfight = False
 roomstate = [1, 1]
 help = open("help.txt", "r")
@@ -41,12 +43,13 @@ elif platform == "win32" or platform == "win64":
 def clear():
     os.system(clearcmd)
 
+
 def clrprint(text):
     os.system(clearcmd)
     print(text)
 
 def command(query):
-    global room1condition, room1condition1, room2condition, room2entity, room3condition, FirstTime1, FirstTime2, FirstTime3, FirstTime4, PuzzleCleared, lobbyfight
+    global room1condition, room1condition1, room2condition, room2entity, room3condition, FirstTime1, FirstTime2, FirstTime3, FirstTime4, FirstTime5, PuzzleCleared, DoorUnlocked, VaultOpen, lobbyfight
     ask = input(query)
     if ask == "help": #help command
         clrprint(help.read())
@@ -87,7 +90,7 @@ def command(query):
         if roomstate[0] == 4 and lobbyfight == False:
             combat.combat(random.choice(names), "entity tentacle", 40)
             lobbyfight = True
-        elif lobbyfight == True:
+        elif lobbyfight == True and roomstate[0] == 4:
             clrprint("The entity fades in front of you, as though simply looking at you killed them.")
             input("Press ENTER to continue.")
     elif ask == "bag":
@@ -104,8 +107,8 @@ def command(query):
                 input("Press ENTER to continue.")
                 print(dialogue.readline())
                 clrprint(dialogue.readline())
+                dialogue.close()
             input("Press ENTER to continue.")
-            dialogue.close()
         else:
             clrprint("You can't get there from here.")
             input("Press ENTER to continue.")
@@ -128,14 +131,14 @@ def command(query):
                 input("Press ENTER to continue.")
                 print(dialogue.readline())
                 clrprint(dialogue.readline())
+                dialogue.close()
             input("Press ENTER to continue.")
-            dialogue.close()
         else:
             clrprint("You can't get there from here.")
             input("Press ENTER to continue.")
     elif ask == "living room":
         if roomstate[0] == 3 or roomstate[0] == 5 or roomstate[0] == 6 or roomstate[0] == 7 or roomstate[0] == 8:
-            if PuzzleCleared == True:
+            if DoorUnlocked == True:
                 roomstate[0] = 4
                 if FirstTime3 == True:
                     FirstTime3 = False
@@ -153,8 +156,8 @@ def command(query):
                     input("Press ENTER to continue.")
                     print(dialogue.readline())
                     clrprint(dialogue.readline())
+                    dialogue.close()
                 input("Press ENTER to continue.")
-                dialogue.close()
             else:
                 clrprint("The door is locked, you can't advance yet.")
                 input("Press ENTER to continue.")
@@ -190,31 +193,35 @@ def command(query):
             clrprint("You can't get there from here.")
             input("Press ENTER to continue.")
     elif ask == "office":
-        if PuzzleCleared == True:
-            dialogue = open("./dialogue.txt", "r")
-            print(dialogue.readline())
-            print(dialogue.readline())
-            print(dialogue.readline())
-            print(dialogue.readline())
-            print(dialogue.readline())
-            print(dialogue.readline())
-            print(dialogue.readline())
-            print(dialogue.readline())
-            print(dialogue.readline())
-            print(dialogue.readline())
-            print(dialogue.readline())
-            print(dialogue.readline())
-            print(dialogue.readline())
-            print(dialogue.readline())
-            clrprint(dialogue.readline())
+        if roomstate[0] == 4 and VaultOpen == True:
+            roomstate[0] = 6
+            if FirstTime5 == True:
+                FirstTime5 = False
+                dialogue = open("./dialogue.txt", "r")
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                clrprint(dialogue.readline())
+                input("Press ENTER to continue.")
+                print(dialogue.readline())
+                clrprint(dialogue.readline())
+                dialogue.close()
             input("Press ENTER to continue.")
-            print(dialogue.readline())
-            clrprint(dialogue.readline())
-            input("Press ENTER to continue.")
-            dialogue.close()
         elif PuzzleCleared == False:
             clrprint("The door is locked.")
     elif ask == "puzzle":
+        PuzzleCleared == False
         if roomstate[0] == 3:
             clrprint("Puzzle Section: Lobby")
         while PuzzleCleared == False:
@@ -225,10 +232,33 @@ def command(query):
                     print(cleartext.readline())
                     clrprint(cleartext.readline())
                     PuzzleCleared = True
+                    DoorUnlocked = True
                 elif puzzle_ask == "inspect":
                     clrprint("You are presented with a cube, and although it looks completely smooth at first, if you squint your eyes you can just make out a faint enscription: \"WHAT STATE CAN YOU LEAVE OR ENTER WITHOUT CHANGING YOUR ADDRESS?\"")
                 elif puzzle_ask == "hint":
                     clrprint("You rack your mind but in your current state you can't think of anything.")
+            elif roomstate[0] == 5:
+                if puzzle_ask == "inspect":
+                    clrprint("You see a vault with a digital keypad and a 4-length lcd screen and can safely assume that inputting a 4 digit code will unlock the vault.")
+                    combat.PlayerIsHoldingKitchenKnifeForJoesBirthdayIn1982("You see a cutting board, and think back to the kitchen knife you saw earlier. Maybe you need it here?")
+                elif "1982" in puzzle_ask:
+                    cleartext = open('./roommaps/puzzles.txt', "r")
+                    print(cleartext.readline())
+                    print(cleartext.readline())
+                    print(cleartext.readline())
+                    clrprint(cleartext.readline())
+                    PuzzleCleared = True
+                    VaultOpen = True
+            elif roomstate[0] == 6:
+                if puzzle_ask == "inspect":
+                    clrprint("In the office there is a singular computer, and although it is rather old you feel a strange amount of power coming out of it. On the desk there is a sticky note, and handwritten on it in black marker it says \"Install the 'neofetch' package and run it.\" You feel like this is your final challenge before your first and only chnce of escape.")
+                    input("Press ENTER to continue.")
+                    choice = input("Ready to turn on the computer? (yes/no)")
+                    if choice.lower() == 'yes':
+                        clear()
+                        arch_start()
+                        input("Press ENTER to continue.")
+                        clrprint("Seeing the screen flash to life fills you with determination. Back in the living room, you hear a door fly open.")
             elif puzzle_ask == "exit":
                 clrprint("You step away from the puzzle and return to exploration.")
                 input("Press ENTER to continue.")

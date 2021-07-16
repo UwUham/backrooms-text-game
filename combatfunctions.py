@@ -51,6 +51,12 @@ def bagadd(item):
     else:
         weaponsinBag.append(item)
 
+def PlayerIsHoldingKitchenKnifeForJoesBirthdayIn1982(var):
+    if "kitchen knife" in weaponinHand or "kitchen knife" in weaponsinBag:
+        print("You have a kitchen knife with the tag \"Joe's birthday\" on it, and underneath it says 18/8/1982.")
+    else:
+        print(var)
+
 def fight(entityName, entityWeapon):
     global damagetaken, damagedealt
     firstgoer = random.randint(0, 2)

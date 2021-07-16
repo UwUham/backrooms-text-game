@@ -2,7 +2,7 @@ room1: You're in your bedroom. At least you think so. There's a blunt knife on t
 room2: You're in the corridor. You can't see around the corner, but you don't feel alone anymore. That's scary. There's a key on the floor with two little wings on it. The corridor leads out to a lobby.
 room3: It seems you have entered the lobby of this ehtereal plane, which seperates the corridor you just came from and the narrow hall, which is located on the other side of a locked door in front of you. In the corner of the dark, disorienting room, a smooth cubic box lies, with a kitchen knife next to it, as if in wait as it calls out to you. A wave of horror waves over you as you realise the twisted, maniacal nature of this room... it's a puzzle section!
 room4: You look around what seems to be the living room, and there is one door on each wall for a total of four doors. One leads back to the lobby where you just came, one leads to a storage room, one leads to an office, and the other leads to a hallway. There's a couch and a television, and on the television is a strange video of a lady covered in tentacles. Upon closer inspection, her expression flattens, she stares directly at you, and she jumps out of the tv! No time to react, you ready your weapon to strike.
-room5: 
+room5: In the storage room, you see a vault with a digital keypad. It seems that you can solve this puzzle by figuring out the code.
 room6: 
 room7: 
 room8: 

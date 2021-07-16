@@ -1,2 +1,4 @@
 room3
-After getting the riddle right you hear a click from behind the door, unlocking the door to a Storage Room.
+After getting the riddle right you hear a click from behind the door, unlocking the door to a living room.
+room4
+You input Joe's birth year on the keypad and the vault promptly swings open. Inside is a keycard. It's lightweight enough to not take up any bag space but it says "OFFICE" written on it in big letters.
