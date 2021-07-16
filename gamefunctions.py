@@ -165,7 +165,7 @@ def command(query):
             clrprint("You can't get there from here.")
             input("Press ENTER to continue.")
     elif ask == "storage room":
-        if roomstate[0] == 4:
+        if roomstate[0] == 4 and lobbyfight == True:
             roomstate[0] = 5
             if FirstTime4 == True:
                 FirstTime4 = False
@@ -186,8 +186,11 @@ def command(query):
                 input("Press ENTER to continue.")
                 print(dialogue.readline())
                 clrprint(dialogue.readline())
+                dialogue.close()
             input("Press ENTER to continue.")
-            dialogue.close()
+        elif lobbyfight == False:
+            clrprint("You should probably look around first before you advance.")
+            input("Press ENTER to continue.")
 
         else:
             clrprint("You can't get there from here.")
@@ -198,6 +201,7 @@ def command(query):
             if FirstTime5 == True:
                 FirstTime5 = False
                 dialogue = open("./dialogue.txt", "r")
+                print(dialogue.readline())
                 print(dialogue.readline())
                 print(dialogue.readline())
                 print(dialogue.readline())
@@ -285,4 +289,4 @@ def start():
     clrprint(dialogue.readline())
     clrprint(dialogue.readline())
     dialogue.close()
-    command("> ")
+    command("\033[0;37;40> ")

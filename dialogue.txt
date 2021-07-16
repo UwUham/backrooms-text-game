@@ -12,17 +12,17 @@ lobby
 What just happened? Was that an entity? Entities? How many? You can't tell…
 Something feels intense. The entities definitely didn't expect you to win that fight. What have you brought upon yourself now?
 storage room
-sample text 1
-sample text 2
+While you know you should feel afraid of what may happen to you, you've come too far to give up now. There's no point in feeling afraid anymore. You're either getting out of here alive or you aren't and survival isn't going to happen to anybody just sitting around feeling terrified.
+You can feel a cold glow coming off of whatever's in this office. You have to swallow your fear and take a step inside, for better or for worse.
 office
-sample text 3
-sample text 4
+You step inside and it feels nothing less or more than a regular, professional office. With a twist. Broken laptops on all the desks, a printer with a picture of a man with a very wide smile being constantly printed. What's this about an impostor? Anyway, you should start looking around,
+With your newfound determination you feel ready for anything. You enter the hall, prepared for any hardships you may face.
 hall 
-sample text 5
-sample text 6
+Despite this hall being relatively short, you feel like you could run for hours and not get anywhere.
+You finally made it across that endless hall, thankfully there's an infirmary here to heal us back to full health.
 infirmary 
-sample text 7
-something something evil prescence
+There are so many beds here... it would sure be nice to rest for a bit.
+You can feel an extremely evil prescence on the other side of this door...
 demise 
-liam attacks
-you make it out
+You walk out to an entirely white void. The door closes behind you, and all you can see is white, as far as the eye can see. A small child, LIAM, walks out from behind what seems to be a corner, and looks toward you with clear aggressive intent. Don't you feel bad fighting a child? I hope not.
+you make it out - good/bad ending
