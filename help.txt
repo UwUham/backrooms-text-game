@@ -2,7 +2,9 @@ help: Shows this message. If used during combat, shows a message specific to com
 map: Shows a map of where you've been so far.
 what, look: Read a descriptive analysis of the room.
 take: Take an item mentioned in the descriptive analysis. (eg cube, key, blunt knife)
+drop: Drop an item if it is in your hand or bag. You can only store one item per room.
 bag: Look inside your bag and take out an item.
 puzzle: If the analysis of a room mentions a puzzle, this starts the puzzle.
+sleep: In any room with a bed, you can use this to sleep and recover to full health.
 -------------------------------------------------
 Say the name of a room to enter it.
