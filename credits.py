@@ -1,4 +1,4 @@
-from gamefunctions import clear
+from terminal import clear
 from time import sleep
 
 def linecount(num):
