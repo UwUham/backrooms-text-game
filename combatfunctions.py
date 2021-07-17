@@ -74,7 +74,7 @@ systemweaponatkstats = {"Fear": 10,
 
 
 weaponsinBag = []
-weaponinHand = []
+weaponinHand = ["scalpel"]
 
 def bagadd(item):
     if len(weaponsinBag) == 3:
@@ -96,6 +96,32 @@ def PlayerIsHoldingKitchenKnifeForJoesBirthdayIn1982(var):
         print("You have a kitchen knife with the tag \"Joe's birthday\" on it, and underneath it says 18/8/1982.")
     else:
         print(var)
+
+def heal():
+    YourHP = 100
+    game.clrprint("You rested and became fully healthy once again.")
+    input("Press ENTER to continue.")
+
+def drop(what, num):
+    num = str(num)
+    drops = open("./roomdrops/" + num + ".txt", "w")
+    dropsread = open("./roomdrops/" + num + ".txt", "r")
+    if len(dropsread.read()) > 0:
+        game.clrprint("You've already dropped an item here, you can't drop another.")
+    elif what in weaponsinBag:
+        drops.write(what + "\n")
+        weaponsinBag.remove(what)
+        game.clrprint("Dropped the " + what + '.')
+    elif what in weaponinHand:
+        drops.write(what + "\n")
+        weaponinHand.remove(what)
+        game.clrprint("Dropped the " + what + '.')
+    else:
+        game.clrprint("You don't have that item." + what)
+    input("Press ENTER to continue.")
+    drops.close()
+    dropsread.close()
+
 
 def fight(entityName, entityWeapon):
     if len(weaponinHand) == 1:
@@ -282,7 +308,7 @@ def sysfight():
             input("Press ENTER to continue")
             count = 0
             while count <= 2:
-                index = random.randrange(1, 4)
+                index = random.randrange(1, 3)
                 entityName = random.choice(systemnames)
                 game.clrprint(entityName.upper() + " attacks!")
                 time.sleep(0.7)

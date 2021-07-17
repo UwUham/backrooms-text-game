@@ -20,7 +20,8 @@ DoorUnlocked = False
 VaultOpen = False
 Computer = False
 lobbyfight = False
-roomstate = [8, 8]
+switch = True
+roomstate = [1, 1]
 pg13 = ""
 
 names = ["Olivia", "Noah",
@@ -55,7 +56,7 @@ def clrprint(text):
     print(text)
 
 def command(query):
-    global room1condition, room1condition1, room2condition, room2entity, room3condition, room8condition, FirstTime1, FirstTime2, FirstTime3, FirstTime4, FirstTime5, FirstTime6, FirstTime7, PuzzleCleared, DoorUnlocked, VaultOpen, lobbyfight, Computer
+    global room1condition, switch, room1condition1, room2condition, room2entity, room3condition, room8condition, FirstTime1, FirstTime2, FirstTime3, FirstTime4, FirstTime5, FirstTime6, FirstTime7, PuzzleCleared, DoorUnlocked, VaultOpen, lobbyfight, Computer
     ask = input(query)
     if ask == "help": #help command
         help = open("help.txt", "r")
@@ -68,30 +69,42 @@ def command(query):
         room.close()
         input("Press ENTER to continue.")
     elif ask.startswith("take"): #command to pick up items
-        if roomstate[0] == 1: #handlers for individual rooms: eg room1
+        dropsr = open("./roomdrops/" + str(roomstate[0]) + ".txt", "r")
+        dropsread = dropsr.read()
+        if ask[5:] in dropsread:
+            drops = open("./roomdrops/" + str(roomstate[0]) + ".txt", "w")
+            combat.bagadd(ask[5:])
+            clrprint("Took the " + ask[5:] + ".")
+            drops.write("")
+            drops.close()
+        elif roomstate[0] == 1 and switch == True: #handlers for individual rooms: eg room1
             if ask.endswith("blunt knife") and room1condition == False:
                 clrprint("Took the blunt knife.")
                 combat.bagadd("blunt knife")
+                switch = False
                 room1condition = True
             if ask.endswith("cube") and room1condition1 == False:
                 clrprint("Took the cube.")
                 combat.bagadd("mysterious cube")
                 room1condition1 = True
-        if roomstate[0] == 2: #same but for room2
+        elif roomstate[0] == 2: #same but for room2
             if ask.endswith("key") and room2condition == False:
                 clrprint("Took the key.")
                 combat.bagadd("key")
                 room2condition = True
-        if roomstate[0] == 3: #same but for room3
+        elif roomstate[0] == 3: #same but for room3
             if ask.endswith("kitchen knife") and room3condition == False:
                 clrprint("Took the kitchen knife.")
                 combat.bagadd("kitchen knife")
                 room3condition = True
-        if roomstate[0] == 8:
+        elif roomstate[0] == 8:
             if ask.endswith("scalpel") and room8condition == False:
                 clrprint("Took the scalpel.")
                 combat.bagadd("scalpel")
                 room8condition = True
+        else:
+            clrprint("That item is not here!")
+        dropsr.close()
         input("Press ENTER to continue.")
     elif ask == "what" or ask == "look":
         meta = open("./roommaps/meta.txt", "r")
@@ -122,6 +135,8 @@ def command(query):
                 print(dialogue.readline())
                 clrprint(dialogue.readline())
                 dialogue.close()
+            else:
+                clrprint("Corridor")
             input("Press ENTER to continue.")
         else:
             clrprint("You can't get there from here.")
@@ -147,6 +162,8 @@ def command(query):
                 print(dialogue.readline())
                 clrprint(dialogue.readline())
                 dialogue.close()
+            else:
+                clrprint("Lobby")
             input("Press ENTER to continue.")
         else:
             clrprint("You can't get there from here.")
@@ -173,6 +190,8 @@ def command(query):
                     print(dialogue.readline())
                     clrprint(dialogue.readline())
                     dialogue.close()
+                else:
+                    clrprint("Living Room")
                 input("Press ENTER to continue.")
             else:
                 clrprint("The door is locked, you can't advance yet.")
@@ -204,6 +223,8 @@ def command(query):
                 print(dialogue.readline())
                 clrprint(dialogue.readline())
                 dialogue.close()
+            else:
+                clrprint("Storage Room")
             input("Press ENTER to continue.")
         elif lobbyfight == False:
             clrprint("You should probably look around first before you advance.")
@@ -239,6 +260,8 @@ def command(query):
                 print(dialogue.readline())
                 clrprint(dialogue.readline())
                 dialogue.close()
+            else:
+                clrprint("Office")
             input("Press ENTER to continue.")
     elif ask == "hall":
         print(FirstTime6)
@@ -271,6 +294,8 @@ def command(query):
                 print(dialogue.readline())
                 clrprint(dialogue.readline())
                 dialogue.close()
+            else:
+                clrprint("Hall")
             input("Press ENTER to continue.")
     elif ask == "infirmary":
         if roomstate[0] == 7:
@@ -305,6 +330,8 @@ def command(query):
                 print(dialogue.readline())
                 clrprint(dialogue.readline())
                 dialogue.close()
+            else:
+                clrprint("Infirmary")
             input("Press ENTER to continue.")
     elif ask == "demise":
         if roomstate[0] == 8:
@@ -447,6 +474,17 @@ def command(query):
             clear()
         PuzzleCleared = False
 
+    elif ask == "sleep":
+        if roomstate[0] == 1 or roomstate[0] == 8:
+            combat.heal()
+        else:
+            clrprint("There's no bed to sleep on here!")
+            input("Press ENTER to continue.")
+
+    elif ask.startswith("drop"):
+        combat.drop(ask[5:], roomstate[0])
+
+
     clear()
     command("> ")
 
@@ -465,6 +503,13 @@ def start():
             loop = 1
         else:
             clrprint("Please select an option.")
+    loop = 1
+    while loop != 10:
+        drops = open("./roomdrops/" + str(loop) + ".txt", "w")
+        drops.write('')
+        drops.close
+        loop = loop + 1
+        
     dialogue = open("./dialogue.txt", "r")
     clrprint(dialogue.readline())
     clrprint(dialogue.readline())
