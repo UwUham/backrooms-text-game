@@ -7,6 +7,7 @@ room1condition1 = False
 room2entity = True
 room2condition = False
 room3condition = False
+room8condition = False
 FirstTime1 = True
 FirstTime2 = True
 FirstTime3 = True
@@ -19,9 +20,8 @@ DoorUnlocked = False
 VaultOpen = False
 Computer = False
 lobbyfight = False
-roomstate = [1, 1]
+roomstate = [8, 8]
 pg13 = ""
-help = open("help.txt", "r")
 
 names = ["Olivia", "Noah",
 "Emma",
@@ -55,10 +55,12 @@ def clrprint(text):
     print(text)
 
 def command(query):
-    global room1condition, room1condition1, room2condition, room2entity, room3condition, FirstTime1, FirstTime2, FirstTime3, FirstTime4, FirstTime5, FirstTime6, FirstTime7, PuzzleCleared, DoorUnlocked, VaultOpen, lobbyfight, Computer
+    global room1condition, room1condition1, room2condition, room2entity, room3condition, room8condition, FirstTime1, FirstTime2, FirstTime3, FirstTime4, FirstTime5, FirstTime6, FirstTime7, PuzzleCleared, DoorUnlocked, VaultOpen, lobbyfight, Computer
     ask = input(query)
     if ask == "help": #help command
+        help = open("help.txt", "r")
         clrprint(help.read())
+        help.close()
         input("Press ENTER to continue.")
     elif ask == "map": # command to look at the map
         room = open("./roommaps/room" + str(roomstate[1]) + "-" + str(roomstate[0]) + ".txt", "r")
@@ -85,6 +87,11 @@ def command(query):
                 clrprint("Took the kitchen knife.")
                 combat.bagadd("kitchen knife")
                 room3condition = True
+        if roomstate[0] == 8:
+            if ask.endswith("scalpel") and room8condition == False:
+                clrprint("Took the scalpel.")
+                combat.bagadd("scalpel")
+                room8condition = True
         input("Press ENTER to continue.")
     elif ask == "what" or ask == "look":
         meta = open("./roommaps/meta.txt", "r")
@@ -234,12 +241,14 @@ def command(query):
                 dialogue.close()
             input("Press ENTER to continue.")
     elif ask == "hall":
+        print(FirstTime6)
         if roomstate[0] == 4 and Computer == True:
             roomstate[0] = 7
             if FirstTime6 == True:
                 roomstate[1] = roomstate[0]
                 FirstTime6 = False
                 dialogue = open("./dialogue.txt", "r")
+                print(dialogue.readline())
                 print(dialogue.readline())
                 print(dialogue.readline())
                 print(dialogue.readline())
@@ -289,6 +298,8 @@ def command(query):
                 print(dialogue.readline())
                 print(dialogue.readline())
                 print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
                 clrprint(dialogue.readline())
                 input("Press ENTER to continue.")
                 print(dialogue.readline())
@@ -296,12 +307,17 @@ def command(query):
                 dialogue.close()
             input("Press ENTER to continue.")
     elif ask == "demise":
-        if roomstate[0] == 7:
-            roomstate[0] = 8
+        if roomstate[0] == 8:
+            roomstate[0] = 9
             if FirstTime7 == True:
                 roomstate[1] = roomstate[0]
                 FirstTime7 = False
                 dialogue = open("./dialogue.txt", "r")
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
+                print(dialogue.readline())
                 print(dialogue.readline())
                 print(dialogue.readline())
                 print(dialogue.readline())
@@ -381,7 +397,16 @@ def command(query):
             clrprint("Puzzle Section: Office")
         while PuzzleCleared == False:
             puzzle_ask = input("> ")
-            if roomstate[0] == 3:
+            if puzzle_ask == "help":
+                clrprint('''inspect - recieve a description on the puzzle.
+                exit - step away from the puzzle and come back later.
+                hint - gives you a hint if one is available.''')
+                input()
+            elif puzzle_ask == "exit":
+                clrprint("You step away from the puzzle and return to exploration.")
+                input("Press ENTER to continue.")
+                break
+            elif roomstate[0] == 3:
                 if "mind" in puzzle_ask.lower():
                     cleartext = open('./roommaps/puzzles.txt', "r")
                     print(cleartext.readline())
@@ -414,16 +439,8 @@ def command(query):
                         arch_start()
                         input("Press ENTER to continue.")
                         clrprint("Seeing the screen flash to life fills you with determination. Back in the living room, you hear a door fly open.")
-                        Computer == True
-            elif puzzle_ask == "exit":
-                clrprint("You step away from the puzzle and return to exploration.")
-                input("Press ENTER to continue.")
-                break
-            elif puzzle_ask == "help":
-                clrprint('''inspect - recieve a description on the puzzle.
-                exit - step away from the puzzle and come back later.
-                hint - gives you a hint if one is available.''')
-                input()
+                        Computer = True
+                        break
             else:
                 clrprint("That's not the answer.")
             input("Press ENTER to continue.")
@@ -452,4 +469,4 @@ def start():
     clrprint(dialogue.readline())
     clrprint(dialogue.readline())
     dialogue.close()
-    command("\033[0;37;40> ")
+    command("\033[0;37;40m > ")
