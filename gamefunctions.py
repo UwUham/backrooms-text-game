@@ -423,6 +423,7 @@ def command(query):
                 clrprint('''inspect - recieve a description on the puzzle.
                 exit - step away from the puzzle and come back later.
                 hint - gives you a hint if one is available.''')
+                input()
             else:
                 clrprint("That's not the answer.")
             input("Press ENTER to continue.")
