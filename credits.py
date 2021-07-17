@@ -1,0 +1,70 @@
+from gamefunctions import clear
+from time import sleep
+
+def linecount(num):
+    count = 0
+    while count != num:
+        print("\n")
+        sleep(0.2)
+        count = count + 1
+
+def liam():
+    print("Liam Broadley")
+    sleep(0.2)
+
+def jaden():
+    print("Jaden Ballard")
+    sleep(0.2)
+
+def credit():
+    clear()
+    print("The Backrooms - Credits")
+    sleep(0.2)
+    linecount(3)
+    print("Game Planning")
+    sleep(0.2)
+    linecount(3)
+    liam()
+    linecount(1)
+    jaden()
+    linecount(3)
+    print('Story Writing')
+    sleep(0.2)
+    linecount(3)
+    jaden()
+    linecount(1)
+    liam()
+    linecount(3)
+    print("Puzzle Design")
+    sleep(0.2)
+    linecount(3)
+    liam()
+    linecount(3)
+    print("Game Engine")
+    sleep(0.2)
+    linecount(3)
+    jaden()
+    linecount(3)
+    print('Dialogue Authoring')
+    sleep(0.2)
+    linecount(3)
+    jaden()
+    linecount(1)
+    liam()
+    linecount(3)
+    print("Character Design")
+    sleep(0.2)
+    linecount(3)
+    liam()
+    linecount(3)
+    print("Special Thanks")
+    sleep(0.2)
+    linecount(1)
+    print("asciiart.eu")
+    sleep(0.2)
+    linecount(1)
+    print('An anonymous 4chan user')
+    sleep(0.2)
+    linecount(1)
+    print("And YOU for playing this game!")
+    sleep(0.2)

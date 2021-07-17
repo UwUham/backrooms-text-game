@@ -1,5 +1,7 @@
-import random, sys, os, combatfunctions as combat
+import random, sys, os, time, combatfunctions as combat
 from terminal import arch_start
+from credits import credit
+
 room1condition = False
 room1condition1 = False
 room2entity = True
@@ -18,6 +20,7 @@ VaultOpen = False
 Computer = False
 lobbyfight = False
 roomstate = [1, 1]
+pg13 = ""
 help = open("help.txt", "r")
 
 names = ["Olivia", "Noah",
@@ -324,6 +327,48 @@ def command(query):
                 clrprint(dialogue.readline())
                 dialogue.close()
             input("Press ENTER to continue.")
+            '''LIAM FIGHT'''
+            combat.combat("Liam", "baby hand", 10)
+            clrprint("After defeating LIAM, he retreats back around the corner... and the next thing you know you are met with THE SYSTEM, an extremely powerful entity who appears to have ten faces scattered in various places aroud the body. Where the head is, you see LIAM's head. Prepare for your final battle.")
+            input("Press ENTER to continue.")
+            combat.system()
+            #finally, the endings
+            gameended = False
+            if pg13 == True:
+                clrprint("The SYSTEM lies in defeat infront of you. A black door fades into existence in front of you, and you know this is your chance to escape. However, having exterminated the entites and finishing THE SYSTEM, the backrooms are a much safer place and you are unsure on whether or not you want to leave.")
+                while gameended == False:
+                    ending = input("Leave the backrooms? (yes/no) ")
+                    if ending == "yes":
+                        gameended = True
+                        clrprint("You take the door in front of you, radiating a white glow as you exit to finally earn your freedom. You regain conscience in your bedroom, strangely enough exactly where you left, even though days had passed. There are times when you don't feel alone, like fragments of your past remain to haunt you, though with enough time you will be able to let them go. You know that they don't want to leave, but they have no reason to remain either. Your friends? No, they're just memories now. You have to let them go.")
+                        input("The end (press ENTER to continue).")
+                    elif ending == "no":
+                        gameended = True
+                        clrprint("The door disintegrates in front of you and you feel at peace, knowing that this was the correct decision. Despite all you've been through, your mission was not to leave the backrooms, but to make them a safer place for you… and the friends you lost a long time ago. You can still feel them near you, and with enough time and assurance that they're safe, they will surely come back. ASHLEY, XEN, HOPE, JAKE, and many others. Your best friends for many years, will be one with you again soon.")
+                        input("The end (press ENTER to continue).")
+                    else:
+                        clrprint("Please select yes or no.")
+            elif pg13 == False:
+                clrprint("The SYSTEM lies dead infront of you. Your old, blunt knife fades into existence infront of your hand, emitting an ominous black glow, and you know what you must do to escape. However, having exterminated the entites and finishing THE SYSTEM, the backrooms are a much safer place and you are unsure on whether or not you want to leave.")
+                while gameended == False:
+                    ending = input("Leave the backrooms? (yes/no) ")
+                    if ending == "yes":
+                        gameended = True
+                        clrprint("You ready your blunt knife, with you since day one, and point it towards yourself. Is this really what you have to do to leave? It'll be worth it in the end. Three… Two… It's been done. I suppose I'm not you anymore, but finally one with myself having been presented with the opportunity for freedom. I snap back into reality. The backrooms, my headspace, were always too hostile to fully immerse myself into. I suppose there's a reason for that. I look around, and my room is completely white. It was honestly more vibrant back in the backrooms despite you only having the ability to perceive what you wanted to. I kind of miss that already. I should probably look around and see how everyone's doing. Why is my door locked? What is this mailbox shaped slit in my door for? Oh god. This isn't my life. I don't want to be here, imprisoned in my own home. I want to go back. Take me back right now. Please. Oh no, they're coming. I remember now. Not again.")
+                        input("The end (press ENTER to continue).")
+                    elif ending == "no":
+                        gameended = True
+                        clrprint("The knife disintegrates in your hand and you feel at peace, knowing that this was the correct decision. Despite all you've been through, your mission was not to leave the backrooms, but to make them a safer place for you… and the friends you lost a long time ago. You can still feel them near you, and with enough time and assurance that they're safe, they will surely come back. ASHLEY, XEN, HOPE, JAKE, and many others. Your best friends for many years, will be one with you again soon.")
+                        input("The end (press ENTER to continue).")
+                    else:
+                        clrprint("Please select yes or no.")
+            '''credits go here'''
+            credit()
+            time.sleep(1)
+            sys.exit()
+
+                    
+            
         elif PuzzleCleared == False:
             clrprint("The door is locked.")
     elif ask == "puzzle":
@@ -363,7 +408,7 @@ def command(query):
                 if puzzle_ask == "inspect":
                     clrprint("In the office there is a singular computer, and although it is rather old you feel a strange amount of power coming out of it. On the desk there is a sticky note, and handwritten on it in black marker it says \"Install the 'neofetch' package and run it.\" You feel like this is your final challenge before your first and only chnce of escape.")
                     input("Press ENTER to continue.")
-                    choice = input("Ready to turn on the computer? (yes/no)")
+                    choice = input("Ready to turn on the computer? (yes/no) ")
                     if choice.lower() == 'yes':
                         clear()
                         arch_start()
@@ -388,6 +433,20 @@ def command(query):
     command("> ")
 
 def start():
+    global pg13
+    clrprint('''DISCLAIMER
+    This game contains themes not suitable for immature audiences.''')
+    loop = 0
+    while loop == 0:
+        pg13 = input("Enter PG13 mode? (yes/no) ").lower()
+        if pg13 == "yes":
+            pg13 = True
+            loop = 1
+        elif pg13 == "no":
+            pg13 = False
+            loop = 1
+        else:
+            clrprint("Please select an option.")
     dialogue = open("./dialogue.txt", "r")
     clrprint(dialogue.readline())
     clrprint(dialogue.readline())

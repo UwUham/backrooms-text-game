@@ -14,7 +14,9 @@ weaponatkstat = {
     "lightsaber": 10,
     "key": 0,
     "kitchen knife": 20,
-    "entity tentacle": 30
+    "entity tentacle": 30,
+    "baby hand": 0,
+    "scalpel": 40
 }
 
 weapondefstat = {
@@ -24,17 +26,55 @@ weapondefstat = {
     "lightsaber": 1,
     "key": 0,
     "kitchen knife": 15,
-    "entity tentacle": 5
+    "entity tentacle": 5,
+    "baby hand": 1,
+    "scalpel": 5
 }
 
 weaponflavours = {
 "entity tentacle": "'s tentacles surround you, and tightly holding you in place the entity manages to get a few valuable hits in",
-"entity fist": " punches you"
+"entity fist": " punches you",
+"baby hand": " swings with his hand, but due to having undeniably small arms and hands, misses and attacks"
 }
+
+systemnames = ["Fear",
+"Anger",
+"Disgust",
+"Sadness",
+"Rage",
+"Loneliness",
+"Melancholy",
+"Annoyance",
+"Hate",
+"Liam"
+]
+
+systemweaponflavour = {"Fear": " swings his terror mace around wildly",
+"Anger": " violently slashes with his angry claws",
+"Disgust": " swings her hand of dissatisfaction at you",
+"Sadness": " projectile cries at you with very sharp tears",
+"Rage": " attempts to impale you with his rage spear but misses",
+"Loneliness": " stabs at you with her knife, but misses and attacks",
+"Melancholy": " sits in silence, menacingly staring at you with peircing eyes",
+"Annoyance": " laughs unbearably loudly, giving you a massive headache and attacking",
+"Hate": " fills you with sorrow, and you forget why you're here in the first place for a second, before you remember and he attacks you",
+"Liam": " swings with his hand, but due to having undeniably small arms and hands, misses and attacks"
+}
+
+systemweaponatkstats = {"Fear": 10,
+"Anger": 15,
+"Disgust": 5,
+"Sadness": 15,
+"Rage": 0,
+"Loneliness": 0,
+"Melancholy": 5,
+"Annoyance": 10,
+"Hate": 20,
+"Liam": 0}
 
 
 weaponsinBag = []
-weaponinHand = []
+weaponinHand = ["scalpel"]
 
 def bagadd(item):
     if len(weaponsinBag) == 3:
@@ -101,7 +141,7 @@ def fight(entityName, entityWeapon):
                 damagedealt = weaponatkstat[handweapon] * 2
             input("Press ENTER to continue")
         game.clear()
-    elif weaponsinBag > 0:
+    elif len(weaponsinBag) > 0:
         game.clrprint("Select a weapon first.")
     else:
         game.clrprint("You fought without a weapon and lost.")
@@ -167,7 +207,7 @@ def defend(entityName, entityWeapon):
             damagetaken = weaponatkstat[entityWeapon]/2
             damagedealt = 0
             game.clrprint("Defended against " + entityName + " partially and took " + damagetaken + " damage.")
-    elif weaponsinBag > 0:
+    elif len(weaponsinBag) > 0:
         game.clrprint("Select a weapon first.")
     else:
         game.clrprint("You fought without a weapon and lost.")
@@ -220,3 +260,118 @@ weapons - switch your held weapon with one in your bag (if available)\n''')
         lost = False
         YourHP = 100
         combat(entityName, entityWeapon, entityHPcache)
+
+def sysfight():
+    global damagetaken, damagedealt
+    damagetaken = 0
+    damagedealt = 0
+    if len(weaponinHand) == 1:
+        firstgoer = random.randint(0, 2)
+        handweapon = weaponinHand[0]
+        index = random.randrange(1, 4)
+
+        if firstgoer == 0:
+            game.clrprint("YOU attack first!")
+            time.sleep(0.7)
+            print("Attacked with", handweapon.upper(), "for", int(index * int(weaponatkstat[handweapon])), "damage!")
+            if index != 2:
+                damagedealt = damagedealt + weaponatkstat[handweapon]
+            if index == 2:
+                print("Critical hit!")
+                damagedealt = damagedealt + int(weaponatkstat[handweapon]) * 2
+            input("Press ENTER to continue")
+            count = 0
+            while count <= 2:
+                index = random.randrange(1, 4)
+                entityName = random.choice(systemnames)
+                game.clrprint(entityName.upper() + " attacks!")
+                time.sleep(0.7)
+                print(entityName.upper(), systemweaponflavour[entityName], "for", int(index * int(systemweaponatkstats[entityName])), "damage!")
+                if index != 2:
+                    damagetaken = damagetaken + systemweaponatkstats[entityName]
+                if index == 2:
+                    print("Critical hit!")
+                    damagetaken = damagetaken + systemweaponatkstats[entityName] * 2
+                input("Press ENTER to continue")
+                count = count + 1
+        else:
+            count = 0
+            while count <= 2:
+                entityName = random.choice(systemnames)
+                game.clrprint(entityName.upper() + " attacks first!")
+                time.sleep(0.7)
+                print(entityName.upper(), systemweaponflavour[entityName], "for", int(index * int(systemweaponatkstats[entityName])), "damage!")
+                if index != 2:
+                    damagetaken = damagetaken + systemweaponatkstats[entityName]
+                if index == 2:
+                    print("Critical hit!")
+                    damagetaken =  damagetaken + systemweaponatkstats[entityName] * 2
+                input("Press ENTER to continue")
+                count = count + 1
+            index = random.randrange(1, 3)
+            game.clrprint("YOU attack!")
+            time.sleep(0.7)
+            print("Attacked with", handweapon.upper(), "for", int(index * int(weaponatkstat[handweapon])), "damage!")
+            if index != 2:
+                damagedealt = damagedealt + weaponatkstat[handweapon]
+            if index == 2:
+                print("Critical hit!")
+                damagedealt = damagedealt + weaponatkstat[handweapon] * 2
+            input("Press ENTER to continue")
+        game.clear()
+    elif len(weaponsinBag) > 0:
+        game.clrprint("Select a weapon first.")
+    else:
+        game.clrprint("You fought without a weapon and lost.")
+        damagetaken = 100
+
+
+def system():
+    global YourHP, damagedealt, damagetaken
+    entityHP = 210
+    entityName = "THE SYSTEM"
+    game.clrprint("THE SYSTEM wants to fight!")
+    while entityHP > 0 and YourHP > 0:
+        print("What would you like to do? (fight, defend, weapons, help)")
+        print("Your health: " + str(YourHP))
+        print("THE SYSTEM health: " + str(entityHP))
+        run = input("> ")
+        if run == "help":
+            print('''
+fight - attack the entity.\n
+defend - protect yourself from the entity.\n
+weapons - switch your held weapon with one in your bag (if available)\n''')
+            input("Press ENTER to continue.")
+            game.clear()
+        elif run == "fight":
+            sysfight()
+            entityHP = entityHP - damagedealt
+            YourHP = YourHP - damagetaken
+            damagedealt = 0
+            damagetaken = 0
+        elif run == "defend":
+            game.clrprint("You can't defend against multiple entities at once!")
+            input("Press ENTER to continue.")
+            game.clear()
+        elif run == "weapons":
+           weapons()
+        else:
+            print("Not a valid choice.")
+            input("Press ENTER to continue.")
+            game.clear()
+    if entityHP <= 0:
+        game.clrprint("Successfully defeated " + entityName.upper() + "!")
+        if YourHP < 30:
+            print("Health restored to 30!")
+            YourHP = 30
+    elif YourHP <= 0:
+        game.clrprint("Defeated by " + entityName.upper() + "!")
+        lost = True
+    if entityHP <= 0:
+        input("Press ENTER to continue.")
+    elif lost == True:
+        input("Press ENTER to try again.")
+        lost = False
+        YourHP = 100
+        entityHP = 210
+        system()

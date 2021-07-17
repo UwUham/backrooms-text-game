@@ -1,2 +1,2 @@
-from gamefunctions import start
+from gamefunctions import start, clear
 start()
