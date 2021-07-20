@@ -57,7 +57,7 @@ def clrprint(text):
     print(text)
 
 def command(query):
-    global room1condition, switch, room1condition1, room2condition, room2entity, room3condition, room8condition, FirstTime1, FirstTime2, FirstTime3, FirstTime4, FirstTime5, FirstTime6, FirstTime7, PuzzleCleared, DoorUnlocked, VaultOpen, lobbyfight, Computer
+    global room1condition, switch, room1condition1, room2condition, room2entity, room3condition, room8condition, room6condition, FirstTime1, FirstTime2, FirstTime3, FirstTime4, FirstTime5, FirstTime6, FirstTime7, PuzzleCleared, DoorUnlocked, VaultOpen, lobbyfight, Computer
     ask = input(query)
     if ask == "help": #help command
         help = open("help.txt", "r")
