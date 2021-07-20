@@ -74,7 +74,7 @@ systemweaponatkstats = {"Fear": 10,
 
 
 weaponsinBag = []
-weaponinHand = ["scalpel"]
+weaponinHand = []
 
 def bagadd(item):
     if len(weaponsinBag) == 3:
