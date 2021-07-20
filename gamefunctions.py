@@ -7,6 +7,7 @@ room1condition1 = False
 room2entity = True
 room2condition = False
 room3condition = False
+room6condition = False
 room8condition = False
 FirstTime1 = True
 FirstTime2 = True
@@ -102,6 +103,11 @@ def command(query):
                 clrprint("Took the scalpel.")
                 combat.bagadd("scalpel")
                 room8condition = True
+        elif roomstate[0] == 6:
+            if ask.endswith("usb") and room6condition == False and Computer == True:
+                clrprint("You found a 2GB USB drive plugged into the pc. It looks like this is what was holding the distribution of Backrooms Linux that you used earlier. Maybe you can weaponise this to make somethitng a little bit easier later...")
+                combat.bagadd("usb")
+                room6condition = True
         else:
             clrprint("That item is not here!")
         dropsr.close()
@@ -263,7 +269,7 @@ def command(query):
             else:
                 clrprint("Office")
             input("Press ENTER to continue.")
-    elif ask == "hall":
+    elif ask == "hallway":
         print(FirstTime6)
         if roomstate[0] == 4 and Computer == True:
             roomstate[0] = 7
@@ -295,7 +301,9 @@ def command(query):
                 clrprint(dialogue.readline())
                 dialogue.close()
             else:
-                clrprint("Hall")
+                clrprint("Hallway")
+        elif Computer == False:
+            clrprint("The door is locked, you need a keycard to advance.")
             input("Press ENTER to continue.")
     elif ask == "infirmary":
         if roomstate[0] == 7:
@@ -416,12 +424,16 @@ def command(query):
             clrprint("The door is locked.")
     elif ask == "puzzle":
         PuzzleCleared == False
-        if roomstate[0] == 3:
+        if roomstate[0] == 3 and DoorUnlocked == False:
             clrprint("Puzzle Section: Lobby")
-        if roomstate[0] == 5:
+        if roomstate[0] == 5 and VaultOpen == False:
             clrprint("Puzzle Section: Storage Room")
-        if roomstate[0] == 6:
+        if roomstate[0] == 6 and Computer == False:
             clrprint("Puzzle Section: Office")
+        else:
+            PuzzleCleared = True
+            clrprint("There's no puzzle to complete here!")
+            input("Press ENTER to continue.")
         while PuzzleCleared == False:
             puzzle_ask = input("> ")
             if puzzle_ask == "help":
@@ -466,6 +478,7 @@ def command(query):
                         arch_start()
                         input("Press ENTER to continue.")
                         clrprint("Seeing the screen flash to life fills you with determination. Back in the living room, you hear a door fly open.")
+                        input("Press ENTER to continue.")
                         Computer = True
                         break
             else:
