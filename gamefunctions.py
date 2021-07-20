@@ -426,9 +426,9 @@ def command(query):
         PuzzleCleared == False
         if roomstate[0] == 3 and DoorUnlocked == False:
             clrprint("Puzzle Section: Lobby")
-        if roomstate[0] == 5 and VaultOpen == False:
+        elif roomstate[0] == 5 and VaultOpen == False:
             clrprint("Puzzle Section: Storage Room")
-        if roomstate[0] == 6 and Computer == False:
+        elif roomstate[0] == 6 and Computer == False:
             clrprint("Puzzle Section: Office")
         else:
             PuzzleCleared = True
