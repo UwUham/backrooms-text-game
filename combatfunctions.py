@@ -16,7 +16,8 @@ weaponatkstat = {
     "kitchen knife": 20,
     "entity tentacle": 30,
     "baby hand": 0,
-    "scalpel": 40
+    "scalpel": 40,
+    "usb": 999
 }
 
 weapondefstat = {
@@ -28,7 +29,8 @@ weapondefstat = {
     "kitchen knife": 15,
     "entity tentacle": 5,
     "baby hand": 1,
-    "scalpel": 5
+    "scalpel": 5,
+    "usb": 999
 }
 
 weaponflavours = {
