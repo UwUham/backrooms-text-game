@@ -296,7 +296,7 @@ def sysfight():
     if len(weaponinHand) == 1:
         firstgoer = random.randint(0, 2)
         handweapon = weaponinHand[0]
-        index = random.randrange(1, 4)
+        index = random.randrange(1, 3)
 
         if firstgoer == 0:
             game.clrprint("YOU attack first!")
