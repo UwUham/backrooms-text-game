@@ -56,10 +56,10 @@ def arch_start():
                     print("\033[0;31;40merror:\033[0;37;40m package not found: " + cmd[9:])
             else:
                 print("\033[0;31;40merror:\033[0;37;40m unknown operand: -S to install")
-        elif cmd == help:
+        elif cmd == "help":
             print("The only command you need for this task is 'pacman'.")
         elif cmd == "neofetch" and neofetchbool == True:
             NeoRun = True
             neofetch(neofetchbool)
         else:
-            print("\033[0;31;40merror:\033[0;37;40m unknown command: try 'help'.")
+            print("\033[0;31;40merror:\033[0;37;40m unknown command" + cmd + ": try 'help'.")
