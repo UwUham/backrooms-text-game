@@ -455,7 +455,7 @@ def command(query):
                 elif puzzle_ask == "inspect":
                     clrprint("You are presented with a cube, and although it looks completely smooth at first, if you squint your eyes you can just make out a faint enscription: \"WHAT STATE CAN YOU LEAVE OR ENTER WITHOUT CHANGING YOUR ADDRESS?\"")
                 elif puzzle_ask == "hint":
-                    clrprint("You rack your mind but in your current state you can't think of anything.")
+                    clrprint("You rack your *mind* but in your current state you can't think of anything.")
             elif roomstate[0] == 5:
                 if puzzle_ask == "inspect":
                     clrprint("You see a vault with a digital keypad and a 4-length lcd screen and can safely assume that inputting a 4 digit code will unlock the vault.")
@@ -468,6 +468,8 @@ def command(query):
                     clrprint(cleartext.readline())
                     PuzzleCleared = True
                     VaultOpen = True
+                elif puzzle_ask == "hint":
+                    clrprint("The Kitchen Knife shall cut a path through the dark puzzle...")
             elif roomstate[0] == 6:
                 if puzzle_ask == "inspect":
                     clrprint("In the office there is a singular computer, and although it is rather old you feel a strange amount of power coming out of it. On the desk there is a sticky note, and handwritten on it in black marker it says \"Install the 'neofetch' package and run it.\" You feel like this is your final challenge before your first and only chnce of escape.")
@@ -481,6 +483,8 @@ def command(query):
                         input("Press ENTER to continue.")
                         Computer = True
                         break
+                    elif puzzle_ask == "hint":
+                        clrprint("You should inspect the computer in closer detail...")
             else:
                 clrprint("That's not the answer.")
             input("Press ENTER to continue.")
