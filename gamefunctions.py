@@ -1,201 +1,185 @@
-import random, sys, os, time, combatfunctions as combat
-from terminal import arch_start
-from credits import credit
+import random, sys, os, time, combatfunctions as combat #importing various dependencies: general usage
+from terminal import arch_start #importing various dependencies: specifics for the Computer puzzle
+from credits import credit #importing various dependencies: the credits at the end
 
-room1condition = False
-room1condition1 = False
-room2entity = True
-room2condition = False
-room3condition = False
-room6condition = False
-room8condition = False
-FirstTime1 = True
-FirstTime2 = True
-FirstTime3 = True
-FirstTime4 = True
-FirstTime5 = True
-FirstTime6 = True
-FirstTime7 = True
-FirstTime8 = True
-PuzzleCleared = False
-DoorUnlocked = False
-VaultOpen = False
-Computer = False
-lobbyfight = False
-switch = True
-roomstate = [1, 1]
-pg13 = ""
+room1condition = False  # defining variables for various places in the code including room text and puzzle completion status
+room1condition1 = False # defining variables for various places in the code including room text and puzzle completion status
+room2entity = True # defining variables for various places in the code including room text and puzzle completion status
+room2condition = False # defining variables for various places in the code including room text and puzzle completion status
+room3condition = False # defining variables for various places in the code including room text and puzzle completion status
+room6condition = False # defining variables for various places in the code including room text and puzzle completion status
+room8condition = False # defining variables for various places in the code including room text and puzzle completion status
+FirstTime1 = True  # defining variables for various places in the code including room text and puzzle completion status
+FirstTime2 = True  # defining variables for various places in the code including room text and puzzle completion status
+FirstTime3 = True  # defining variables for various places in the code including room text and puzzle completion status
+FirstTime4 = True  # defining variables for various places in the code including room text and puzzle completion status
+FirstTime5 = True  # defining variables for various places in the code including room text and puzzle completion status
+FirstTime6 = True  # defining variables for various places in the code including room text and puzzle completion status
+FirstTime7 = True  # defining variables for various places in the code including room text and puzzle completion status
+FirstTime8 = True  # defining variables for various places in the code including room text and puzzle completion status
+PuzzleCleared = False  # defining variables for various places in the code including room text and puzzle completion status
+DoorUnlocked = False   # defining variables for various places in the code including room text and puzzle completion status
+VaultOpen = False  # defining variables for various places in the code including room text and puzzle completion status
+Computer = False   # defining variables for various places in the code including room text and puzzle completion status
+lobbyfight = False # defining variables for various places in the code including room text and puzzle completion status
+switch = True  # defining variables for various places in the code including room text and puzzle completion status
+roomstate = [1, 1] # defining variables for various places in the code including room text and puzzle completion status
+pg13 = ""  # defining variables for various places in the code including room text and puzzle completion status
 
-room1items = []
-room2items = []
-room3items = []
-room4items = []
-room5items = []
-room6items = []
-room7items = []
-room8items = []
-room9items = []
+room1items = [] # defining lists that represent dropped items in all the rooms
+room2items = [] # defining lists that represent dropped items in all the rooms
+room3items = [] # defining lists that represent dropped items in all the rooms
+room4items = [] # defining lists that represent dropped items in all the rooms
+room5items = [] # defining lists that represent dropped items in all the rooms
+room6items = [] # defining lists that represent dropped items in all the rooms
+room7items = [] # defining lists that represent dropped items in all the rooms
+room8items = [] # defining lists that represent dropped items in all the rooms
+room9items = [] # defining lists that represent dropped items in all the rooms
 
-names = ["Olivia", "Noah",
-"Emma",
-"Amelia", "Oliver",
-"Ava", "Elijah",
-"Sophia", "Lucas",
-"Charlotte", "Mason",
-"Isabella", "Levi",
-"Mia", "Asher",
-"Luna", "James",
-"Harper", "Mateo",
-"Evelyn", "Aiden",
-"Gianna", "Benjamin",
-"Aria", "Logan",
-"Ella", "Leo",
-"Ellie", "Wyatt"
-]
+names = ["Olivia", "Noah", "Emma", "Amelia", "Oliver", "Ava", "Elijah", "Sophia", "Lucas", "Charlotte", "Mason", "Isabella", "Levi", "Mia", "Asher", "Luna", "James", "Harper", "Mateo", "Evelyn", "Aiden", "Gianna", "Benjamin", "Aria", "Logan", "Ella", "Leo", "Ellie", "Wyatt"] # a list of possible names for enemy entities
 
-platform = sys.platform
-if platform == "linux" or platform == "linux2" or platform == "darwin":
-    clearcmd = "clear"
-elif platform == "win32":
-    clearcmd = "cls"
+platform = sys.platform # defining the command to clear the screen dependent on the end user's operating system.
+if platform == "linux" or platform == "linux2" or platform == "darwin": # defining the command to clear the screen dependent on the end user's operating system.
+    clearcmd = "clear" # defining the command to clear the screen dependent on the end user's operating system.
+elif platform == "win32": # defining the command to clear the screen dependent on the end user's operating system.
+    clearcmd = "cls" # defining the command to clear the screen dependent on the end user's operating system.
 
-def clear():
-    os.system(clearcmd)
+def clear(): # assigning the clear command to a function
+    os.system(clearcmd) # assigning the clear command to a function
 
-def itemappend(name):
-    if roomstate[0] == 1:
-        room1items.append(name)
-    elif roomstate[0] == 2:
-        room2items.append(name)
-    elif roomstate[0] == 3:
-        room3items.append(name)
-    elif roomstate[0] == 4:
-        room4items.append(name)
-    elif roomstate[0] == 5:
-        room5items.append(name)
-    elif roomstate[0] == 6:
-        room6items.append(name)
-    elif roomstate[0] == 7:
-        room7items.append(name)
-    elif roomstate[0] == 8:
-        room8items.append(name)
-    elif roomstate[0] == 9:
-        room9items.append(name)
+def itemappend(name): # creating a drop system based on the current room: this function is made more to communicate with another file than anything.
+    if roomstate[0] == 1: # creating a drop system based on the current room: this function is made more to communicate with another file than anything.
+        room1items.append(name) # creating a drop system based on the current room: this function is made more to communicate with another file than anything.
+    elif roomstate[0] == 2: # creating a drop system based on the current room: this function is made more to communicate with another file than anything.
+        room2items.append(name) # creating a drop system based on the current room: this function is made more to communicate with another file than anything.
+    elif roomstate[0] == 3: # creating a drop system based on the current room: this function is made more to communicate with another file than anything.
+        room3items.append(name) # creating a drop system based on the current room: this function is made more to communicate with another file than anything.
+    elif roomstate[0] == 4: # creating a drop system based on the current room: this function is made more to communicate with another file than anything.
+        room4items.append(name) # creating a drop system based on the current room: this function is made more to communicate with another file than anything.
+    elif roomstate[0] == 5: # creating a drop system based on the current room: this function is made more to communicate with another file than anything.
+        room5items.append(name) # creating a drop system based on the current room: this function is made more to communicate with another file than anything.
+    elif roomstate[0] == 6: # creating a drop system based on the current room: this function is made more to communicate with another file than anything.
+        room6items.append(name) # creating a drop system based on the current room: this function is made more to communicate with another file than anything.
+    elif roomstate[0] == 7: # creating a drop system based on the current room: this function is made more to communicate with another file than anything.
+        room7items.append(name) # creating a drop system based on the current room: this function is made more to communicate with another file than anything.
+    elif roomstate[0] == 8: # creating a drop system based on the current room: this function is made more to communicate with another file than anything.
+        room8items.append(name) # creating a drop system based on the current room: this function is made more to communicate with another file than anything.
+    elif roomstate[0] == 9: # creating a drop system based on the current room: this function is made more to communicate with another file than anything.
+        room9items.append(name) # creating a drop system based on the current room: this function is made more to communicate with another file than anything.
 
-def clrprint(text):
-    os.system(clearcmd)
-    print(text)
+def clrprint(text): # assigning the clear command to another funtion that I will use frequently: clearing the screen and immediately printing something.
+    os.system(clearcmd) # assigning the clear command to another funtion that I will use frequently: clearing the screen and immediately printing something.
+    print(text) # assigning the clear command to another funtion that I will use frequently: clearing the screen and immediately printing something.
 
-def command(query):
-    global FirstTime8, room1items, room2items, room3items, room4items, room5items, room6items, room7items, room8items, room9items, room1condition, switch, room1condition1, room2condition, room2entity, room3condition, room8condition, room6condition, FirstTime1, FirstTime2, FirstTime3, FirstTime4, FirstTime5, FirstTime6, FirstTime7, PuzzleCleared, DoorUnlocked, VaultOpen, lobbyfight, Computer
-    ask = input(query).lower()
-    if ask == "help": #help command
-        help = open("help.txt", "r")
-        clrprint(help.read())
-        help.close()
-        input("Press ENTER to continue.")
+def command(query): # this is where all the magic happens. It contains almost every command used in the game and controls everything.
+    global FirstTime8, room1items, room2items, room3items, room4items, room5items, room6items, room7items, room8items, room9items, room1condition, switch, room1condition1, room2condition, room2entity, room3condition, room8condition, room6condition, FirstTime1, FirstTime2, FirstTime3, FirstTime4, FirstTime5, FirstTime6, FirstTime7, PuzzleCleared, DoorUnlocked, VaultOpen, lobbyfight, Computer # i'm not sure if something like "global *" would have worked at all but now that it's been written there's not much point in changing it.
+    ask = input(query).lower() # this turns the written command into a variable.
+    if ask == "help": # help command: displays a message with all available commands.
+        help = open("help.txt", "r") # open a file containing all the commands
+        clrprint(help.read()) # print the contents of the file
+        help.close() # close the file
+        input("Press ENTER to continue.") # wait for user input before continuing: this is better than waiting a set amount of time because the user can leave the game on and come back later without missing anything.
     elif ask == "map": # command to look at the map
-        room = open("./roommaps/room" + str(roomstate[1]) + "-" + str(roomstate[0]) + ".txt", "r")
-        clrprint(room.read())
-        room.close()
-        input("Press ENTER to continue.")
-    elif ask.startswith("take"): #command to pick up items
-        if roomstate[0] == 1:
-            if ask[5:] in room1items:
-                combat.bagadd(ask[5:])
-                clrprint("Took the " + ask[5:] + ".")
-                room1items.remove(ask[5:])
-                switch = True
-        elif roomstate[0] == 2:
-            if ask[5:] in room2items:
-                combat.bagadd(ask[5:])
-                clrprint("Took the " + ask[5:] + ".")
-                room2items.remove(ask[5:])
-                switch = True
-        elif roomstate[0] == 3:
-            if ask[5:] in room3items:
-                combat.bagadd(ask[5:])
-                clrprint("Took the " + ask[5:] + ".")
-                room3items.remove(ask[5:])
-                switch = True
-        elif roomstate[0] == 4:
-            if ask[5:] in room4items:
-                combat.bagadd(ask[5:])
-                clrprint("Took the " + ask[5:] + ".")
-                room4items.remove(ask[5:])
-                switch = True
-        elif roomstate[0] == 5:
-            if ask[5:] in room5items:
-                combat.bagadd(ask[5:])
-                clrprint("Took the " + ask[5:] + ".")
-                room5items.remove(ask[5:])
-                switch = True
-        elif roomstate[0] == 6:
-            if ask[5:] in room6items:
-                combat.bagadd(ask[5:])
-                clrprint("Took the " + ask[5:] + ".")
-                room6items.remove(ask[5:])
-                switch = True
-        elif roomstate[0] == 7:
-            if ask[5:] in room7items:
-                combat.bagadd(ask[5:])
-                clrprint("Took the " + ask[5:] + ".")
-                room7items.remove(ask[5:])
-                switch = True
-        elif roomstate[0] == 8:
-            if ask[5:] in room8items:
-                combat.bagadd(ask[5:])
-                clrprint("Took the " + ask[5:] + ".")
-                room8items.remove(ask[5:])
-                switch = True
-        elif roomstate[0] == 9:
-            if ask[5:] in room2items:
-                combat.bagadd(ask[5:])
-                clrprint("Took the " + ask[5:] + ".")
-                room2items.remove(ask[5:])
-                switch = True
-        if switch == False:
-            if roomstate[0] == 1: #handlers for individual rooms: eg room1
-                if ask.endswith("blunt knife") and room1condition == False:
-                    clrprint("Took the blunt knife.")
-                    combat.bagadd("blunt knife")
-                    switch = False
-                    room1condition = True
-                if ask.endswith("cube") and room1condition1 == False:
-                    clrprint("Took the cube.")
-                    combat.bagadd("mysterious cube")
-                    room1condition1 = True
-            elif roomstate[0] == 2: #same but for room2
-                if ask.endswith("key") and room2condition == False:
-                    clrprint("Took the key.")
-                    combat.bagadd("key")
-                    room2condition = True
-            elif roomstate[0] == 3: #same but for room3
-                if ask.endswith("kitchen knife") and room3condition == False:
-                    clrprint("Took the kitchen knife.")
-                    combat.bagadd("kitchen knife")
-                    room3condition = True
-            elif roomstate[0] == 8:
-                if ask.endswith("scalpel") and room8condition == False:
-                    clrprint("Took the scalpel.")
-                    combat.bagadd("scalpel")
-                    room8condition = True
-            elif roomstate[0] == 6:
-                if ask.endswith("usb") and room6condition == False and Computer == True:
-                    clrprint("You found a 2GB USB drive plugged into the pc. It looks like this is what was holding the distribution of Backrooms Linux that you used earlier. Maybe you can weaponise this to make somethitng a little bit easier later...")
-                    combat.bagadd("usb")
-                    room6condition = True
-            else:
-                clrprint("That item is not here!")
-        switch = False
-        input("Press ENTER to continue.")
-    elif ask == "what" or ask == "look":
-        meta = open("./roommaps/meta.txt", "r")
-        for i in meta:
-            if i.startswith("room" + str(roomstate[0])):
+        room = open("./roommaps/room" + str(roomstate[1]) + "-" + str(roomstate[0]) + ".txt", "r") # choose and open a file specific to your current room and visited rooms
+        clrprint(room.read()) # print the contents of the map file
+        room.close() # close the file
+        input("Press ENTER to continue.") # wait for user input
+    elif ask.startswith("take"): # command to pick up items. this is a very inefficient method of doing this but it works and that is enough for me.
+        if roomstate[0] == 1: # check what room the user is in
+            if ask[5:] in room1items: # check if the contents of end of the message have been dropped on the floor
+                combat.bagadd(ask[5:]) # put the dropped item in the bag, take it off the floor, and tell the user that the above things have been done.
+                clrprint("Took the " + ask[5:] + ".") # put the dropped item in the bag, take it off the floor, and tell the user that the above things have been done.
+                room1items.remove(ask[5:]) # put the dropped item in the bag, take it off the floor, and tell the user that the above things have been done.
+                switch = True # tell the code that we took the item off the floor and it does not need to search the room for the item
+        elif roomstate[0] == 2: # check what room the user is in
+            if ask[5:] in room2items: # check if the contents of end of the message have been dropped on the floor
+                combat.bagadd(ask[5:])  # put the dropped item in the bag, take it off the floor, and tell the user that the above things have been done.
+                clrprint("Took the " + ask[5:] + ".") # put the dropped item in the bag, take it off the floor, and tell the user that the above things have been done.
+                room2items.remove(ask[5:]) # put the dropped item in the bag, take it off the floor, and tell the user that the above things have been done.
+                switch = True  # tell the code that we took the item off the floor and it does not need to search the room for the item
+        elif roomstate[0] == 3: # check what room the user is in
+            if ask[5:] in room3items: # check if the contents of end of the message have been dropped on the floor
+                combat.bagadd(ask[5:]) # put the dropped item in the bag, take it off the floor, and tell the user that the above things have been done.
+                clrprint("Took the " + ask[5:] + ".") # put the dropped item in the bag, take it off the floor, and tell the user that the above things have been done.
+                room3items.remove(ask[5:]) # put the dropped item in the bag, take it off the floor, and tell the user that the above things have been done.
+                switch = True  # tell the code that we took the item off the floor and it does not need to search the room for the item
+        elif roomstate[0] == 4: # check what room the user is in
+            if ask[5:] in room4items: # check if the contents of end of the message have been dropped on the floor
+                combat.bagadd(ask[5:]) # put the dropped item in the bag, take it off the floor, and tell the user that the above things have been done.
+                clrprint("Took the " + ask[5:] + ".") # put the dropped item in the bag, take it off the floor, and tell the user that the above things have been done.
+                room4items.remove(ask[5:]) # put the dropped item in the bag, take it off the floor, and tell the user that the above things have been done.
+                switch = True # tell the code that we took the item off the floor and it does not need to search the room for the item
+        elif roomstate[0] == 5: # check what room the user is in
+            if ask[5:] in room5items: # check if the contents of end of the message have been dropped on the floor
+                combat.bagadd(ask[5:]) # put the dropped item in the bag, take it off the floor, and tell the user that the above things have been done.
+                clrprint("Took the " + ask[5:] + ".") # put the dropped item in the bag, take it off the floor, and tell the user that the above things have been done.
+                room5items.remove(ask[5:]) # put the dropped item in the bag, take it off the floor, and tell the user that the above things have been done.
+                switch = True  # tell the code that we took the item off the floor and it does not need to search the room for the item
+        elif roomstate[0] == 6: # check what room the user is in 
+            if ask[5:] in room6items: # check if the contents of end of the message have been dropped on the floor
+                combat.bagadd(ask[5:]) # put the dropped item in the bag, take it off the floor, and tell the user that the above things have been done.
+                clrprint("Took the " + ask[5:] + ".") # put the dropped item in the bag, take it off the floor, and tell the user that the above things have been done.
+                room6items.remove(ask[5:]) # put the dropped item in the bag, take it off the floor, and tell the user that the above things have been done.
+                switch = True  # tell the code that we took the item off the floor and it does not need to search the room for the item
+        elif roomstate[0] == 7: # check what room the user is in
+            if ask[5:] in room7items: # check if the contents of end of the message have been dropped on the floor
+                combat.bagadd(ask[5:]) # put the dropped item in the bag, take it off the floor, and tell the user that the above things have been done.
+                clrprint("Took the " + ask[5:] + ".") # put the dropped item in the bag, take it off the floor, and tell the user that the above things have been done.
+                room7items.remove(ask[5:]) # put the dropped item in the bag, take it off the floor, and tell the user that the above things have been done.
+                switch = True  # tell the code that we took the item off the floor and it does not need to search the room for the item
+        elif roomstate[0] == 8: # check what room the user is in
+            if ask[5:] in room8items: # check if the contents of end of the message have been dropped on the floor
+                combat.bagadd(ask[5:]) # put the dropped item in the bag, take it off the floor, and tell the user that the above things have been done.
+                clrprint("Took the " + ask[5:] + ".") # put the dropped item in the bag, take it off the floor, and tell the user that the above things have been done.
+                room8items.remove(ask[5:]) # put the dropped item in the bag, take it off the floor, and tell the user that the above things have been done.
+                switch = True  # tell the code that we took the item off the floor and it does not need to search the room for the item
+        elif roomstate[0] == 9: # check what room the user is in
+            if ask[5:] in room2items: # check if the contents of end of the message have been dropped on the floor
+                combat.bagadd(ask[5:]) # put the dropped item in the bag, take it off the floor, and tell the user that the above things have been done.
+                clrprint("Took the " + ask[5:] + ".") # put the dropped item in the bag, take it off the floor, and tell the user that the above things have been done.
+                room2items.remove(ask[5:]) # put the dropped item in the bag, take it off the floor, and tell the user that the above things have been done.
+                switch = True # tell the code that we took the item off the floor and it does not need to search the room for the item
+        if switch == False: # check if the code did not tell itself not to search the room
+            if roomstate[0] == 1: # checking if the user is in the correct room to take an item
+                if ask.endswith("blunt knife") and room1condition == False: # check if the specified item is in the room and it has not already been picked up
+                    clrprint("Took the blunt knife.") # take the item, and tell the code that the item has already been picked up.
+                    combat.bagadd("blunt knife") # take the item, and tell the code that the item has already been picked up.
+                    room1condition = True # take the item, and tell the code that the item has already been picked up.
+                if ask.endswith("cube") and room1condition1 == False: # check if the specified item is in the room and it has not already been picked up
+                    clrprint("Took the cube.") # take the item, and tell the code that the item has already been picked up.
+                    combat.bagadd("mysterious cube") # take the item, and tell the code that the item has already been picked up.
+                    room1condition1 = True # take the item, and tell the code that the item has already been picked up.
+            elif roomstate[0] == 2: # checking if the user is in the correct room to take an item
+                if ask.endswith("key") and room2condition == False: # check if the specified item is in the room and it has not already been picked up
+                    clrprint("Took the key.") # take the item, and tell the code that the item has already been picked up.
+                    combat.bagadd("key") # take the item, and tell the code that the item has already been picked up.
+                    room2condition = True # take the item, and tell the code that the item has already been picked up.
+            elif roomstate[0] == 3: # checking if the user is in the correct room to take an item
+                if ask.endswith("kitchen knife") and room3condition == False: # check if the specified item is in the room and it has not already been picked up
+                    clrprint("Took the kitchen knife.") # take the item, and tell the code that the item has already been picked up.
+                    combat.bagadd("kitchen knife") # take the item, and tell the code that the item has already been picked up.
+                    room3condition = True # take the item, and tell the code that the item has already been picked up.
+            elif roomstate[0] == 8: # checking if the user is in the correct room to take an item
+                if ask.endswith("scalpel") and room8condition == False: # check if the specified item is in the room and it has not already been picked up
+                    clrprint("Took the scalpel.") # take the item, and tell the code that the item has already been picked up.
+                    combat.bagadd("scalpel") # take the item, and tell the code that the item has already been picked up.
+                    room8condition = True # take the item, and tell the code that the item has already been picked up.
+            elif roomstate[0] == 6: # checking if the user is in the correct room to take an item
+                if ask.endswith("usb") and room6condition == False and Computer == True: # check if the specified item is in the room and it has not already been picked up and the puzzle relevant has been completed (also this is for a secret item that there is no hint for in the game.)
+                    clrprint("You found a 2GB USB drive plugged into the pc. It looks like this is what was holding the distribution of Backrooms Linux that you used earlier. Maybe you can weaponise this to make somethitng a little bit easier later...") # take the item, and tell the code that the item has already been picked up.
+                    combat.bagadd("usb") # take the item, and tell the code that the item has already been picked up.
+                    room6condition = True # take the item, and tell the code that the item has already been picked up.
+            else: # check if the item is not in the room and has not been dropped
+                clrprint("That item is not here!") # tell the user that the item is not available
+        switch = False # reset the drop system so that the code can be told again
+        input("Press ENTER to continue.") # wait for user input
+    elif ask == "what" or ask == "look": #  command to call a descriptive analysis of the room you are in
+        meta = open("./roommaps/meta.txt", "r") # open a file containing all the metadata for rooms.
+        for i in meta: # cycle through every line in the file
+            if i.startswith("room" + str(roomstate[0])): # until you find one that corresponds to the correct room
                 clrprint(i[7:-1])
         meta.close()
-        input("Press ENTER to continue.")
+        input("Press ENTER to continue.") # wait for user input
         if roomstate[0] == 4 and lobbyfight == False:
             combat.combat(random.choice(names), "entity tentacle", 40)
             lobbyfight = True
