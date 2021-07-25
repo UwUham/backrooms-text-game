@@ -100,30 +100,25 @@ def PlayerIsHoldingKitchenKnifeForJoesBirthdayIn1982(var):
         print(var)
 
 def heal():
+    global YourHP
     YourHP = 100
     game.clrprint("You rested and became fully healthy once again.")
     input("Press ENTER to continue.")
 
-def drop(what, num):
-    num = str(num)
-    drops = open("./roomdrops/" + num + ".txt", "w")
-    dropsread = open("./roomdrops/" + num + ".txt", "r")
-    if len(dropsread.read()) > 0:
-        game.clrprint("You've already dropped an item here, you can't drop another.")
-    elif what in weaponsinBag:
-        drops.write(what + "\n")
+def drop(what):
+    global weaponsinBag, weaponinHand
+    if what in weaponsinBag:
         weaponsinBag.remove(what)
-        game.clrprint("Dropped the " + what + '.')
+        game.itemappend(what)
+        game.clrprint("Dropped the " + what + ".")
     elif what in weaponinHand:
-        drops.write(what + "\n")
         weaponinHand.remove(what)
-        game.clrprint("Dropped the " + what + '.')
+        game.itemappend(what)
+        game.clrprint("Dropped the " + what + ".")
     else:
-        game.clrprint("You don't have that item." + what)
+        game.clrprint("You do not have a " + what + " in your inventory!")
     input("Press ENTER to continue.")
-    drops.close()
-    dropsread.close()
-
+        
 
 def fight(entityName, entityWeapon):
     if len(weaponinHand) == 1:

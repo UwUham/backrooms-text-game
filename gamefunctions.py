@@ -16,6 +16,7 @@ FirstTime4 = True
 FirstTime5 = True
 FirstTime6 = True
 FirstTime7 = True
+FirstTime8 = True
 PuzzleCleared = False
 DoorUnlocked = False
 VaultOpen = False
@@ -24,6 +25,16 @@ lobbyfight = False
 switch = True
 roomstate = [1, 1]
 pg13 = ""
+
+room1items = []
+room2items = []
+room3items = []
+room4items = []
+room5items = []
+room6items = []
+room7items = []
+room8items = []
+room9items = []
 
 names = ["Olivia", "Noah",
 "Emma",
@@ -45,20 +56,39 @@ names = ["Olivia", "Noah",
 platform = sys.platform
 if platform == "linux" or platform == "linux2" or platform == "darwin":
     clearcmd = "clear"
-elif platform == "win32" or platform == "win64":
+elif platform == "win32":
     clearcmd = "cls"
 
 def clear():
     os.system(clearcmd)
 
+def itemappend(name):
+    if roomstate[0] == 1:
+        room1items.append(name)
+    elif roomstate[0] == 2:
+        room2items.append(name)
+    elif roomstate[0] == 3:
+        room3items.append(name)
+    elif roomstate[0] == 4:
+        room4items.append(name)
+    elif roomstate[0] == 5:
+        room5items.append(name)
+    elif roomstate[0] == 6:
+        room6items.append(name)
+    elif roomstate[0] == 7:
+        room7items.append(name)
+    elif roomstate[0] == 8:
+        room8items.append(name)
+    elif roomstate[0] == 9:
+        room9items.append(name)
 
 def clrprint(text):
     os.system(clearcmd)
     print(text)
 
 def command(query):
-    global room1condition, switch, room1condition1, room2condition, room2entity, room3condition, room8condition, room6condition, FirstTime1, FirstTime2, FirstTime3, FirstTime4, FirstTime5, FirstTime6, FirstTime7, PuzzleCleared, DoorUnlocked, VaultOpen, lobbyfight, Computer
-    ask = input(query)
+    global FirstTime8, room1items, room2items, room3items, room4items, room5items, room6items, room7items, room8items, room9items, room1condition, switch, room1condition1, room2condition, room2entity, room3condition, room8condition, room6condition, FirstTime1, FirstTime2, FirstTime3, FirstTime4, FirstTime5, FirstTime6, FirstTime7, PuzzleCleared, DoorUnlocked, VaultOpen, lobbyfight, Computer
+    ask = input(query).lower()
     if ask == "help": #help command
         help = open("help.txt", "r")
         clrprint(help.read())
@@ -70,47 +100,94 @@ def command(query):
         room.close()
         input("Press ENTER to continue.")
     elif ask.startswith("take"): #command to pick up items
-        dropsr = open("./roomdrops/" + str(roomstate[0]) + ".txt", "r")
-        dropsread = dropsr.read()
-        if ask[5:] in dropsread:
-            drops = open("./roomdrops/" + str(roomstate[0]) + ".txt", "w")
-            combat.bagadd(ask[5:])
-            clrprint("Took the " + ask[5:] + ".")
-            drops.write("")
-            drops.close()
-        elif roomstate[0] == 1 and switch == True: #handlers for individual rooms: eg room1
-            if ask.endswith("blunt knife") and room1condition == False:
-                clrprint("Took the blunt knife.")
-                combat.bagadd("blunt knife")
-                switch = False
-                room1condition = True
-            if ask.endswith("cube") and room1condition1 == False:
-                clrprint("Took the cube.")
-                combat.bagadd("mysterious cube")
-                room1condition1 = True
-        elif roomstate[0] == 2: #same but for room2
-            if ask.endswith("key") and room2condition == False:
-                clrprint("Took the key.")
-                combat.bagadd("key")
-                room2condition = True
-        elif roomstate[0] == 3: #same but for room3
-            if ask.endswith("kitchen knife") and room3condition == False:
-                clrprint("Took the kitchen knife.")
-                combat.bagadd("kitchen knife")
-                room3condition = True
-        elif roomstate[0] == 8:
-            if ask.endswith("scalpel") and room8condition == False:
-                clrprint("Took the scalpel.")
-                combat.bagadd("scalpel")
-                room8condition = True
+        if roomstate[0] == 1:
+            if ask[5:] in room1items:
+                combat.bagadd(ask[5:])
+                clrprint("Took the " + ask[5:] + ".")
+                room1items.remove(ask[5:])
+                switch = True
+        elif roomstate[0] == 2:
+            if ask[5:] in room2items:
+                combat.bagadd(ask[5:])
+                clrprint("Took the " + ask[5:] + ".")
+                room2items.remove(ask[5:])
+                switch = True
+        elif roomstate[0] == 3:
+            if ask[5:] in room3items:
+                combat.bagadd(ask[5:])
+                clrprint("Took the " + ask[5:] + ".")
+                room3items.remove(ask[5:])
+                switch = True
+        elif roomstate[0] == 4:
+            if ask[5:] in room4items:
+                combat.bagadd(ask[5:])
+                clrprint("Took the " + ask[5:] + ".")
+                room4items.remove(ask[5:])
+                switch = True
+        elif roomstate[0] == 5:
+            if ask[5:] in room5items:
+                combat.bagadd(ask[5:])
+                clrprint("Took the " + ask[5:] + ".")
+                room5items.remove(ask[5:])
+                switch = True
         elif roomstate[0] == 6:
-            if ask.endswith("usb") and room6condition == False and Computer == True:
-                clrprint("You found a 2GB USB drive plugged into the pc. It looks like this is what was holding the distribution of Backrooms Linux that you used earlier. Maybe you can weaponise this to make somethitng a little bit easier later...")
-                combat.bagadd("usb")
-                room6condition = True
-        else:
-            clrprint("That item is not here!")
-        dropsr.close()
+            if ask[5:] in room6items:
+                combat.bagadd(ask[5:])
+                clrprint("Took the " + ask[5:] + ".")
+                room6items.remove(ask[5:])
+                switch = True
+        elif roomstate[0] == 7:
+            if ask[5:] in room7items:
+                combat.bagadd(ask[5:])
+                clrprint("Took the " + ask[5:] + ".")
+                room7items.remove(ask[5:])
+                switch = True
+        elif roomstate[0] == 8:
+            if ask[5:] in room8items:
+                combat.bagadd(ask[5:])
+                clrprint("Took the " + ask[5:] + ".")
+                room8items.remove(ask[5:])
+                switch = True
+        elif roomstate[0] == 9:
+            if ask[5:] in room2items:
+                combat.bagadd(ask[5:])
+                clrprint("Took the " + ask[5:] + ".")
+                room2items.remove(ask[5:])
+                switch = True
+        if switch == False:
+            if roomstate[0] == 1: #handlers for individual rooms: eg room1
+                if ask.endswith("blunt knife") and room1condition == False:
+                    clrprint("Took the blunt knife.")
+                    combat.bagadd("blunt knife")
+                    switch = False
+                    room1condition = True
+                if ask.endswith("cube") and room1condition1 == False:
+                    clrprint("Took the cube.")
+                    combat.bagadd("mysterious cube")
+                    room1condition1 = True
+            elif roomstate[0] == 2: #same but for room2
+                if ask.endswith("key") and room2condition == False:
+                    clrprint("Took the key.")
+                    combat.bagadd("key")
+                    room2condition = True
+            elif roomstate[0] == 3: #same but for room3
+                if ask.endswith("kitchen knife") and room3condition == False:
+                    clrprint("Took the kitchen knife.")
+                    combat.bagadd("kitchen knife")
+                    room3condition = True
+            elif roomstate[0] == 8:
+                if ask.endswith("scalpel") and room8condition == False:
+                    clrprint("Took the scalpel.")
+                    combat.bagadd("scalpel")
+                    room8condition = True
+            elif roomstate[0] == 6:
+                if ask.endswith("usb") and room6condition == False and Computer == True:
+                    clrprint("You found a 2GB USB drive plugged into the pc. It looks like this is what was holding the distribution of Backrooms Linux that you used earlier. Maybe you can weaponise this to make somethitng a little bit easier later...")
+                    combat.bagadd("usb")
+                    room6condition = True
+            else:
+                clrprint("That item is not here!")
+        switch = False
         input("Press ENTER to continue.")
     elif ask == "what" or ask == "look":
         meta = open("./roommaps/meta.txt", "r")
@@ -127,6 +204,11 @@ def command(query):
             input("Press ENTER to continue.")
     elif ask == "bag":
         combat.weapons()
+    elif ask == "bedroom":
+        if roomstate[0] == 2:
+            roomstate[0] = 1
+            clrprint("Bedroom")
+            input("Press ENTER to continue.")
     elif ask == "corridor":
         if roomstate[0] == 1 or roomstate[0] == 3:
             roomstate[0] = 2
@@ -344,9 +426,9 @@ def command(query):
     elif ask == "demise":
         if roomstate[0] == 8:
             roomstate[0] = 9
-            if FirstTime7 == True:
+            if FirstTime8 == True:
                 roomstate[1] = roomstate[0]
-                FirstTime7 = False
+                FirstTime8 = False
                 dialogue = open("./dialogue.txt", "r")
                 print(dialogue.readline())
                 print(dialogue.readline())
@@ -499,7 +581,11 @@ def command(query):
             input("Press ENTER to continue.")
 
     elif ask.startswith("drop"):
-        combat.drop(ask[5:], roomstate[0])
+        combat.drop(ask[5:])
+    
+    else:
+        clrprint("Unknown action. Try \"help\".")
+        input("Press ENTER to continue.")
 
 
     clear()
@@ -520,12 +606,6 @@ def start():
             loop = 1
         else:
             clrprint("Please select an option.")
-    loop = 1
-    while loop != 10:
-        drops = open("./roomdrops/" + str(loop) + ".txt", "w")
-        drops.write('')
-        drops.close
-        loop = loop + 1
         
     dialogue = open("./dialogue.txt", "r")
     clrprint(dialogue.readline())
