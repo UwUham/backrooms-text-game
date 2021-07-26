@@ -180,48 +180,48 @@ def command(query): # this is where all the magic happens. It contains almost ev
                 clrprint(i[7:-1])
         meta.close()
         input("Press ENTER to continue.") # wait for user input
-        if roomstate[0] == 4 and lobbyfight == False:
-            combat.combat(random.choice(names), "entity tentacle", 40)
-            lobbyfight = True
-        elif lobbyfight == True and roomstate[0] == 4:
-            clrprint("The entity fades in front of you, as though simply looking at you killed them.")
-            input("Press ENTER to continue.")
-    elif ask == "bag":
-        combat.weapons()
-    elif ask == "bedroom":
-        if roomstate[0] == 2:
-            roomstate[0] = 1
-            clrprint("Bedroom")
-            input("Press ENTER to continue.")
-    elif ask == "corridor":
-        if roomstate[0] == 1 or roomstate[0] == 3:
-            roomstate[0] = 2
-            if FirstTime1 == True:
-                roomstate[1] = roomstate[0]
-                FirstTime1 = False
-                dialogue = open("./dialogue.txt", "r")
-                print(dialogue.readline())
-                print(dialogue.readline())
-                clrprint(dialogue.readline())
-                input("Press ENTER to continue.")
-                print(dialogue.readline())
-                clrprint(dialogue.readline())
-                dialogue.close()
-            else:
-                clrprint("Corridor")
-            input("Press ENTER to continue.")
-        else:
-            clrprint("You can't get there from here.")
-            input("Press ENTER to continue.")
-    elif ask == "lobby":
-        if room2entity == True:
-            combat.combat(random.choice(names), "entity fist", 50)
-            room2entity = False
-        if roomstate[0] == 2 or roomstate[0] == 4:
-            roomstate[0] = 3
-            if FirstTime2 == True:
-                roomstate[1] = roomstate[0]
-                FirstTime2 = False
+        if roomstate[0] == 4 and lobbyfight == False: # start of first fight, ensuring that the fight has not been completed already
+            combat.combat(random.choice(names), "entity tentacle", 40) # randomising the name and starting the combat sequence, including the statistics for the entity weapon
+            lobbyfight = True # changes the variable so that the fight is not repeated if the player enters the lobby with the same roomstate
+        elif lobbyfight == True and roomstate[0] == 4: # starts the sequence of events that happens after you finish the fight, and if you re-enter the room without changing the roomstate. 
+            clrprint("The entity fades in front of you, as though simply looking at you killed them.") # prints out the text explaining that you have beaten the entity and then clears it afterwards
+            input("Press ENTER to continue.") # wait for user input
+    elif ask == "bag": # runs the sequence that starts when the player inputs the bag command
+        combat.weapons() # calls the weapon function from the combat file
+    elif ask == "bedroom": # moves the player into the bedroom
+        if roomstate[0] == 2: # checks to see if the room has been entered before
+            roomstate[0] = 1 # moves the player back into room one
+            clrprint("Bedroom") # prints the text and then clears it afterwards
+            input("Press ENTER to continue.") # wait for user input
+    elif ask == "corridor": # moves the player into the corridor
+        if roomstate[0] == 1 or roomstate[0] == 3: # checks to see if the player is in either of the rooms that can access the lobby (the rooms right next to the lobby)
+            roomstate[0] = 2 # moves the player back into the second room which is the corridor
+            if FirstTime1 == True: # checks to see if this is the first time that the plyer has entered the room, and if that is the case then starts sequence
+                roomstate[1] = roomstate[0] # increases the count of how many rooms the player has discovered
+                FirstTime1 = False # changes the variable so that if the player enters the room again, the text is not displayed again
+                dialogue = open("./dialogue.txt", "r") # opens the file that contains dialouge
+                print(dialogue.readline()) # cycles through each line of the text file to the correct line
+                print(dialogue.readline()) # cycles through each line of the text file to the correct line
+                clrprint(dialogue.readline()) # cycles through each line of the text file to the correct line
+                input("Press ENTER to continue.") # wait for user input
+                print(dialogue.readline()) # cycles through each line of text file to the correct line
+                clrprint(dialogue.readline()) # prints the correct line of text and then clears it
+                dialogue.close() # closes the files that contains dialouge
+            else: # if the player is not here for their first time, then this starts the sequence below
+                clrprint("Corridor") # prints corridor and then clears the text
+            input("Press ENTER to continue.") # wait for user input
+        else: # if the player is not in either roomstate 1 or 3, then this starts the sequence below
+            clrprint("You can't get there from here.") # prints the text and then clears it
+            input("Press ENTER to continue.") # wait for user input
+    elif ask == "lobby": # moves the player into the lobby
+        if room2entity == True: # checks to see if the entity in room 2 exists, if it does then starts the sequence below
+            combat.combat(random.choice(names), "entity fist", 50) # randomsing the name and starting the combat sequence including the statistics for the entity weapon
+            room2entity = False # changes the variable to false so that you don' fight the same enemy again
+        if roomstate[0] == 2 or roomstate[0] == 4: # checks to see if the player is in either of the rooms that can access the lobby (the rooms right next to the lobby)
+            roomstate[0] = 3 # moves the player into room 3
+            if FirstTime2 == True: # checks to see if this is the players first time going into the room, if it is, then this starts the sequence below
+                roomstate[1] = roomstate[0] # increases the count of how many rooms the player has discovered
+                FirstTime2 = False # changes the variable to false so that if the player enters the room again, the text is not displayed again
                 dialogue = open("./dialogue.txt", "r")
                 print(dialogue.readline())
                 print(dialogue.readline())
