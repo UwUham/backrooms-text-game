@@ -1,97 +1,97 @@
-global damagedealt, damagetaken, YourHP
-damagedealt = 0
-damagetaken = 0
-YourHP = 100
+global damagedealt, damagetaken, YourHP # defining variables to be used in combat
+damagedealt = 0 # defining variables to be used in combat
+damagetaken = 0 # defining variables to be used in combat
+YourHP = 100 # defining variables to be used in combat
 
-import random, time, gamefunctions as game
-
-
-
-weaponatkstat = {
-    "blunt knife": 5,
-    "entity fist": 10,
-    "shield": 0,
-    "lightsaber": 10,
-    "key": 0,
-    "kitchen knife": 20,
-    "entity tentacle": 30,
-    "baby hand": 0,
-    "scalpel": 40,
-    "usb": 999
-}
-
-weapondefstat = {
-    "blunt knife": 15,
-    "entity fist": 10,
-    "shield": 10,
-    "lightsaber": 1,
-    "key": 0,
-    "kitchen knife": 15,
-    "entity tentacle": 5,
-    "baby hand": 1,
-    "scalpel": 5,
-    "usb": 999
-}
-
-weaponflavours = {
-"entity tentacle": "'s tentacles surround you, and tightly holding you in place the entity manages to get a few valuable hits in",
-"entity fist": " punches you",
-"baby hand": " swings with his hand, but due to having undeniably small arms and hands, misses and attacks"
-}
-
-systemnames = ["Fear",
-"Anger",
-"Disgust",
-"Sadness",
-"Rage",
-"Loneliness",
-"Melancholy",
-"Annoyance",
-"Hate",
-"Liam"
-]
-
-systemweaponflavour = {"Fear": " swings his terror mace around wildly",
-"Anger": " violently slashes with his angry claws",
-"Disgust": " swings her hand of dissatisfaction at you",
-"Sadness": " projectile cries at you with very sharp tears",
-"Rage": " attempts to impale you with his rage spear but misses",
-"Loneliness": " stabs at you with her knife, but misses and attacks",
-"Melancholy": " sits in silence, menacingly staring at you with peircing eyes",
-"Annoyance": " laughs unbearably loudly, giving you a massive headache and attacking",
-"Hate": " fills you with sorrow, and you forget why you're here in the first place for a second, before you remember and he attacks you",
-"Liam": " swings with his hand, but due to having undeniably small arms and hands, misses and attacks"
-}
-
-systemweaponatkstats = {"Fear": 10,
-"Anger": 15,
-"Disgust": 5,
-"Sadness": 15,
-"Rage": 0,
-"Loneliness": 0,
-"Melancholy": 5,
-"Annoyance": 10,
-"Hate": 20,
-"Liam": 0}
+import random, time, gamefunctions as game # importing required libraries
 
 
-weaponsinBag = []
-weaponinHand = []
 
-def bagadd(item):
-    if len(weaponsinBag) == 3:
-        game.clrprint("Not enough space for this item.")
-    elif len(weaponsinBag) > 3:
-        game.clrprint("How did you even get this many items? Pick a number, from 0 to", len(weaponsinBag) - 1,  "and we'll remove that item, and that'll repeat until you have three items again.")
-        while len(weaponsinBag) > 3:
-            num = input("> ")
-            if num.isdigit():
-                num = int(num)
-                weaponsinBag.pop(num)
-            else:
-                print("Nice try, but no. Quit messing with the game and pay the price.")
-    else:
-        weaponsinBag.append(item)
+weaponatkstat = { # defining attack stats for weapons
+    "blunt knife": 5, # defining attack stats for weapons
+    "entity fist": 10, # defining attack stats for weapons
+    "shield": 0, # defining attack stats for weapons
+    "lightsaber": 10, # defining attack stats for weapons
+    "key": 0, # defining attack stats for weapons
+    "kitchen knife": 20, # defining attack stats for weapons
+    "entity tentacle": 30, # defining attack stats for weapons
+    "baby hand": 0, # defining attack stats for weapons
+    "scalpel": 40, # defining attack stats for weapons
+    "usb": 999 # defining attack stats for weapons
+} # defining attack stats for weapons
+
+weapondefstat = { # defining defense stats for weapons
+    "blunt knife": 15, # defining defense stats for weapons
+    "entity fist": 10, # defining defense stats for weapons
+    "shield": 10, # defining defense stats for weapons
+    "lightsaber": 1, # defining defense stats for weapons
+    "key": 0, # defining defense stats for weapons
+    "kitchen knife": 15, # defining defense stats for weapons
+    "entity tentacle": 5, # defining defense stats for weapons
+    "baby hand": 1, # defining defense stats for weapons
+    "scalpel": 5, # defining defense stats for weapons
+    "usb": 999 # defining defense stats for weapons
+} # defining defense stats for weapons
+
+weaponflavours = { # creating flavour text for enemy attacks
+"entity tentacle": "'s tentacles surround you, and tightly holding you in place the entity manages to get a few valuable hits in", # creating flavour text for enemy attacks
+"entity fist": " punches you", # creating flavour text for enemy attacks
+"baby hand": " swings with his hand, but due to having undeniably small arms and hands, misses and attacks" # creating flavour text for enemy attacks
+} # creating flavour text for enemy attacks
+
+systemnames = ["Fear", # defining names for the final boss
+"Anger", # defining names for the final boss
+"Disgust", # defining names for the final boss
+"Sadness", # defining names for the final boss
+"Rage", # defining names for the final boss
+"Loneliness", # defining names for the final boss
+"Melancholy", # defining names for the final boss
+"Annoyance", # defining names for the final boss
+"Hate", # defining names for the final boss
+"Liam" # defining names for the final boss
+] # defining names for the final boss
+
+systemweaponflavour = {"Fear": " swings his terror mace around wildly", # creating flavour texr for the final boss
+"Anger": " violently slashes with his angry claws", # creating flavour texr for the final boss
+"Disgust": " swings her hand of dissatisfaction at you", # creating flavour texr for the final boss
+"Sadness": " projectile cries at you with very sharp tears", # creating flavour texr for the final boss
+"Rage": " attempts to impale you with his rage spear but misses", # creating flavour texr for the final boss
+"Loneliness": " stabs at you with her knife, but misses and attacks", # creating flavour texr for the final boss
+"Melancholy": " sits in silence, menacingly staring at you with peircing eyes", # creating flavour texr for the final boss
+"Annoyance": " laughs unbearably loudly, giving you a massive headache and attacking", # creating flavour texr for the final boss
+"Hate": " fills you with sorrow, and you forget why you're here in the first place for a second, before you remember and he attacks you", # creating flavour texr for the final boss
+"Liam": " swings with his hand, but due to having undeniably small arms and hands, misses and attacks" # creating flavour texr for the final boss
+} # creating flavour texr for the final boss
+
+systemweaponatkstats = {"Fear": 10, # defining attack stats for final boss weapons
+"Anger": 15, # defining attack stats for final boss weapons
+"Disgust": 5, # defining attack stats for final boss weapons
+"Sadness": 15, # defining attack stats for final boss weapons
+"Rage": 0, # defining attack stats for final boss weapons
+"Loneliness": 0, # defining attack stats for final boss weapons
+"Melancholy": 5, # defining attack stats for final boss weapons
+"Annoyance": 10, # defining attack stats for final boss weapons
+"Hate": 20, # defining attack stats for final boss weapons
+"Liam": 0} # defining attack stats for final boss weapons
+
+
+weaponsinBag = [] # creating variables for the bag and the hand
+weaponinHand = [] # creating variables for the bag and the hand
+
+def bagadd(item): # create the bagadd function
+    if len(weaponsinBag) == 3: # if the bag is full:
+        game.clrprint("Not enough space for this item.") # tell the user that the bag is full
+    elif len(weaponsinBag) > 3: # check if something has happened eg. editing the game files to have more then 3 items:
+        game.clrprint("How did you even get this many items? Pick a number, from 0 to " + len(weaponsinBag) - 1 + " and we'll remove that item, and that'll repeat until you have three items again.") # create a user friendly handler that removes items from the bag until it is normal again.
+        while len(weaponsinBag) > 3: # part of the Super Secret Handler that eats your items.
+            num = input("> ") # part of the Super Secret Handler that eats your items.
+            if num.isdigit(): # part of the Super Secret Handler that eats your items.
+                num = int(num) # part of the Super Secret Handler that eats your items.
+                weaponsinBag.pop(num) # part of the Super Secret Handler that eats your items.
+            else: # if the user does not pick a number:
+                print("Nice try, but no. Quit messing with the game and pay the price.") # talk to user
+    else: # if nothing is wrong:
+        weaponsinBag.append(item) # take the item
 
 def PlayerIsHoldingKitchenKnifeForJoesBirthdayIn1982(var):
     if "kitchen knife" in weaponinHand or "kitchen knife" in weaponsinBag:

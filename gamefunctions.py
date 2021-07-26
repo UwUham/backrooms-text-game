@@ -222,17 +222,17 @@ def command(query): # this is where all the magic happens. It contains almost ev
             if FirstTime2 == True: # checks to see if this is the players first time going into the room, if it is, then this starts the sequence below
                 roomstate[1] = roomstate[0] # increases the count of how many rooms the player has discovered
                 FirstTime2 = False # changes the variable to false so that if the player enters the room again, the text is not displayed again
-                dialogue = open("./dialogue.txt", "r")
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                clrprint(dialogue.readline())
-                input("Press ENTER to continue.")
-                print(dialogue.readline())
-                clrprint(dialogue.readline())
+                dialogue = open("./dialogue.txt", "r") # open the dialogue file
+                print(dialogue.readline()) # cycling through to the correct line
+                print(dialogue.readline()) # cycling through to the correct line
+                print(dialogue.readline()) # cycling through to the correct line
+                print(dialogue.readline()) # cycling through to the correct line
+                print(dialogue.readline()) # cycling through to the correct line
+                print(dialogue.readline()) # cycling through to the correct line
+                clrprint(dialogue.readline()) # cycling through to the correct line
+                input("Press ENTER to continue.") # wait for user input
+                print(dialogue.readline()) # cycle through to the correct line
+                clrprint(dialogue.readline()) # clear and print the correct line.
                 dialogue.close()
             else:
                 clrprint("Lobby")
