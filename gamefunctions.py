@@ -200,11 +200,11 @@ def command(query): # this is where all the magic happens. It contains almost ev
                 roomstate[1] = roomstate[0] # increases the count of how many rooms the player has discovered
                 FirstTime1 = False # changes the variable so that if the player enters the room again, the text is not displayed again
                 dialogue = open("./dialogue.txt", "r") # opens the file that contains dialouge
-                print(dialogue.readline()) # cycles through each line of the text file to the correct line
-                print(dialogue.readline()) # cycles through each line of the text file to the correct line
-                clrprint(dialogue.readline()) # cycles through each line of the text file to the correct line
+                print(dialogue.readline()) # cycles through each line of the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through each line of the text file to the correct line, then prints it
+                clrprint(dialogue.readline()) # cycles through each line of the text file to the correct line, then prints it
                 input("Press ENTER to continue.") # wait for user input
-                print(dialogue.readline()) # cycles through each line of text file to the correct line
+                print(dialogue.readline()) # cycles through each line of text file to the correct line, then prints it
                 clrprint(dialogue.readline()) # prints the correct line of text and then clears it
                 dialogue.close() # closes the files that contains dialouge
             else: # if the player is not here for their first time, then this starts the sequence below
@@ -222,23 +222,23 @@ def command(query): # this is where all the magic happens. It contains almost ev
             if FirstTime2 == True: # checks to see if this is the players first time going into the room, if it is, then this starts the sequence below
                 roomstate[1] = roomstate[0] # increases the count of how many rooms the player has discovered
                 FirstTime2 = False # changes the variable to false so that if the player enters the room again, the text is not displayed again
-                dialogue = open("./dialogue.txt", "r") # open the dialogue file
-                print(dialogue.readline()) # cycling through to the correct line
-                print(dialogue.readline()) # cycling through to the correct line
-                print(dialogue.readline()) # cycling through to the correct line
-                print(dialogue.readline()) # cycling through to the correct line
-                print(dialogue.readline()) # cycling through to the correct line
-                print(dialogue.readline()) # cycling through to the correct line
-                clrprint(dialogue.readline()) # cycling through to the correct line
+                dialogue = open("./dialogue.txt", "r") # opens the file that contains dialouge 
+                print(dialogue.readline()) # cycles through each line of the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through each line of the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through each line of the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through each line of the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through each line of the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through each line of the text file to the correct line, then prints it
+                clrprint(dialogue.readline()) # cycles through each line of the text file to the correct line and then prints it, then clears it
                 input("Press ENTER to continue.") # wait for user input
-                print(dialogue.readline()) # cycle through to the correct line
-                clrprint(dialogue.readline()) # clear and print the correct line.
-                dialogue.close()
-            else:
-                clrprint("Lobby")
-            input("Press ENTER to continue.")
-        else:
-            clrprint("You can't get there from here.")
+                print(dialogue.readline()) # cycles through each line of the text file to the correct line, then prints it
+                clrprint(dialogue.readline()) # cycles through each line of the text file to the correct line and then prints it, then clears it
+                dialogue.close() # closes the dialouge file
+            else: # if the player is not here for their first time, then this starts the sequence below 
+                clrprint("Lobby") # prints lobby and then clears it
+            input("Press ENTER to continue.") # wait for user input
+        else: # if the roomstate is not 2 or 4, then this starts the sequence below
+            clrprint("You can't get there from here.") # prints out the text and then 
             input("Press ENTER to continue.")
     elif ask == "living room":
         if roomstate[0] == 3 or roomstate[0] == 5 or roomstate[0] == 6 or roomstate[0] == 7 or roomstate[0] == 8:
