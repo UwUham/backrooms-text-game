@@ -93,150 +93,150 @@ def bagadd(item): # create the bagadd function
     else: # if nothing is wrong:
         weaponsinBag.append(item) # take the item
 
-def PlayerIsHoldingKitchenKnifeForJoesBirthdayIn1982(var):
-    if "kitchen knife" in weaponinHand or "kitchen knife" in weaponsinBag:
-        print("You have a kitchen knife with the tag \"Joe's birthday\" on it, and underneath it says 18/8/1982.")
-    else:
-        print(var)
+def PlayerIsHoldingKitchenKnifeForJoesBirthdayIn1982(var): # this runs code in here to interact with a pussle in gamefunctions
+    if "kitchen knife" in weaponinHand or "kitchen knife" in weaponsinBag: # if the kitchen knife is in your hand or your bag
+        print("You have a kitchen knife with the tag \"Joe's birthday\" on it, and underneath it says 18/8/1982.") # give hint text
+    else: # if the player does not have the knife
+        print(var) # print specified text
 
-def heal():
-    global YourHP
-    YourHP = 100
-    game.clrprint("You rested and became fully healthy once again.")
-    input("Press ENTER to continue.")
+def heal(): # create the heal function
+    global YourHP # set your hp to 100
+    YourHP = 100 # set your hp to 100
+    game.clrprint("You rested and became fully healthy once again.") # tell the player that their health is now full
+    input("Press ENTER to continue.") # wait for user input
 
-def drop(what):
-    global weaponsinBag, weaponinHand
-    if what in weaponsinBag:
-        weaponsinBag.remove(what)
-        game.itemappend(what)
-        game.clrprint("Dropped the " + what + ".")
-    elif what in weaponinHand:
-        weaponinHand.remove(what)
-        game.itemappend(what)
-        game.clrprint("Dropped the " + what + ".")
-    else:
-        game.clrprint("You do not have a " + what + " in your inventory!")
-    input("Press ENTER to continue.")
+def drop(what): # create the drop function
+    global weaponsinBag, weaponinHand # set the variables used to global
+    if what in weaponsinBag: # if the specified item is in your bag
+        weaponsinBag.remove(what) # remove the item
+        game.itemappend(what) # interact with gamefunctions to put the item on the ground
+        game.clrprint("Dropped the " + what + ".") # tell the user they dropped the item
+    elif what in weaponinHand: # if the specified item is in your hand
+        weaponinHand.remove(what) # remove the item
+        game.itemappend(what) # interact with gamefunctions to put the item on the ground
+        game.clrprint("Dropped the " + what + ".") # tell the user that they dropped the item
+    else: # if the item is not in the player's inventory
+        game.clrprint("You do not have a " + what + " in your inventory!") # tell the player as such
+    input("Press ENTER to continue.") # wait for user input
         
 
-def fight(entityName, entityWeapon):
-    if len(weaponinHand) == 1:
-        global damagetaken, damagedealt
-        firstgoer = random.randint(0, 2)
-        handweapon = weaponinHand[0]
-        index = random.randrange(1, 3)
+def fight(entityName, entityWeapon): # create the fight function
+    if len(weaponinHand) == 1: # if you are holding a weapon
+        global damagetaken, damagedealt # set variables as global
+        firstgoer = random.randint(0, 2) # randomly deciding who goes first
+        handweapon = weaponinHand[0] # creating a variable to refer to your weapon for ease purposes
+        index = random.randrange(1, 3) # randomly deciding if the hit will be a critical hit or not. thanks to python's poor pseudo-randomisation, crits behave really weirdly.
 
-        if firstgoer == 0:
-            game.clrprint("YOU attack first!")
-            time.sleep(0.7)
-            print("Attacked with", handweapon.upper(), "for", int(index * int(weaponatkstat[handweapon])), "damage!")
-            damagedealt = weaponatkstat[handweapon]
-            if index == 2:
-                print("Critical hit!")
-                damagedealt = int(weaponatkstat[handweapon]) * 2
-            input("Press ENTER to continue")
-            index = random.randrange(1, 3)
-            game.clrprint(entityName.upper() + " attacks!")
-            time.sleep(0.7)
-            print(entityName.upper(), weaponflavours[entityWeapon], "for", int(index * int(weaponatkstat[entityWeapon])), "damage!")
-            damagetaken = weaponatkstat[entityWeapon]
-            if index == 2:
-                print("Critical hit!")
-                damagetaken = weaponatkstat[entityWeapon] * 2
-            input("Press ENTER to continue")
-        else:
-            game.clrprint(entityName.upper() + " attacks first!")
-            time.sleep(0.7)
-            print(entityName.upper(), weaponflavours[entityWeapon], "for", int(index * int(weaponatkstat[entityWeapon])), "damage!")
-            damagetaken = weaponatkstat[entityWeapon]
-            if index == 2.0:
-                print("Critical hit!")
-                damagetaken = weaponatkstat[entityWeapon] * 2
-            input("Press ENTER to continue")
-            index = random.randrange(1, 3)
-            game.clrprint("YOU attack!")
-            time.sleep(0.7)
-            print("Attacked with", handweapon.upper(), "for", int(index * int(weaponatkstat[handweapon])), "damage!")
-            damagedealt = weaponatkstat[handweapon]
-            if index == 2:
-                print("Critical hit!")
-                damagedealt = weaponatkstat[handweapon] * 2
-            input("Press ENTER to continue")
-        game.clear()
-    elif len(weaponsinBag) > 0:
+        if firstgoer == 0: # if you are going first
+            game.clrprint("YOU attack first!") # tell the user that they are attacking
+            time.sleep(0.7) # wait
+            print("Attacked with", handweapon.upper(), "for", int(index * int(weaponatkstat[handweapon])), "damage!") # tell the user about their attack and how much damage they did
+            damagedealt = weaponatkstat[handweapon] # take damage based off of your weapon's attack stat
+            if index == 2: # if you hit a critical hit
+                print("Critical hit!") # tell the user that you did a critical hit
+                damagedealt = int(weaponatkstat[handweapon]) * 2 # change the amount of damage dealt accordingly
+            input("Press ENTER to continue") # wait for user input
+            index = random.randrange(1, 3) # randomly deciding crit
+            game.clrprint(entityName.upper() + " attacks!") # tell the user that the entity it attacking
+            time.sleep(0.7) # wait
+            print(entityName.upper(), weaponflavours[entityWeapon], "for", int(index * int(weaponatkstat[entityWeapon])), "damage!") # tell the user about their attack and how much damage they did
+            damagetaken = weaponatkstat[entityWeapon] # set the amount of damage taken
+            if index == 2: # if the entity hits a critical
+                print("Critical hit!") # tell the user
+                damagetaken = weaponatkstat[entityWeapon] * 2 # set damage
+            input("Press ENTER to continue")  # wait for user input
+        else: # if the entity is going first
+            game.clrprint(entityName.upper() + " attacks first!") # tell the user that the entity is attacking
+            time.sleep(0.7) # wait
+            print(entityName.upper(), weaponflavours[entityWeapon], "for", int(index * int(weaponatkstat[entityWeapon])), "damage!") # tell the user about their attack and how much damage they did
+            damagetaken = weaponatkstat[entityWeapon] # set damage
+            if index == 2.0: # if entity hits a crit
+                print("Critical hit!") # tell the user
+                damagetaken = weaponatkstat[entityWeapon] * 2 # set damage
+            input("Press ENTER to continue") # wait for user input
+            index = random.randrange(1, 3) # decide crit
+            game.clrprint("YOU attack!") # tell the user they are attacking
+            time.sleep(0.7) # wait
+            print("Attacked with", handweapon.upper(), "for", int(index * int(weaponatkstat[handweapon])), "damage!") # tell the user about their attack and how much damage they did
+            damagedealt = weaponatkstat[handweapon] # set damage
+            if index == 2: # if you crit
+                print("Critical hit!") # tell the user that they crit
+                damagedealt = weaponatkstat[handweapon] * 2 # set damage
+            input("Press ENTER to continue") # wait for user input
+        game.clear() # clear the screen
+    elif len(weaponsinBag) > 0: # if there are items in your bag but not in your hand:
         game.clrprint("Select a weapon first.")
-    else:
-        game.clrprint("You fought without a weapon and lost.")
-        damagetaken = 100
+    else: # if both your bag and your hand are enpty
+        game.clrprint("You fought without a weapon and lost.") # tell the user they lost
+        damagetaken = 100 # kill the character
 
 
-def weapons():
-    if len(weaponsinBag) != 0:
-        swap = True
-        game.clrprint("You have:")
-        for i in weaponsinBag:
-            print(i)
-        print("Items in bag: " + str(len(weaponsinBag)))
-        choice = input("Select an item (any weapon that was listed or none): ").lower()
-        if choice == weaponsinBag[0].lower():
-            choicenum = 0
-        elif len(weaponsinBag) >= 2:
-            if choice == weaponsinBag[1].lower():
-                choicenum = 1
-        elif len(weaponsinBag) >= 3:    
-            if choice == weaponsinBag[2].lower():
-                choicenum = 2
-        elif choice == "none":
-            swap = False
-        else:
-            print("Not a valid choice.")
-            swap = False
-        if swap == True:
-            if len(weaponinHand) == 1:
-                handweapon = weaponinHand[0]
-                weaponinHand.append(weaponsinBag[choicenum])
-                weaponsinBag.append(weaponinHand[0])
-                weaponinHand.pop(0)
-                weaponsinBag.pop(choicenum)
-                game.clrprint("Placed the " + handweapon + " back in the bag!")
-                handweapon = weaponinHand[0]
-                time.sleep(0.7)
-                print("Pulled out the", handweapon + "!")
-            elif len(weaponinHand) == 0:
-                weaponinHand.append(weaponsinBag[choicenum])
-                weaponsinBag.pop(0)
-                handweapon = weaponinHand[0]
-                time.sleep(0.7)
-                print("Pulled out the", handweapon + "!")
-    else:
-        game.clrprint("Your bag is empty!")
-    input("Press ENTER to continue.")
-    game.clear()
+def weapons(): # create the weapons function
+    if len(weaponsinBag) != 0: # if there is something in your bag
+        swap = True # a switch boolean
+        game.clrprint("You have:") # print the items in your bag
+        for i in weaponsinBag: # print the items in your bag
+            print(i) # print the items in your bag
+        print("Items in bag: " + str(len(weaponsinBag))) # print the items in your bag
+        choice = input("Select an item (any weapon that was listed or none): ").lower() # selecting a choice and handling it accordingly
+        if choice == weaponsinBag[0].lower(): # selecting a choice and handling it accordingly
+            choicenum = 0 # selecting a choice and handling it accordingly
+        elif len(weaponsinBag) >= 2: # selecting a choice and handling it accordingly
+            if choice == weaponsinBag[1].lower(): # selecting a choice and handling it accordingly
+                choicenum = 1 # selecting a choice and handling it accordingly
+        elif len(weaponsinBag) >= 3:     # selecting a choice and handling it accordingly
+            if choice == weaponsinBag[2].lower(): # selecting a choice and handling it accordingly
+                choicenum = 2 # selecting a choice and handling it accordingly
+        elif choice == "none": # selecting a choice and handling it accordingly
+            swap = False # selecting a choice and handling it accordingly
+        else: # selecting a choice and handling it accordingly
+            print("Not a valid choice.") # selecting a choice and handling it accordingly
+            swap = False # flip the switch boolean
+        if swap == True: # if you selected a weapon
+            if len(weaponinHand) == 1: # if there is an item in your hand
+                handweapon = weaponinHand[0] # swapping the places of the item in the bag and the item in the hand
+                weaponinHand.append(weaponsinBag[choicenum]) # swapping the places of the item in the bag and the item in the hand
+                weaponsinBag.append(weaponinHand[0]) # swapping the places of the item in the bag and the item in the hand
+                weaponinHand.pop(0) # swapping the places of the item in the bag and the item in the hand
+                weaponsinBag.pop(choicenum) # swapping the places of the item in the bag and the item in the hand
+                game.clrprint("Placed the " + handweapon + " back in the bag!") # swapping the places of the item in the bag and the item in the hand
+                handweapon = weaponinHand[0] # swapping the places of the item in the bag and the item in the hand
+                time.sleep(0.7) # swapping the places of the item in the bag and the item in the hand
+                print("Pulled out the", handweapon + "!") # swapping the places of the item in the bag and the item in the hand
+            elif len(weaponinHand) == 0: # if there is not an item in your hand
+                weaponinHand.append(weaponsinBag[choicenum]) # take out the weapon
+                weaponsinBag.pop(0) # take out the weapon
+                handweapon = weaponinHand[0] # take out the weapon
+                time.sleep(0.7) # take out the weapon
+                print("Pulled out the", handweapon + "!") # take out the weapon
+    else: # if your bag is empty
+        game.clrprint("Your bag is empty!") # tell the player
+    input("Press ENTER to continue.") # wait for user input
+    game.clear() # clear the screen
          
 
-def defend(entityName, entityWeapon):
-    global damagedealt, damagetaken
-    if len(weaponinHand) == 1:
-        if weapondefstat[weaponinHand[0]] > weaponatkstat[entityWeapon]:
-            damagedealt = weaponatkstat[entityWeapon]/2
-            damagetaken = 0
-            game.clrprint("Fully defended against " + entityName + " and reflected " + str(damagedealt) + " damage back.")
-        elif weapondefstat[weaponinHand[0]] <= int(weaponatkstat[entityWeapon])/2:
-            damagetaken = weaponatkstat[entityWeapon]
-            damagedealt = 0
-            game.clrprint("Defense failed, " + str(damagetaken) + " damage taken.")
-        else:
-            damagetaken = weaponatkstat[entityWeapon]/2
-            damagedealt = 0
-            game.clrprint("Defended against " + entityName + " partially and took " + damagetaken + " damage.")
-    elif len(weaponsinBag) > 0:
-        game.clrprint("Select a weapon first.")
-    else:
-        game.clrprint("You fought without a weapon and lost.")
-        damagetaken = 100
+def defend(entityName, entityWeapon): # create the defend function
+    global damagedealt, damagetaken # set variables as global
+    if len(weaponinHand) == 1: # if there is an item in your hand
+        if weapondefstat[weaponinHand[0]] > weaponatkstat[entityWeapon]: # if your defense stat is higher than the enemy's attack stat
+            damagedealt = weaponatkstat[entityWeapon]/2 # half the enemy's attack
+            damagetaken = 0 # take 0 damage
+            game.clrprint("Fully defended against " + entityName + " and reflected " + str(damagedealt) + " damage back.") # tell the player what happened
+        elif weapondefstat[weaponinHand[0]] <= int(weaponatkstat[entityWeapon])/2: # if your defense stat is equal to or less than half of the enemys attack:
+            damagetaken = weaponatkstat[entityWeapon] # defining damage
+            damagedealt = 0 # defining damage
+            game.clrprint("Defense failed, " + str(damagetaken) + " damage taken.") # tell the user that their defense failed
+        else: # if the defense stat is above half
+            damagetaken = int(weaponatkstat[entityWeapon]/2) # half the damage taken
+            damagedealt = 0 # set the damage dealt to 0
+            game.clrprint("Defended against " + entityName + " partially and took " + str(damagetaken) + " damage.") # tell the user how much damage they took
+    elif len(weaponsinBag) > 0: # if you don't have a weapon in your hand but have one in your bag
+        game.clrprint("Select a weapon first.") # tell the user to pick a weapon
+    else: # if the user does not have a weapon
+        game.clrprint("You fought without a weapon and lost.") # lose the fight
+        damagetaken = 100 # lose the fight
 
-def combat(entityName, entityWeapon, entityHP):
+def combat(entityName, entityWeapon, entityHP): # create the combat function
     global YourHP
     entityHPcache = entityHP
     game.clrprint(entityName.upper() + " wants to fight!")
