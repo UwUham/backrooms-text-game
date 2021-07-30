@@ -239,250 +239,247 @@ def command(query): # this is where all the magic happens. It contains almost ev
             input("Press ENTER to continue.") # wait for user input
         else: # if the roomstate is not 2 or 4, then this starts the sequence below
             clrprint("You can't get there from here.") # prints out the text and then 
-            input("Press ENTER to continue.")
-    elif ask == "living room":
-        if roomstate[0] == 3 or roomstate[0] == 5 or roomstate[0] == 6 or roomstate[0] == 7 or roomstate[0] == 8:
-            if DoorUnlocked == True:
-                roomstate[0] = 4
-                if FirstTime3 == True:
-                    roomstate[1] = roomstate[0]
-                    FirstTime3 = False
-                    dialogue = open("./dialogue.txt", "r")
-                    print(dialogue.readline())
-                    print(dialogue.readline())
-                    print(dialogue.readline())
-                    print(dialogue.readline())
-                    print(dialogue.readline())
-                    print(dialogue.readline())
-                    print(dialogue.readline())
-                    print(dialogue.readline())
-                    print(dialogue.readline())
-                    clrprint(dialogue.readline())
-                    input("Press ENTER to continue.")
-                    print(dialogue.readline())
-                    clrprint(dialogue.readline())
-                    dialogue.close()
-                else:
-                    clrprint("Living Room")
-                input("Press ENTER to continue.")
-            else:
-                clrprint("The door is locked, you can't advance yet.")
-                input("Press ENTER to continue.")
-        else:
-            clrprint("You can't get there from here.")
-            input("Press ENTER to continue.")
-    elif ask == "storage room":
-        if roomstate[0] == 4 and lobbyfight == True:
-            roomstate[0] = 5
-            if FirstTime4 == True:
-                roomstate[1] = roomstate[0]
-                FirstTime4 = False
-                dialogue = open("./dialogue.txt", "r")
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                clrprint(dialogue.readline())
-                input("Press ENTER to continue.")
-                print(dialogue.readline())
-                clrprint(dialogue.readline())
-                dialogue.close()
-            else:
-                clrprint("Storage Room")
-            input("Press ENTER to continue.")
-        elif lobbyfight == False:
-            clrprint("You should probably look around first before you advance.")
-            input("Press ENTER to continue.")
+            input("Press ENTER to continue.") # wait for user input
+    elif ask == "living room": # moves the player to the living room
+        if roomstate[0] == 3 or roomstate[0] == 5 or roomstate[0] == 6 or roomstate[0] == 7 or roomstate[0] == 8: # checks to see if the player is in one of the rooms that has access to the living room
+            if DoorUnlocked == True: # checks to see if the door is unlocked
+                roomstate[0] = 4 # moves the player into room 4, which is the living room
+                if FirstTime3 == True: # chacks to see if this is the players first time entering the room, if it is then starts the sequence below
+                    roomstate[1] = roomstate[0] # increases the count of how many rooms the player has discovered
+                    FirstTime3 = False # chnges the variable to false so that the text below des not play again
+                    dialogue = open("./dialogue.txt", "r") # opens the file with the dialouge
+                    print(dialogue.readline()) # cycles through the text file to the correct line, then prints it  
+                    print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                    print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                    print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                    print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                    print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                    print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                    print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                    print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                    clrprint(dialogue.readline()) # cycles through the text file to the correct line, then prints it, then clears it
+                    input("Press ENTER to continue.") # wait for user input
+                    print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                    clrprint(dialogue.readline()) # cycles through the text file to the correct line, then prints it, then clears it
+                    dialogue.close() # closes the file with the dialouge
+                else: # if the player has already been in the room, then this starts the sequence below
+                    clrprint("Living Room") # prints the text then clears it
+                input("Press ENTER to continue.") # wait for user input
+            else: # if the door has not been unlocked, then this starts the sequence below
+                clrprint("The door is locked, you can't advance yet.") # prints text then clears it
+                input("Press ENTER to continue.") # wait for user input
+        else: # if the player is not in one of the rooms that has access to the living room, then this starts the sequence below
+            clrprint("You can't get there from here.") # prints text then clears it
+            input("Press ENTER to continue.") # wait for user input
+    elif ask == "storage room": # moves the player into the storage room
+        if roomstate[0] == 4 and lobbyfight == True: # checks to see if the player has access to the room, and if the fight in the lobby has been completed
+            roomstate[0] = 5 # moves the player into room 5, which is the storage room
+            if FirstTime4 == True: # checks to see if this is players first time entering the room, if it is, then starts the sequence below
+                roomstate[1] = roomstate[0] # increases the count of the rooms that the player has discovered
+                FirstTime4 = False # changes the variable to false so that the text below does not appear again
+                dialogue = open("./dialogue.txt", "r") # opens the text file with the dialouge
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                clrprint(dialogue.readline()) # cycles through the text file to the correct line, then prints it, then clears it
+                input("Press ENTER to continue.") # wait for user input
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                clrprint(dialogue.readline()) # cycles through the text file to the correct line, then prints it, then clears it
+                dialogue.close() # closes the text file with the dialouge
+            else: # if the player has already been in the room, then this starts the sequence below
+                clrprint("Storage Room") # prints text then clears it
+            input("Press ENTER to continue.") # wait for user input
+        elif lobbyfight == False: # if the fight in the lobby has not been completed, then this starts the sequence below
+            clrprint("You should probably look around first before you advance.") # prints text then clears it
+            input("Press ENTER to continue.") # wait for user input
 
-        else:
-            clrprint("You can't get there from here.")
-            input("Press ENTER to continue.")
-    elif ask == "office":
-        if roomstate[0] == 4 and VaultOpen == True:
-            roomstate[0] = 6
-            if FirstTime5 == True:
-                roomstate[1] = roomstate[0]
-                FirstTime5 = False
-                dialogue = open("./dialogue.txt", "r")
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                clrprint(dialogue.readline())
-                input("Press ENTER to continue.")
-                print(dialogue.readline())
-                clrprint(dialogue.readline())
-                dialogue.close()
-            else:
-                clrprint("Office")
-            input("Press ENTER to continue.")
-    elif ask == "hallway":
-        print(FirstTime6)
-        if roomstate[0] == 4 and Computer == True:
-            roomstate[0] = 7
-            if FirstTime6 == True:
-                roomstate[1] = roomstate[0]
-                FirstTime6 = False
-                dialogue = open("./dialogue.txt", "r")
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                clrprint(dialogue.readline())
-                input("Press ENTER to continue.")
-                print(dialogue.readline())
-                clrprint(dialogue.readline())
-                dialogue.close()
-            else:
-                clrprint("Hallway")
-        elif Computer == False:
-            clrprint("The door is locked, you need a keycard to advance.")
-            input("Press ENTER to continue.")
-    elif ask == "infirmary":
-        if roomstate[0] == 7:
-            roomstate[0] = 8
-            if FirstTime7 == True:
-                roomstate[1] = roomstate[0]
-                FirstTime7 = False
-                dialogue = open("./dialogue.txt", "r")
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                clrprint(dialogue.readline())
-                input("Press ENTER to continue.")
-                print(dialogue.readline())
-                clrprint(dialogue.readline())
-                dialogue.close()
-            else:
-                clrprint("Infirmary")
-            input("Press ENTER to continue.")
-    elif ask == "demise":
-        if roomstate[0] == 8:
-            roomstate[0] = 9
-            if FirstTime8 == True:
-                roomstate[1] = roomstate[0]
-                FirstTime8 = False
-                dialogue = open("./dialogue.txt", "r")
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                print(dialogue.readline())
-                clrprint(dialogue.readline())
-                input("Press ENTER to continue.")
-                print(dialogue.readline())
-                clrprint(dialogue.readline())
-                dialogue.close()
-            input("Press ENTER to continue.")
-            '''LIAM FIGHT'''
-            combat.combat("Liam", "baby hand", 10)
-            clrprint("After defeating LIAM, he retreats back around the corner... and the next thing you know you are met with THE SYSTEM, an extremely powerful entity who appears to have ten faces scattered in various places aroud the body. Where the head is, you see LIAM's head. Prepare for your final battle.")
-            input("Press ENTER to continue.")
-            combat.system()
+        else: # if the player is not in one of the rooms that has access to the storage room, then this starts the sequence below
+            clrprint("You can't get there from here.") # prints text then clears it
+            input("Press ENTER to continue.") # wait for user input
+    elif ask == "office": # moves the player to the office
+        if roomstate[0] == 4 and VaultOpen == True: # checks to see if the player is in a room that has access to the office, and that the keycard from the puzzle in the storage room has been colected
+            roomstate[0] = 6 # moves the player into room 6, which is the office
+            if FirstTime5 == True: # checks to see if this is the players first time entering the room, if it is then starts the sequence below
+                roomstate[1] = roomstate[0] # increases the count of how many rooms the player has discovered
+                FirstTime5 = False # changes the variable to false so that if the player enters the room again then the text below does then appear again
+                dialogue = open("./dialogue.txt", "r") # opens the text file with the dialouge
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                clrprint(dialogue.readline()) # cycles through the text file to the correct line, then prints it, then clears it
+                input("Press ENTER to continue.") # wait for user input
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                clrprint(dialogue.readline()) # cycles through the text file to the correct line, then prints it, then clears it
+                dialogue.close() # closes the text file with the dialouge
+            else: # if this is not the players first time in the room, then this starts the sequence below
+                clrprint("Office") # prints the text and then clears it
+            input("Press ENTER to continue.") # wait for user input
+    elif ask == "hallway": # movrs the player into the hallway
+        if roomstate[0] == 4 and Computer == True: # checks to see if the player is in one of the rooms that has access to the hallway, and to see if the computer puzzle in the office has been completed.
+            roomstate[0] = 7 # moves the player into room 7, which is the hallway
+            if FirstTime6 == True: # checks to see if this is the players first time in the room, if it is then starts the sequence below
+                roomstate[1] = roomstate[0] # increases the count of rooms the player has discovered
+                FirstTime6 = False # changes the variable to false so that if the player enters the room again, then the text below does not appear
+                dialogue = open("./dialogue.txt", "r") # opens the text file with the dialouge
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it 
+                clrprint(dialogue.readline()) # cycles through the text file to the correct line, then prints it, then clears it
+                input("Press ENTER to continue.") # wait for user input
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                clrprint(dialogue.readline()) # cycles through the text file to the correct line, then prints it, then clears it
+                dialogue.close() # closes the text file with the dialouge
+            else: # if the player has already been in the room, then this starts the sequence below
+                clrprint("Hallway") # prints text then clears it
+        elif Computer == False: # if the computer puzzle in the office has not been completed, then this starts the sequence below
+            clrprint("The door is locked, you need a keycard to advance.") # prints text then clears it
+            input("Press ENTER to continue.") # wait for user input
+    elif ask == "infirmary": # moves the player into the infirmary
+        if roomstate[0] == 7: # checks to see if the player is in a room that has access to the infirmary
+            roomstate[0] = 8 # moves the player into room 8, which is the infirmary
+            if FirstTime7 == True: # checks to see if this is the players first time, if it is then this starts the sequence below
+                roomstate[1] = roomstate[0] # increases the count of how many rooms the player has discovered
+                FirstTime7 = False # changes the variable to false so that if the player eneters the room again, then the text below does not appear again
+                dialogue = open("./dialogue.txt", "r") # opens the text file with the dialouge
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                clrprint(dialogue.readline()) # cycles through the text file to the correct line, then prints it, then clears it
+                input("Press ENTER to continue.") # wait for user input
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                clrprint(dialogue.readline()) # cycles through the text file to the correct line, then prints it, then clears it
+                dialogue.close() # closes the text file with the dialouge
+            else: # if this is not the players first time, then the sequence below starts
+                clrprint("Infirmary") # prints text then clears it
+            input("Press ENTER to continue.") # wait for user input
+    elif ask == "demise": # moves the player to their demise
+        if roomstate[0] == 8: # checks to see if the player is in one of the rooms that have access to demise
+            roomstate[0] = 9 # moves the player into room 9, which is demise
+            if FirstTime8 == True: # checks to see if this is the players first time, if it is then starts the sequence below (this was implemented as a way to ignore this ending, and find another way out, so if we were to ever expand on the game, we could have multiple routes, and thus you would not be locked into the ending at this point, because once you enter deise you cannot leave)
+                roomstate[1] = roomstate[0] # increases the count of the rooms that the player has discovered
+                FirstTime8 = False # changes the variable to false so that if the players enters the room again, the text does not appear again (once again, a way to expand the game) 
+                dialogue = open("./dialogue.txt", "r") # opens the text file with the dialouge
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                clrprint(dialogue.readline()) # cycles through the text file to the correct line, then prints it, then clears it
+                input("Press ENTER to continue.") # wait for user input
+                print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
+                clrprint(dialogue.readline()) # cycles through the text file to the correct line, then prints it, then clears it
+                dialogue.close() # closes the text file with the dialouge in it
+            input("Press ENTER to continue.") # wait for user input
+            combat.combat("Liam", "baby hand", 10) # starts combat with little old me - liam
+            clrprint("After defeating LIAM, he retreats back around the corner... and the next thing you know you are met with THE SYSTEM, an extremely powerful entity who appears to have ten faces scattered in various places aroud the body. Where the head is, you see LIAM's head. Prepare for your final battle.") # prints the text where you beat me up, then clears it - also liam
+            input("Press ENTER to continue.") # wait for user input
+            combat.system() # starts the fight with the final boss, the system
             #finally, the endings
-            gameended = False
-            if pg13 == True:
-                clrprint("The SYSTEM lies in defeat infront of you. A black door fades into existence in front of you, and you know this is your chance to escape. However, having exterminated the entites and finishing THE SYSTEM, the backrooms are a much safer place and you are unsure on whether or not you want to leave.")
-                while gameended == False:
-                    ending = input("Leave the backrooms? (yes/no) ")
-                    if ending == "yes":
-                        gameended = True
-                        clrprint("You take the door in front of you, radiating a white glow as you exit to finally earn your freedom. You regain conscience in your bedroom, strangely enough exactly where you left, even though days had passed. There are times when you don't feel alone, like fragments of your past remain to haunt you, though with enough time you will be able to let them go. You know that they don't want to leave, but they have no reason to remain either. Your friends? No, they're just memories now. You have to let them go.")
-                        input("The end (press ENTER to continue).")
-                    elif ending == "no":
-                        gameended = True
-                        clrprint("The door disintegrates in front of you and you feel at peace, knowing that this was the correct decision. Despite all you've been through, your mission was not to leave the backrooms, but to make them a safer place for you… and the friends you lost a long time ago. You can still feel them near you, and with enough time and assurance that they're safe, they will surely come back. ASHLEY, XEN, HOPE, JAKE, and many others. Your best friends for many years, will be one with you again soon.")
-                        input("The end (press ENTER to continue).")
-                    else:
-                        clrprint("Please select yes or no.")
-            elif pg13 == False:
-                clrprint("The SYSTEM lies dead infront of you. Your old, blunt knife fades into existence infront of your hand, emitting an ominous black glow, and you know what you must do to escape. However, having exterminated the entites and finishing THE SYSTEM, the backrooms are a much safer place and you are unsure on whether or not you want to leave.")
-                while gameended == False:
-                    ending = input("Leave the backrooms? (yes/no) ")
-                    if ending == "yes":
-                        gameended = True
-                        clrprint("You ready your blunt knife, with you since day one, and point it towards yourself. Is this really what you have to do to leave? It'll be worth it in the end. Three… Two… It's been done. I suppose I'm not you anymore, but finally one with myself having been presented with the opportunity for freedom. I snap back into reality. The backrooms, my headspace, were always too hostile to fully immerse myself into. I suppose there's a reason for that. I look around, and my room is completely white. It was honestly more vibrant back in the backrooms despite you only having the ability to perceive what you wanted to. I kind of miss that already. I should probably look around and see how everyone's doing. Why is my door locked? What is this mailbox shaped slit in my door for? Oh god. This isn't my life. I don't want to be here, imprisoned in my own home. I want to go back. Take me back right now. Please. Oh no, they're coming. I remember now. Not again.")
-                        input("The end (press ENTER to continue).")
-                    elif ending == "no":
-                        gameended = True
-                        clrprint("The knife disintegrates in your hand and you feel at peace, knowing that this was the correct decision. Despite all you've been through, your mission was not to leave the backrooms, but to make them a safer place for you… and the friends you lost a long time ago. You can still feel them near you, and with enough time and assurance that they're safe, they will surely come back. ASHLEY, XEN, HOPE, JAKE, and many others. Your best friends for many years, will be one with you again soon.")
-                        input("The end (press ENTER to continue).")
-                    else:
-                        clrprint("Please select yes or no.")
-            '''credits go here'''
-            credit()
-            time.sleep(1)
-            sys.exit()
+            gameended = False # makes sure that the game has never been completed before
+            if pg13 == True: # checks to see if the pg13 mode is on or off, which dictates the ending text
+                clrprint("The SYSTEM lies in defeat infront of you. A black door fades into existence in front of you, and you know this is your chance to escape. However, having exterminated the entites and finishing THE SYSTEM, the backrooms are a much safer place and you are unsure on whether or not you want to leave.") # prints text then clears it
+                while gameended == False: # while the user has not inputted yes or no
+                    ending = input("Leave the backrooms? (yes/no) ") # allows the player to dictate the ending
+                    if ending == "yes": # if the player chose yes, the sequence below starts
+                        gameended = True # changes the variable so that the loop is not repeated
+                        clrprint("You take the door in front of you, radiating a white glow as you exit to finally earn your freedom. You regain conscience in your bedroom, strangely enough exactly where you left, even though days had passed. There are times when you don't feel alone, like fragments of your past remain to haunt you, though with enough time you will be able to let them go. You know that they don't want to leave, but they have no reason to remain either. Your friends? No, they're just memories now. You have to let them go.") # prints the text then clears it
+                        input("The end (press ENTER to continue).") # wait for user input, and also the first ending
+                    elif ending == "no": # if the player chose no, the sequence below starts
+                        gameended = True # changes the variable so that the loop is not repeated
+                        clrprint("The door disintegrates in front of you and you feel at peace, knowing that this was the correct decision. Despite all you've been through, your mission was not to leave the backrooms, but to make them a safer place for you… and the friends you lost a long time ago. You can still feel them near you, and with enough time and assurance that they're safe, they will surely come back. ASHLEY, XEN, HOPE, JAKE, and many others. Your best friends for many years, will be one with you again soon.") # prints the text then clears it
+                        input("The end (press ENTER to continue).") # wait for user input, and also the second ending
+                    else: # if the player is either mentally deficient, or they cannot spell yes or no, the following sequence starts
+                        clrprint("Please select yes or no.") # prints the text for the mentally deficient people who cannot type, then clears it
+            elif pg13 == False: # if the pg13 mode is off, then this starts the sequence below
+                clrprint("The SYSTEM lies dead infront of you. Your old, blunt knife fades into existence infront of your hand, emitting an ominous black glow, and you know what you must do to escape. However, having exterminated the entites and finishing THE SYSTEM, the backrooms are a much safer place and you are unsure on whether or not you want to leave.") # prints text then clears it
+                while gameended == False: # while the user has not inputted yes or no
+                    ending = input("Leave the backrooms? (yes/no) ") # allows the player to dictate the ending
+                    if ending == "yes": # if the player chose yes, the sequence below starts
+                        gameended = True # changes the variable so that the loop is not repeated
+                        clrprint("You ready your blunt knife, with you since day one, and point it towards yourself. Is this really what you have to do to leave? It'll be worth it in the end. Three… Two… It's been done. I suppose I'm not you anymore, but finally one with myself having been presented with the opportunity for freedom. I snap back into reality. The backrooms, my headspace, were always too hostile to fully immerse myself into. I suppose there's a reason for that. I look around, and my room is completely white. It was honestly more vibrant back in the backrooms despite you only having the ability to perceive what you wanted to. I kind of miss that already. I should probably look around and see how everyone's doing. Why is my door locked? What is this mailbox shaped slit in my door for? Oh god. This isn't my life. I don't want to be here, imprisoned in my own home. I want to go back. Take me back right now. Please. Oh no, they're coming. I remember now. Not again.") # prints the text then clears it
+                        input("The end (press ENTER to continue).") # wait for user input, also the third ending
+                    elif ending == "no": # if the player chose no, then the following sequence starts
+                        gameended = True # changes the variable so that the loop is not repeated
+                        clrprint("The knife disintegrates in your hand and you feel at peace, knowing that this was the correct decision. Despite all you've been through, your mission was not to leave the backrooms, but to make them a safer place for you… and the friends you lost a long time ago. You can still feel them near you, and with enough time and assurance that they're safe, they will surely come back. ASHLEY, XEN, HOPE, JAKE, and many others. Your best friends for many years, will be one with you again soon.") # prints the text then clears it
+                        input("The end (press ENTER to continue).") # wait for user input, also the final ending
+                    else: # if the player is either mentally deficient, or they cannot spell yes or no, the following sequence starts
+                        clrprint("Please select yes or no.") # prints the text for the mentally deficient people who cannot type, then clears it
+            credit() # credits start
+            time.sleep(1) # time between the credits and the ending
+            sys.exit() # ends the code
 
                     
             
