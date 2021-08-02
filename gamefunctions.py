@@ -483,113 +483,112 @@ def command(query): # this is where all the magic happens. It contains almost ev
 
                     
             
-        elif PuzzleCleared == False:
-            clrprint("The door is locked.")
-    elif ask == "puzzle":
-        PuzzleCleared == False
-        if roomstate[0] == 3 and DoorUnlocked == False:
-            clrprint("Puzzle Section: Lobby")
-        elif roomstate[0] == 5 and VaultOpen == False:
-            clrprint("Puzzle Section: Storage Room")
-        elif roomstate[0] == 6 and Computer == False:
-            clrprint("Puzzle Section: Office")
-        else:
-            PuzzleCleared = True
-            clrprint("There's no puzzle to complete here!")
-            input("Press ENTER to continue.")
-        while PuzzleCleared == False:
-            puzzle_ask = input("> ")
-            if puzzle_ask == "help":
-                clrprint('''inspect - recieve a description on the puzzle.
+        elif PuzzleCleared == False: # if the door to the final room is locked, then this starts the sequence below
+            clrprint("The door is locked.") # prints text then clears it
+    elif ask == "puzzle": # starts the puzzle that is in the same room as player
+        PuzzleCleared == False # checks to see if the puzzle has been completed, if it has not then this starts the sequence below
+        if roomstate[0] == 3 and DoorUnlocked == False: # checks to see if the player is in room 3, and that the door has not been unlocked
+            clrprint("Puzzle Section: Lobby") # prints text then clears
+        elif roomstate[0] == 5 and VaultOpen == False: # if the player is in room 5, and the vault has not been openned, then this starts the sequence below
+            clrprint("Puzzle Section: Storage Room") # prints text then clears it
+        elif roomstate[0] == 6 and Computer == False: # if the player is in room 6, and the computer puzzle has not been completed, then this starts the sequence below
+            clrprint("Puzzle Section: Office") # prints text then clears it
+        else: # if none of the conditions above are met, then this starts the sequence below
+            PuzzleCleared = True # changes the variable to true so that the loop below starts correctly
+            clrprint("There's no puzzle to complete here!") # prints text then clears it
+            input("Press ENTER to continue.") # wait for user input
+        while PuzzleCleared == False: # while the variable is false, then this starts the sequence below, and does not stop until the variable changes
+            puzzle_ask = input("> ") # command environment
+            if puzzle_ask == "help": # if the player askes for help, then this starts the sequence below
+                clrprint('''inspect - recieve a description on the puzzle. 
                 exit - step away from the puzzle and come back later.
-                hint - gives you a hint if one is available.''')
-                input()
-            elif puzzle_ask == "exit":
-                clrprint("You step away from the puzzle and return to exploration.")
-                input("Press ENTER to continue.")
-                break
-            elif roomstate[0] == 3:
-                if "mind" in puzzle_ask.lower():
-                    cleartext = open('./roommaps/puzzles.txt', "r")
-                    print(cleartext.readline())
-                    clrprint(cleartext.readline())
-                    PuzzleCleared = True
-                    DoorUnlocked = True
-                elif puzzle_ask == "inspect":
-                    clrprint("You are presented with a cube, and although it looks completely smooth at first, if you squint your eyes you can just make out a faint enscription: \"WHAT STATE CAN YOU LEAVE OR ENTER WITHOUT CHANGING YOUR ADDRESS?\"")
-                elif puzzle_ask == "hint":
-                    clrprint("You rack your *mind* but in your current state you can't think of anything.")
-            elif roomstate[0] == 5:
-                if puzzle_ask == "inspect":
-                    clrprint("You see a vault with a digital keypad and a 4-length lcd screen and can safely assume that inputting a 4 digit code will unlock the vault.")
-                    combat.PlayerIsHoldingKitchenKnifeForJoesBirthdayIn1982("You see a cutting board, and think back to the kitchen knife you saw earlier. Maybe you need it here?")
-                elif "1982" in puzzle_ask:
-                    cleartext = open('./roommaps/puzzles.txt', "r")
-                    print(cleartext.readline())
-                    print(cleartext.readline())
-                    print(cleartext.readline())
-                    clrprint(cleartext.readline())
-                    PuzzleCleared = True
-                    VaultOpen = True
-                elif puzzle_ask == "hint":
-                    clrprint("The Kitchen Knife shall cut a path through the dark puzzle...")
-            elif roomstate[0] == 6:
-                if puzzle_ask == "inspect":
-                    clrprint("In the office there is a singular computer, and although it is rather old you feel a strange amount of power coming out of it. On the desk there is a sticky note, and handwritten on it in black marker it says \"Install the 'neofetch' package and run it.\" You feel like this is your final challenge before your first and only chnce of escape.")
-                    input("Press ENTER to continue.")
-                    choice = input("Ready to turn on the computer? (yes/no) ")
-                    if choice.lower() == 'yes':
-                        clear()
-                        arch_start()
-                        input("Press ENTER to continue.")
-                        clrprint("Seeing the screen flash to life fills you with determination. Back in the living room, you hear a door fly open.")
-                        input("Press ENTER to continue.")
-                        Computer = True
-                        break
-                    elif puzzle_ask == "hint":
-                        clrprint("You should inspect the computer in closer detail...")
-            else:
-                clrprint("That's not the answer.")
-            input("Press ENTER to continue.")
-            clear()
-        PuzzleCleared = False
+                hint - gives you a hint if one is available.''') # prints text then clears it
+            elif puzzle_ask == "exit": # if the player asks to exit the puzzle section, then the following sequence starts
+                clrprint("You step away from the puzzle and return to exploration.") # prints text then clears it
+                input("Press ENTER to continue.") # wait for user input
+                break # breaks out of the 'while PuzzleCleared = false' loop
+            elif roomstate[0] == 3: # if the roomstate is 3
+                if "mind" in puzzle_ask.lower(): # if the players writes 'mind' anywhere in the statement, then this starts the follwing sequence
+                    cleartext = open('./roommaps/puzzles.txt', "r") # clears all of the text, then opens the puzzle text file
+                    print(cleartext.readline()) # cycles through the text file to the correct line, then prints it
+                    clrprint(cleartext.readline()) # cycles through the text file to the correct line, then prints it, then clears it
+                    PuzzleCleared = True # changes the variable to true so that so that the above loop is not repeated
+                    DoorUnlocked = True # changes the variable to true so that the player can now access more of the area
+                elif puzzle_ask == "inspect": # if the players asks to inspect, then this starts the sequence below
+                    clrprint("You are presented with a cube, and although it looks completely smooth at first, if you squint your eyes you can just make out a faint enscription: \"WHAT STATE CAN YOU LEAVE OR ENTER WITHOUT CHANGING YOUR ADDRESS?\"") # prints text then clears it
+                elif puzzle_ask == "hint": # if the players asks for a hint, then this starts the sequence below
+                    clrprint("You rack your *mind* but in your current state you can't think of anything.") # prints text then clears it
+            elif roomstate[0] == 5: # if the roomstate is 5, then this starts the sequence below
+                if puzzle_ask == "inspect": # if the player asks to inspect, then this starts the sequence below
+                    clrprint("You see a vault with a digital keypad and a 4-length lcd screen and can safely assume that inputting a 4 digit code will unlock the vault.") # prints text then clears it
+                    combat.PlayerIsHoldingKitchenKnifeForJoesBirthdayIn1982("You see a cutting board, and think back to the kitchen knife you saw earlier. Maybe you need it here?") # if the player is holding the kitchen knife, then prints out the text.
+                elif "1982" in puzzle_ask: # if the text '1982' is anywhere in the command that the player inputs, then the following sequence starts
+                    cleartext = open('./roommaps/puzzles.txt', "r") # clears the text, then opens the file with the puzzle text
+                    print(cleartext.readline()) # cycles through the text file to the correct line, then prints it
+                    print(cleartext.readline()) # cycles through the text file to the correct line, then prints it 
+                    print(cleartext.readline()) # cycles through the text file to the correct line, then prints it 
+                    clrprint(cleartext.readline()) # cyceles through the text file to the correct line, then prints it, then clears it
+                    PuzzleCleared = True # changes the variable to true so that the above loop does not continue
+                    VaultOpen = True # changes the variable to true so that the player has access to more areas
+                elif puzzle_ask == "hint": # if the player asks for a hint, then this starts the sequence below
+                    clrprint("The Kitchen Knife shall cut a path through the dark puzzle...") # prints etx then clears it
+            elif roomstate[0] == 6: # if the player is in roomstate 6, then this starts the sequence below
+                if puzzle_ask == "inspect": # if the player asks to inspect, then this starts the sequence below
+                    clrprint("In the office there is a singular computer, and although it is rather old you feel a strange amount of power coming out of it. On the desk there is a sticky note, and handwritten on it in black marker it says \"Install the 'neofetch' package and run it.\" You feel like this is your final challenge before your first and only chnce of escape.") # prints text then clears it
+                    input("Press ENTER to continue.") # wait for user input
+                    choice = input("Ready to turn on the computer? (yes/no) ") # asks for an input on whether or not the player wants to start up the computer
+                    if choice.lower() == 'yes': # if the player chose yes, then this starts the sequence below
+                        clear() # clears everything
+                        arch_start() # starts the computer puzzle
+                        input("Press ENTER to continue.") # wait for user input
+                        clrprint("Seeing the screen flash to life fills you with determination. Back in the living room, you hear a door fly open.") # prints text then clears it
+                        input("Press ENTER to continue.") # wait for user input
+                        Computer = True # changes the variable to true so that the player has access to more areas 
+                        break # breaks out of the 'while PuzzleCleared = false' loop
+                    elif puzzle_ask == "hint": # if the player asks for a hint then this starts the the sequence below
+                        clrprint("You should inspect the computer in closer detail...") # prints text then clears it
+            else: # if none of the above conditions are met, then this starts the sequence below
+                clrprint("That's not the answer.") # prints text then clears it
+            input("Press ENTER to continue.") # wait for user input
+            clear() # clears everything
+        PuzzleCleared = False # changes the variable to false so that the loop is re-entered
 
-    elif ask == "sleep":
-        if roomstate[0] == 1 or roomstate[0] == 8:
-            combat.heal()
-        else:
-            clrprint("There's no bed to sleep on here!")
-            input("Press ENTER to continue.")
+    elif ask == "sleep": # if the player asks to sleep, then this starts the following sequence
+        if roomstate[0] == 1 or roomstate[0] == 8: # if the roomstate is either 1 or 8, then this starts the sequence below
+            combat.heal() # heals the player 
+        else: # if the player does not have access to a bed, then this starts the sequence below
+            clrprint("There's no bed to sleep on here!") # prints text then clears
+            input("Press ENTER to continue.") # wait for user input
 
-    elif ask.startswith("drop"):
-        combat.drop(ask[5:])
+    elif ask.startswith("drop"): # if the player wants to drop, then this starts the sequence below
+        combat.drop(ask[5:]) # calls the drop function from combat, to drop the item that was named
     
-    else:
-        clrprint("Unknown action. Try \"help\".")
-        input("Press ENTER to continue.")
+    else: # if none of the above conditions are met, then this starts the sequence below
+        clrprint("Unknown action. Try \"help\".") # prints text then clears it
+        input("Press ENTER to continue.") # wait for user input
 
 
-    clear()
-    command("> ")
+    clear() # clears everything
+    command("> ") # opens the command environment again
 
-def start():
-    global pg13
-    clrprint('''DISCLAIMER
-    This game contains themes not suitable for immature audiences.''')
-    loop = 0
-    while loop == 0:
-        pg13 = input("Enter PG13 mode? (yes/no) ").lower()
-        if pg13 == "yes":
-            pg13 = True
-            loop = 1
-        elif pg13 == "no":
-            pg13 = False
-            loop = 1
-        else:
-            clrprint("Please select an option.")
+def start(): # defines start
+    global pg13 # defines the global variable, pg13
+    clrprint('''DISCLAIMER 
+    This game contains themes not suitable for immature audiences.''') # prints text then clears it
+    loop = 0 # changes the variable to 0, so that the following loop can start
+    while loop == 0: # while the loop variable is 0, then following sequence will repeat
+        pg13 = input("Enter PG13 mode? (yes/no) ").lower() # gives the player a choice to start the game in either mode, which dictates the content of the endings
+        if pg13 == "yes": # if the player chose yes, then this starts the sequence below
+            pg13 = True # changes the variable to true so that the ending is changed
+            loop = 1 # ends the loop
+        elif pg13 == "no": # if the player chose no, then this starts the sequence below
+            pg13 = False # changes the variable to false, so that the ending is changed
+            loop = 1 # ends the loop
+        else: # if the player does not input yes or no, then this starts the sequence below
+            clrprint("Please select an option.") # prints text then clears it
         
-    dialogue = open("./dialogue.txt", "r")
-    clrprint(dialogue.readline())
-    clrprint(dialogue.readline())
-    dialogue.close()
-    command("\033[0;37;40m > ")
+    dialogue = open("./dialogue.txt", "r") # opens the etxt file with the dialouge
+    clrprint(dialogue.readline()) # cycles through the text file to the correct line, then prints it, then clears it
+    clrprint(dialogue.readline()) # cycles through the text file to the correct line, then prints it, then clears it
+    dialogue.close() # closes the text file with the dialouge
+    command("> ") # opens the command environment
