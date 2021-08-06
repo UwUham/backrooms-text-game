@@ -62,4 +62,4 @@ def arch_start(): # create the arch_start function, the functoin used to begin t
             NeoRun = True # run neofetch and tell the code that neofetch has been run
             neofetch(neofetchbool) # run neofetch and tell the code that neofetch has been run
         else: # if the user types an unknown command:
-            print("\033[0;31;40merror:\033[0;37;40m unknown command" + cmd + ": try 'help'.") # tell the user about "help"
+            print("\033[0;31;40merror:\033[0;37;40m unknown command" + cmd + ": try 'help'.") # tell the user about "help".

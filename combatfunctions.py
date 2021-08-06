@@ -312,36 +312,37 @@ def sysfight(): # creating the sysfight function, a rework of our old combat eng
             if index == 2: # if the user did hit a crit
                 print("Critical hit!") # tell the user that they hit a crit
                 damagedealt = damagedealt + int(weaponatkstat[handweapon]) * 2 # double the damage and set it
-            input("Press ENTER to continue") # 
-            count = 0
-            while count <= 2:
-                index = random.randrange(1, 3)
-                entityName = random.choice(systemnames)
-                game.clrprint(entityName.upper() + " attacks!")
-                time.sleep(0.7)
-                print(entityName.upper(), systemweaponflavour[entityName], "for", int(index * int(systemweaponatkstats[entityName])), "damage!")
-                if index != 2:
-                    damagetaken = damagetaken + systemweaponatkstats[entityName]
-                if index == 2:
-                    print("Critical hit!")
-                    damagetaken = damagetaken + systemweaponatkstats[entityName] * 2
-                input("Press ENTER to continue")
-                count = count + 1
-        else:
-            count = 0
-            while count <= 2:
-                entityName = random.choice(systemnames)
-                game.clrprint(entityName.upper() + " attacks first!")
-                time.sleep(0.7)
-                print(entityName.upper(), systemweaponflavour[entityName], "for", int(index * int(systemweaponatkstats[entityName])), "damage!")
-                if index != 2:
-                    damagetaken = damagetaken + systemweaponatkstats[entityName]
-                if index == 2:
-                    print("Critical hit!")
-                    damagetaken =  damagetaken + systemweaponatkstats[entityName] * 2
-                input("Press ENTER to continue")
-                count = count + 1
-            index = random.randrange(1, 3)
+            input("Press ENTER to continue") # wait for user input
+            count = 0 # defining a variable for a loop
+            while count <= 2: # go through the entity attack sequence three times
+                index = random.randrange(1, 3) # go through the entity attack sequence three times
+                entityName = random.choice(systemnames) # go through the entity attack sequence three times
+                game.clrprint(entityName.upper() + " attacks!") # go through the entity attack sequence three times
+                time.sleep(0.7) # go through the entity attack sequence three times
+                print(entityName.upper(), systemweaponflavour[entityName], "for", int(index * int(systemweaponatkstats[entityName])), "damage!") # go through the entity attack sequence three times
+                if index != 2: # go through the entity attack sequence three times
+                    damagetaken = damagetaken + systemweaponatkstats[entityName] # go through the entity attack sequence three times
+                if index == 2: # go through the entity attack sequence three times
+                    print("Critical hit!") # go through the entity attack sequence three times
+                    damagetaken = damagetaken + systemweaponatkstats[entityName] * 2 # go through the entity attack sequence three times
+                input("Press ENTER to continue") # go through the entity attack sequence three times
+                count = count + 1 # go through the entity attack sequence three times
+        else: # if the SYSTEM goes first:
+            count = 0 # repeat the enemy attack sequence three times
+            while count <= 2: # repeat the enemy attack sequence three times
+                entityName = random.choice(systemnames) # repeat the enemy attack sequence three times
+                game.clrprint(entityName.upper() + " attacks first!") # repeat the enemy attack sequence three times
+                time.sleep(0.7) # repeat the enemy attack sequence three times
+                print(entityName.upper(), systemweaponflavour[entityName], "for", int(index * int(systemweaponatkstats[entityName])), "damage!") # repeat the enemy attack sequence three times
+                if index != 2: # repeat the enemy attack sequence three times
+                    damagetaken = damagetaken + systemweaponatkstats[entityName] # repeat the enemy attack sequence three times
+                if index == 2: # repeat the enemy attack sequence three times
+                    print("Critical hit!") # repeat the enemy attack sequence three times
+                    damagetaken =  damagetaken + systemweaponatkstats[entityName] * 2 # repeat the enemy attack sequence three times
+                input("Press ENTER to continue") # repeat the enemy attack sequence three times
+                count = count + 1 # repeat the enemy attack sequence three times
+                index = random.randrange(1, 3) # decide critical hit
+            index = random.randrange(1, 3) # decide critical hit
             game.clrprint("YOU attack!")
             time.sleep(0.7)
             print("Attacked with", handweapon.upper(), "for", int(index * int(weaponatkstat[handweapon])), "damage!")
