@@ -174,6 +174,7 @@ def fight(entityName, entityWeapon): # create the fight function
 
 
 def weapons(): # create the weapons function
+    global choicenum, swap # set a variable as global
     if len(weaponsinBag) != 0: # if there is something in your bag
         swap = True # a switch boolean
         game.clrprint("You have:") # print the items in your bag
@@ -183,12 +184,10 @@ def weapons(): # create the weapons function
         choice = input("Select an item (any weapon that was listed or none): ").lower() # selecting a choice and handling it accordingly
         if choice == weaponsinBag[0].lower(): # selecting a choice and handling it accordingly
             choicenum = 0 # selecting a choice and handling it accordingly
-        elif len(weaponsinBag) >= 2: # selecting a choice and handling it accordingly
-            if choice == weaponsinBag[1].lower(): # selecting a choice and handling it accordingly
-                choicenum = 1 # selecting a choice and handling it accordingly
-        elif len(weaponsinBag) >= 3:     # selecting a choice and handling it accordingly
-            if choice == weaponsinBag[2].lower(): # selecting a choice and handling it accordingly
-                choicenum = 2 # selecting a choice and handling it accordingly
+        elif choice == weaponsinBag[1].lower(): # selecting a choice and handling it accordingly
+            choicenum = 1 # selecting a choice and handling it accordingly
+        elif choice == weaponsinBag[2].lower(): # selecting a choice and handling it accordingly
+            choicenum = 2 # selecting a choice and handling it accordingly
         elif choice == "none": # selecting a choice and handling it accordingly
             swap = False # selecting a choice and handling it accordingly
         else: # selecting a choice and handling it accordingly
@@ -282,11 +281,24 @@ weapons - switch your held weapon with one in your bag (if available)\n''') # pr
         YourHP = 30 # restore the user's HP
     if entityHP <= 0: # if the entity has less than or equal to 0 HP:
         input("Press ENTER to continue.") # wait for user input
-    elif lost == True and doyouhaveaweapon == True: # if the user has a weapon but lost the game:
-        input("Press ENTER to try again.") # give the user the option to try again
-        lost = False # tell the game that you are trying again
-        YourHP = 100 # set your hp to 100
-        combat(entityName, entityWeapon, entityHPcache) # start the fight again
+    elif lost == True and doyouhaveaweapon == True: # if you lost but don't have a weapon
+        retry == input("Try again? (yes/no) ").lower() # wait for user input
+        if retry == "yes": # if user says yes
+            lost = False # set lost to false
+            YourHP = 100 # fight retry sequence
+            retryloop = 1 # loop stuff
+            combat(entiityName, entityWeapon, entityHPcache) # retry the fight
+        elif retry == "no": # if user says no
+            YourHP = 100 # set hp to 100
+            game.clrprint("You wake up again, in the room where the fight began. You feel healthy.") # tell the user that they are alive
+            input("Press ENTER to continue.") # wait for user input
+            game.clear() # clear the screen
+            retryloop = 1 # loop stuff
+            game.command("> ") # go back out to the exploration mode
+        else: # item invalidation
+            print("Please select an option.") # item invalidation
+            input("Press ENTER to continue.") # item invalidation
+            game.clear() # item invalidation
     elif lost == True and doyouhaveaweapon == False: # if the user has no weapon but lost the game:
         doyouhaveaweapon = True # set the weapon switch to true
         game.clrprint("You wake up again, in the room where the fight began. You feel healthy, however you still do not have a weapon.") # tell the user that they are alive
@@ -343,75 +355,89 @@ def sysfight(): # creating the sysfight function, a rework of our old combat eng
                 count = count + 1 # repeat the enemy attack sequence three times
                 index = random.randrange(1, 3) # decide critical hit
             index = random.randrange(1, 3) # decide critical hit
-            game.clrprint("YOU attack!")
-            time.sleep(0.7)
-            print("Attacked with", handweapon.upper(), "for", int(index * int(weaponatkstat[handweapon])), "damage!")
-            if index != 2:
-                damagedealt = damagedealt + weaponatkstat[handweapon]
-            if index == 2:
-                print("Critical hit!")
-                damagedealt = damagedealt + weaponatkstat[handweapon] * 2
-            input("Press ENTER to continue")
-        game.clear()
-    elif len(weaponsinBag) > 0:
-        game.clrprint("Select a weapon first.")
-    else:
-        game.clrprint("You fought without a weapon and lost.")
-        damagetaken = 100
-        doyouhaveaweapon = False
-        input("Press ENTER to continue.")
+            game.clrprint("YOU attack!") # go through your attack sequence
+            time.sleep(0.7) # go through your attack sequence
+            print("Attacked with", handweapon.upper(), "for", int(index * int(weaponatkstat[handweapon])), "damage!") # go through your attack sequence
+            if index != 2: # go through your attack sequence
+                damagedealt = damagedealt + weaponatkstat[handweapon] # go through your attack sequence
+            if index == 2: # go through your attack sequence
+                print("Critical hit!") # go through your attack sequence
+                damagedealt = damagedealt + weaponatkstat[handweapon] * 2 # go through your attack sequence
+            input("Press ENTER to continue") # go through your attack sequence
+        game.clear() # go through your attack sequence
+    elif len(weaponsinBag) > 0: # make sure the player is holding a weapon
+        game.clrprint("Select a weapon first.") # make sure the player is holding a weapon
+    else: # if you don't have a weapon in the final boss fight somehow:
+        game.clrprint("You fought without a weapon and lost.") # go through the lost battle sequence
+        damagetaken = 100 # go through the lost battle sequence
+        doyouhaveaweapon = False # go through the lost battle sequence
+        input("Press ENTER to continue.") # go through the lost battle sequence
 
 
-def system():
+def system(): # set the function for the final battle
     global YourHP, damagedealt, damagetaken, doyouhaveaweapon
-    entityHP = 210
-    entityName = "THE SYSTEM"
-    game.clrprint("THE SYSTEM wants to fight!")
-    while entityHP > 0 and YourHP > 0:
-        print("What would you like to do? (fight, defend, weapons, help)")
-        print("Your health: " + str(YourHP))
-        print("THE SYSTEM health: " + str(entityHP))
-        run = input("> ")
-        if run == "help":
+    entityHP = 210 # init text and variables
+    entityName = "THE SYSTEM" # init text and variables
+    game.clrprint("THE SYSTEM wants to fight!") # init text and variables
+    while entityHP > 0 and YourHP > 0: # while both members are alive
+        print("What would you like to do? (fight, defend, weapons, help)") # open the fight menu
+        print("Your health: " + str(YourHP)) # open the fight menu
+        print("THE SYSTEM health: " + str(entityHP)) # open the fight menu
+        run = input("> ") # open the fight menu
+        if run == "help": # if you need the help text in the final battle for whatever reason:
             print('''
 fight - attack the entity.\n
 defend - protect yourself from the entity.\n
-weapons - switch your held weapon with one in your bag (if available)\n''')
-            input("Press ENTER to continue.")
-            game.clear()
-        elif run == "fight":
-            sysfight()
-            entityHP = entityHP - damagedealt
-            YourHP = YourHP - damagetaken
-            damagedealt = 0
-            damagetaken = 0
-        elif run == "defend":
-            game.clrprint("You can't defend against multiple entities at once!")
-            input("Press ENTER to continue.")
-            game.clear()
-        elif run == "weapons":
-           weapons()
-        else:
-            print("Not a valid choice.")
-            input("Press ENTER to continue.")
-            game.clear()
-    if entityHP <= 0:
-        game.clrprint("Successfully defeated " + entityName.upper() + "!")
-        if YourHP < 30:
-            print("Health restored to 30!")
-            YourHP = 30
-    elif YourHP <= 0:
-        game.clrprint("Defeated by " + entityName.upper() + "!")
-        lost = True
-    if entityHP <= 0:
-        input("Press ENTER to continue.")
-    elif lost == True and doyouhaveaweapon == True:
-        input("Press ENTER to try again.")
-        lost = False
-        YourHP = 100
-        entityHP = 210
-        system()
-    elif lost == True and doyouhaveaweapon == False:
+weapons - switch your held weapon with one in your bag (if available)\n''') # print help text and wait for user input
+            input("Press ENTER to continue.") # print help text and wait for user input
+            game.clear() # clear the screen
+        elif run == "fight": # if the user fights
+            sysfight() # go through the fight sequence
+            entityHP = entityHP - damagedealt # go through the fight sequence
+            YourHP = YourHP - damagetaken # go through the fight sequence
+            damagedealt = 0 # go through the fight sequence
+            damagetaken = 0 # go through the fight sequence
+        elif run == "defend": # if the user tries to defend
+            game.clrprint("You can't defend against multiple entities at once!") # to be honest i had no idea how defending was gonna work here, so i just scrapped it
+            input("Press ENTER to continue.") # wait for user input
+            game.clear() # clear the screen
+        elif run == "weapons": # if the user switches weapons
+           weapons() # switch weapons
+        else: # if the user says anything else:
+            print("Not a valid choice.") # tell the user that choice is invalid
+            input("Press ENTER to continue.") # wait for user input
+            game.clear() # clear the screen
+    if entityHP <= 0: # if the entitiy is dead:
+        game.clrprint("Successfully defeated " + entityName.upper() + "!") # fight win text/sequence
+        if YourHP < 30: # fight win text/sequence
+            print("Health restored to 30!") # fight win text/sequence
+            YourHP = 30 # fight win text/sequence
+    elif YourHP <= 0: # if you are dead
+        game.clrprint("Defeated by " + entityName.upper() + "!") # fight loss sequence
+        lost = True # fight loss sequence
+    if entityHP <= 0: # fight loss sequence
+        input("Press ENTER to continue.") # fight loss sequence
+    elif lost == True and doyouhaveaweapon == True: # if you lost but don't have a weapon
+        retry == input("Try again? (yes/no) ").lower() # wait for user input
+        if retry == "yes": # if user says yes
+            lost = False # set lost to false
+            YourHP = 100 # fight retry sequence
+            entityHP = 210 # fight retry sequence
+            system() # fight retry sequence
+            retryloop = 1 # loop stuff
+        elif retry == "no": # if user says no
+            YourHP = 100 # set hp to 100
+            game.clrprint("You wake up again, in the room where the fight began. You feel healthy.") # tell the user that they are alive
+            input("Press ENTER to continue.") # wait for user input
+            game.clear() # clear the screen
+            retryloop = 1 # loop stuff
+            game.command("> ") # go back out to the exploration mode
+        else: # item invalidation
+            print("Please select an option.") # item invalidation
+            input("Press ENTER to continue.") # item invalidation
+            game.clear() # item invalidation
+    elif lost == True and doyouhaveaweapon == False: # if you lost due to not having a weapon
+        YourHP = 100 # set hp to 100
         game.clrprint("You wake up again, in the room where the fight began. You feel healthy, however you still do not have a weapon.") # tell the user that they are alive
         input("Press ENTER to continue.") # wait for user input
         game.clear() # clear the screen

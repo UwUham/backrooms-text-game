@@ -411,7 +411,6 @@ def command(query): # this is where all the magic happens. It contains almost ev
             roomstate[0] = 9 # moves the player into room 9, which is demise
             if FirstTime8 == True: # checks to see if this is the players first time, if it is then starts the sequence below (this was implemented as a way to ignore this ending, and find another way out, so if we were to ever expand on the game, we could have multiple routes, and thus you would not be locked into the ending at this point, because once you enter deise you cannot leave)
                 roomstate[1] = roomstate[0] # increases the count of the rooms that the player has discovered
-                FirstTime8 = False # changes the variable to false so that if the players enters the room again, the text does not appear again (once again, a way to expand the game) 
                 dialogue = open("./dialogue.txt", "r") # opens the text file with the dialouge
                 print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
                 print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
@@ -477,6 +476,7 @@ def command(query): # this is where all the magic happens. It contains almost ev
                         input("The end (press ENTER to continue).") # wait for user input, also the final ending
                     else: # if the player is either mentally deficient, or they cannot spell yes or no, the following sequence starts
                         clrprint("Please select yes or no.") # prints the text for the mentally deficient people who cannot type, then clears it
+            FirstTime8 = False # changes the variable to false so that if the players enters the room again, the text does not appear again (once again, a way to expand the game) 
             credit() # credits start
             time.sleep(1) # time between the credits and the ending
             sys.exit() # ends the code
@@ -587,7 +587,7 @@ def start(): # defines start
         else: # if the player does not input yes or no, then this starts the sequence below
             clrprint("Please select an option.") # prints text then clears it
         
-    dialogue = open("./dialogue.txt", "r") # opens the etxt file with the dialouge
+    dialogue = open("./dialogue.txt", "r") # opens the text file with the dialouge
     clrprint(dialogue.readline()) # cycles through the text file to the correct line, then prints it, then clears it
     clrprint(dialogue.readline()) # cycles through the text file to the correct line, then prints it, then clears it
     dialogue.close() # closes the text file with the dialouge
