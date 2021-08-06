@@ -52,10 +52,14 @@ def arch_start(): # create the arch_start function, the functoin used to begin t
                         print("neofetch 7.1.0.2-any  83.1KiB  22.0KiB/s  00:0" + time + "  " + "[" + (index * "#") + ((23 - index) * "-") + "]") # have a loading screen for the "download" of the function, as Unix package managers do
                         sleep(0.17) # have a loading screen for the "download" of the function, as Unix package managers do
                     neofetchbool = True # tell the code Neofetch is installed
+                if cmd.startswith("pacman -Ss"): # if the command is pacman -Ss
+                    print('''
+                    neofetch [1.0.0]
+                    A command line system information tool''') # print list of packages
                 else: # if the command is "pacman -S (anything other than neofetch)":
                     print("\033[0;31;40merror:\033[0;37;40m package not found: " + cmd[9:]) # print error text
             else: # if the command is pacman "(anything other than -S)":
-                print("\033[0;31;40merror:\033[0;37;40m unknown operand: -S to install") # print error text
+                print("\033[0;31;40merror:\033[0;37;40m unknown operand: -S <package> to install, -Ss to list available packages") # print error text
         elif cmd == "help": # if the user runs the help command:
             print("The only command you need for this task is 'pacman'.") # tell the user about the pacman command
         elif cmd == "neofetch" and neofetchbool == True: # if the user runs neofetch after installing it:
