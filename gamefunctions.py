@@ -1,3 +1,9 @@
+"""
+Gamefunctions.py is the file that holds all the commands in the exploration terminal environment. It holds commands such as run, drp, look, and the puzzle environments and solutions.
+For contributors:
+You can add new commands by adding an "elif" on the "ask ==" layer in the "run" function.
+In the "elif ask.startsWith("take")" layer, you can add new items by choosing a room and placing an item in the room's command area by typng.
+"""
 import random, sys, os, time, combatfunctions as combat #importing various dependencies: general usage
 from terminal import arch_start #importing various dependencies: specifics for the Computer puzzle
 from credits import credit #importing various dependencies: the credits at the end
@@ -571,7 +577,7 @@ def command(query): # this is where all the magic happens. It contains almost ev
     clear() # clears everything
     command("> ") # opens the command environment again
 
-def start(): # defines start
+def start(): # defines start: which brings all the code together and starts the code.
     global pg13 # defines the global variable, pg13
     clrprint('''DISCLAIMER 
     This game contains themes not suitable for immature audiences.''') # prints text then clears it
