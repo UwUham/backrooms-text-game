@@ -1,3 +1,9 @@
+'''
+Combatfunctions.py is a module we made to handle our extra feature, a combat engine.
+In-game, the combat engine aims to create an Undertale, OMORI or Pokemon-like turn-based RPG-style fighting experience.
+As a developer, you can modify the stats of existing weapons by changing the values in the weaponatkstat and weapondefstat libraries, or create new ones by adding existing entries.
+Please note that you need to make your custom weapons obtainable in-game, by editing the gamefunctions.py file.
+'''
 global damagedealt, damagetaken, YourHP # defining variables to be used in combat
 damagedealt = 0 # defining variables to be used in combat
 damagetaken = 0 # defining variables to be used in combat
@@ -78,7 +84,7 @@ systemweaponatkstats = {"Fear": 10, # defining attack stats for final boss weapo
 weaponsinBag = [] # creating variables for the bag and the hand
 weaponinHand = [] # creating variables for the bag and the hand
 
-def bagadd(item): # create the bagadd function
+def bagadd(item): # create the bagadd function, which is used to add items to your bag.
     if len(weaponsinBag) == 3: # if the bag is full:
         game.clrprint("Not enough space for this item.") # tell the user that the bag is full
     elif len(weaponsinBag) > 3: # check if something has happened eg. editing the game files to have more then 3 items:
@@ -99,13 +105,13 @@ def PlayerIsHoldingKitchenKnifeForJoesBirthdayIn1982(var): # this runs code in h
     else: # if the player does not have the knife
         print(var) # print specified text
 
-def heal(): # create the heal function
+def heal(): # create the heal function, which does what it says on the tin: heal your character to maximum HP
     global YourHP # set your hp to 100
     YourHP = 100 # set your hp to 100
     game.clrprint("You rested and became fully healthy once again.") # tell the player that their health is now full
     input("Press ENTER to continue.") # wait for user input
 
-def drop(what): # create the drop function
+def drop(what): # create the drop function, which drops your currently held item or an item in your bag
     global weaponsinBag, weaponinHand # set the variables used to global
     if what in weaponsinBag: # if the specified item is in your bag
         weaponsinBag.remove(what) # remove the item
@@ -120,7 +126,7 @@ def drop(what): # create the drop function
     input("Press ENTER to continue.") # wait for user input
         
 
-def fight(entityName, entityWeapon): # create the fight function
+def fight(entityName, entityWeapon): # create the fight function, which is used in combat to initialise a turn
     if len(weaponinHand) == 1: # if you are holding a weapon
         global damagetaken, damagedealt, doyouhaveaweapon # set variables as global
         firstgoer = random.randint(0, 2) # randomly deciding who goes first
@@ -216,7 +222,7 @@ def weapons(): # create the weapons function
     game.clear() # clear the screen
          
 
-def defend(entityName, entityWeapon): # create the defend function
+def defend(entityName, entityWeapon): # create the defend function, which differently initalises a turn to work more defensively
     global damagedealt, damagetaken, doyouhaveaweapon # set variables as global
     if len(weaponinHand) == 1: # if there is an item in your hand
         if weapondefstat[weaponinHand[0]] > weaponatkstat[entityWeapon]: # if your defense stat is higher than the enemy's attack stat
@@ -239,7 +245,7 @@ def defend(entityName, entityWeapon): # create the defend function
         doyouhaveaweapon = False # tell the game the user does not have a weapon
         input("Press ENTER to continue.") # wait for user input
 
-def combat(entityName, entityWeapon, entityHP): # create the combat function
+def combat(entityName, entityWeapon, entityHP): # create the combat function, which begins a fight and changes your terminal enviroment to something combat based
     global YourHP, doyouhaveaweapon # make your hp variable global
     entityHPcache = entityHP # cache the entity's hp
     game.clrprint(entityName.upper() + " wants to fight!") # tell the user the battle has been intitalized
@@ -282,12 +288,12 @@ weapons - switch your held weapon with one in your bag (if available)\n''') # pr
     if entityHP <= 0: # if the entity has less than or equal to 0 HP:
         input("Press ENTER to continue.") # wait for user input
     elif lost == True and doyouhaveaweapon == True: # if you lost but don't have a weapon
-        retry == input("Try again? (yes/no) ").lower() # wait for user input
+        retry = input("Try again? (yes/no) ").lower() # wait for user input
         if retry == "yes": # if user says yes
             lost = False # set lost to false
             YourHP = 100 # fight retry sequence
             retryloop = 1 # loop stuff
-            combat(entiityName, entityWeapon, entityHPcache) # retry the fight
+            combat(entityName, entityWeapon, entityHPcache) # retry the fight
         elif retry == "no": # if user says no
             YourHP = 100 # set hp to 100
             game.clrprint("You wake up again, in the room where the fight began. You feel healthy.") # tell the user that they are alive
@@ -374,7 +380,7 @@ def sysfight(): # creating the sysfight function, a rework of our old combat eng
         input("Press ENTER to continue.") # go through the lost battle sequence
 
 
-def system(): # set the function for the final battle
+def system(): # set the function for the final battle, initialising an identical combat environment with reworked turns to work with the system's special mechanic
     global YourHP, damagedealt, damagetaken, doyouhaveaweapon
     entityHP = 210 # init text and variables
     entityName = "THE SYSTEM" # init text and variables
@@ -418,7 +424,7 @@ weapons - switch your held weapon with one in your bag (if available)\n''') # pr
     if entityHP <= 0: # fight loss sequence
         input("Press ENTER to continue.") # fight loss sequence
     elif lost == True and doyouhaveaweapon == True: # if you lost but don't have a weapon
-        retry == input("Try again? (yes/no) ").lower() # wait for user input
+        retry = input("Try again? (yes/no) ").lower() # wait for user input
         if retry == "yes": # if user says yes
             lost = False # set lost to false
             YourHP = 100 # fight retry sequence
