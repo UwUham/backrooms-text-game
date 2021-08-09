@@ -411,7 +411,6 @@ def command(query): # this is where all the magic happens. It contains almost ev
             roomstate[0] = 9 # moves the player into room 9, which is demise
             if FirstTime8 == True: # checks to see if this is the players first time, if it is then starts the sequence below (this was implemented as a way to ignore this ending, and find another way out, so if we were to ever expand on the game, we could have multiple routes, and thus you would not be locked into the ending at this point, because once you enter deise you cannot leave)
                 roomstate[1] = roomstate[0] # increases the count of the rooms that the player has discovered
-                FirstTime8 = False # changes the variable to false so that if the players enters the room again, the text does not appear again (once again, a way to expand the game) 
                 dialogue = open("./dialogue.txt", "r") # opens the text file with the dialouge
                 print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
                 print(dialogue.readline()) # cycles through the text file to the correct line, then prints it
@@ -459,7 +458,7 @@ def command(query): # this is where all the magic happens. It contains almost ev
                         input("The end (press ENTER to continue).") # wait for user input, and also the first ending
                     elif ending == "no": # if the player chose no, the sequence below starts
                         gameended = True # changes the variable so that the loop is not repeated
-                        clrprint("The door disintegrates in front of you and you feel at peace, knowing that this was the correct decision. Despite all you've been through, your mission was not to leave the backrooms, but to make them a safer place for you… and the friends you lost a long time ago. You can still feel them near you, and with enough time and assurance that they're safe, they will surely come back. ASHLEY, XEN, HOPE, JAKE, and many others. Your best friends for many years, will be one with you again soon.") # prints the text then clears it
+                        clrprint("The door disintegrates in front of you and you feel at peace, knowing that this was the correct decision. Despite all you've been through, your mission was not to leave the backrooms, but to make them a safer place for you... and the friends you lost a long time ago. You can still feel them near you, and with enough time and assurance that they're safe, they will surely come back. ASHLEY, XEN, HOPE, JAKE, and many others. Your best friends for many years, will be one with you again soon.") # prints the text then clears it
                         input("The end (press ENTER to continue).") # wait for user input, and also the second ending
                     else: # if the player is either mentally deficient, or they cannot spell yes or no, the following sequence starts
                         clrprint("Please select yes or no.") # prints the text for the mentally deficient people who cannot type, then clears it
@@ -469,14 +468,15 @@ def command(query): # this is where all the magic happens. It contains almost ev
                     ending = input("Leave the backrooms? (yes/no) ") # allows the player to dictate the ending
                     if ending == "yes": # if the player chose yes, the sequence below starts
                         gameended = True # changes the variable so that the loop is not repeated
-                        clrprint("You ready your blunt knife, with you since day one, and point it towards yourself. Is this really what you have to do to leave? It'll be worth it in the end. Three… Two… It's been done. I suppose I'm not you anymore, but finally one with myself having been presented with the opportunity for freedom. I snap back into reality. The backrooms, my headspace, were always too hostile to fully immerse myself into. I suppose there's a reason for that. I look around, and my room is completely white. It was honestly more vibrant back in the backrooms despite you only having the ability to perceive what you wanted to. I kind of miss that already. I should probably look around and see how everyone's doing. Why is my door locked? What is this mailbox shaped slit in my door for? Oh god. This isn't my life. I don't want to be here, imprisoned in my own home. I want to go back. Take me back right now. Please. Oh no, they're coming. I remember now. Not again.") # prints the text then clears it
+                        clrprint("You ready your blunt knife, with you since day one, and point it towards yourself. Is this really what you have to do to leave? It'll be worth it in the end. Three... Two... It's been done. I suppose I'm not you anymore, but finally one with myself having been presented with the opportunity for freedom. I snap back into reality. The backrooms, my headspace, were always too hostile to fully immerse myself into. I suppose there's a reason for that. I look around, and my room is completely white. It was honestly more vibrant back in the backrooms despite you only having the ability to perceive what you wanted to. I kind of miss that already. I should probably look around and see how everyone's doing. Why is my door locked? What is this mailbox shaped slit in my door for? Oh god. This isn't my life. I don't want to be here, imprisoned in my own home. I want to go back. Take me back right now. Please. Oh no, they're coming. I remember now. Not again.") # prints the text then clears it
                         input("The end (press ENTER to continue).") # wait for user input, also the third ending
                     elif ending == "no": # if the player chose no, then the following sequence starts
                         gameended = True # changes the variable so that the loop is not repeated
-                        clrprint("The knife disintegrates in your hand and you feel at peace, knowing that this was the correct decision. Despite all you've been through, your mission was not to leave the backrooms, but to make them a safer place for you… and the friends you lost a long time ago. You can still feel them near you, and with enough time and assurance that they're safe, they will surely come back. ASHLEY, XEN, HOPE, JAKE, and many others. Your best friends for many years, will be one with you again soon.") # prints the text then clears it
+                        clrprint("The knife disintegrates in your hand and you feel at peace, knowing that this was the correct decision. Despite all you've been through, your mission was not to leave the backrooms, but to make them a safer place for you... and the friends you lost a long time ago. You can still feel them near you, and with enough time and assurance that they're safe, they will surely come back. ASHLEY, XEN, HOPE, JAKE, and many others. Your best friends for many years, will be one with you again soon.") # prints the text then clears it
                         input("The end (press ENTER to continue).") # wait for user input, also the final ending
                     else: # if the player is either mentally deficient, or they cannot spell yes or no, the following sequence starts
                         clrprint("Please select yes or no.") # prints the text for the mentally deficient people who cannot type, then clears it
+            FirstTime8 = False # changes the variable to false so that if the players enters the room again, the text does not appear again (once again, a way to expand the game) 
             credit() # credits start
             time.sleep(1) # time between the credits and the ending
             sys.exit() # ends the code
@@ -587,7 +587,7 @@ def start(): # defines start
         else: # if the player does not input yes or no, then this starts the sequence below
             clrprint("Please select an option.") # prints text then clears it
         
-    dialogue = open("./dialogue.txt", "r") # opens the etxt file with the dialouge
+    dialogue = open("./dialogue.txt", "r") # opens the text file with the dialouge
     clrprint(dialogue.readline()) # cycles through the text file to the correct line, then prints it, then clears it
     clrprint(dialogue.readline()) # cycles through the text file to the correct line, then prints it, then clears it
     dialogue.close() # closes the text file with the dialouge
