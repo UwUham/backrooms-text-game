@@ -10,7 +10,7 @@ if platform == "linux" or platform == "linux2" or platform == "darwin": # determ
 elif platform == "win32" or platform == "win64": # determing the command to be used for the clear function. importing the clear from gamefuntions caused an error so we just replicated it.
     clearcmd = "cls" # determing the command to be used for the clear function. importing the clear from gamefuntions caused an error so we just replicated it.
 
-def clear(): # creating the clear function
+def clear(): # creating the clear function, to clear the screen in the same way as is done in gamefunctions.
     system(clearcmd) # creating the clear function
 
 def neofetch(var): # create the neofetch function (neofetch is a screenfetch tool used across essentially all operating systems as a CLI system information tool. It works across windows, macOS, linux, Android, and even iOS and iPadOS.)
