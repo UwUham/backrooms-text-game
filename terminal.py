@@ -22,7 +22,7 @@ def neofetch(var): # create the neofetch function (neofetch is a screenfetch too
        |---|    
    .---^ - ^---. OS: Backrooms Linux 1.0.0
    :___________:
-      |  |//|    Host: Backport rf1171-x
+      |  |//|    Host: SYSTEM rf1171-x
       |  |//|   
       |  |//|    Kernel: 5.12.13-arch1-2
       |  |//|   
