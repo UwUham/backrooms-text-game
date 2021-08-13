@@ -2,7 +2,7 @@
 The credits function is used to create an autoscrolling credits environment.
 To contributors:
 Steps to add your name in these credits:
-1. Create a function named after you.
+1. Create a function named after you, following the other functions as a template.
 2. In any area where you contributed, underneath a current contributors name, insert "linecount(1)" and beneath that, your function.
 '''
 from terminal import clear # importing the required function

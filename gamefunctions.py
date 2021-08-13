@@ -2,7 +2,7 @@
 Gamefunctions.py is the file that holds all the commands in the exploration terminal environment. It holds commands such as run, drp, look, and the puzzle environments and solutions.
 For contributors:
 You can add new commands by adding an "elif" on the "ask ==" layer in the "run" function.
-In the "elif ask.startsWith("take")" layer, you can add new items by choosing a room and placing an item in the room's command area by typing.
+In the "elif ask.startsWith("take")" layer, you can add new items by choosing a room and placing an item in the room's command area.
 """
 import random, sys, os, time, combatfunctions as combat #importing various dependencies: general usage
 from terminal import arch_start #importing various dependencies: specifics for the Computer puzzle
@@ -28,7 +28,7 @@ DoorUnlocked = False   # defining variables for various places in the code inclu
 VaultOpen = False  # defining variables for various places in the code including room text and puzzle completion status
 Computer = False   # defining variables for various places in the code including room text and puzzle completion status
 lobbyfight = False # defining variables for various places in the code including room text and puzzle completion status
-switch = True  # defining variables for various places in the code including room text and puzzle completion status
+switch = False  # defining variables for various places in the code including room text and puzzle completion status
 roomstate = [1, 1] # defining variables for various places in the code including room text and puzzle completion status
 pg13 = ""  # defining variables for various places in the code including room text and puzzle completion status
 
@@ -569,6 +569,21 @@ def command(query): # this is where all the magic happens. It contains almost ev
     elif ask.startswith("drop"): # if the player wants to drop, then this starts the sequence below
         combat.drop(ask[5:]) # calls the drop function from combat, to drop the item that was named
     
+    elif ask == "exit": # if the player runs the exit command:
+        while True: # create a loop that can only be exited with the break function
+            choice = input("Do you want to exit the game? (y/n) ") # create a prompt for if they wanna exit
+            if choice == "y": # checks which option the user picked
+                clear() # clear the screen
+                sys.exit() # exit the script
+            elif choice == "n": # checks which option the user picked
+                break # return to exploration
+            else: # checks which option the user picked
+                print("Please select an option.") # tell the user to select an option
+                input("Press ENTER to continue.") # wait for user input
+                clear() # clear the screen
+
+        
+
     else: # if none of the above conditions are met, then this starts the sequence below
         clrprint("Unknown action. Try \"help\".") # prints text then clears it
         input("Press ENTER to continue.") # wait for user input
