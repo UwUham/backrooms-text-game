@@ -179,7 +179,7 @@ def fight(entityName, entityWeapon): # create the fight function, which is used 
         input("Press ENTER to continue.") # wait for user input
 
 
-def weapons(): # create the weapons function
+def weapons(): # create the weapons function, which is used to interact with your bag
     global choicenum, swap # set a variable as global
     if len(weaponsinBag) != 0: # if there is something in your bag
         swap = True # a switch boolean

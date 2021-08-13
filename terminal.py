@@ -1,6 +1,6 @@
-from os import system # defining required variables
-from time import sleep # defining required variables
-import sys # defining required variables
+from os import system # importing required librares
+from time import sleep # importing required librares
+import sys # importing required librares
 neofetchbool = False  # initialising variables
 NeoRun = False # initialising variables
 
