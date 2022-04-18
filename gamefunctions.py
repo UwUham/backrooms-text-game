@@ -50,6 +50,8 @@ if platform == "linux" or platform == "linux2" or platform == "darwin": # defini
 elif platform == "win32": # defining the command to clear the screen dependent on the end user's operating system.
     clearcmd = "cls" # defining the command to clear the screen dependent on the end user's operating system.
 
+  
+
 def clear(): # assigning the clear command to a function
     os.system(clearcmd) # assigning the clear command to a function
 
@@ -76,6 +78,13 @@ def itemappend(name): # creating a drop system based on the current room: this f
 def clrprint(text): # assigning the clear command to another funtion that I will use frequently: clearing the screen and immediately printing something.
     os.system(clearcmd) # assigning the clear command to another funtion that I will use frequently: clearing the screen and immediately printing something.
     print(text) # assigning the clear command to another funtion that I will use frequently: clearing the screen and immediately printing something.
+
+def gotoline(n):
+    for i in range(n):
+        print(dialogue.readline())
+    clrprint(dialogue.readline()def gotoline(n):
+        for i in range(n):
+            print(dialogue.readline()) ) 
 
 def command(query): # this is where all the magic happens. It contains almost every command used in the game and controls everything.
     global FirstTime8, room1items, room2items, room3items, room4items, room5items, room6items, room7items, room8items, room9items, room1condition, switch, room1condition1, room2condition, room2entity, room3condition, room8condition, room6condition, FirstTime1, FirstTime2, FirstTime3, FirstTime4, FirstTime5, FirstTime6, FirstTime7, PuzzleCleared, DoorUnlocked, VaultOpen, lobbyfight, Computer # i'm not sure if something like "global *" would have worked at all but now that it's been written there's not much point in changing it.
@@ -187,14 +196,15 @@ def command(query): # this is where all the magic happens. It contains almost ev
         meta.close()
         input("Press ENTER to continue.") # wait for user input
         if roomstate[0] == 4 and lobbyfight == False: # start of first fight, ensuring that the fight has not been completed already
-            combat.combat(random.choice(names), "entity tentacle", 40) # randomising the name and starting the combat sequence, including the statistics for the entity weapon
+            combat.combat(random.choice(names), "en from the combat file
+                elif ask == "bedroom": # moves the player into ntity tentacle", 40) # randomising the name and starting the combat sequence, including the statistics for the entity weapon
             lobbyfight = True # changes the variable so that the fight is not repeated if the player enters the lobby with the same roomstate
         elif lobbyfight == True and roomstate[0] == 4: # starts the sequence of events that happens after you finish the fight, and if you re-enter the room without changing the roomstate. 
             clrprint("The entity fades in front of you, as though simply looking at you killed them.") # prints out the text explaining that you have beaten the entity and then clears it afterwards
             input("Press ENTER to continue.") # wait for user input
     elif ask == "bag": # runs the sequence that starts when the player inputs the bag command
         combat.weapons() # calls the weapon function from the combat file
-    elif ask == "bedroom": # moves the player into the bedroom
+            elif ask == "bedroom": # moves the player into the bedroom
         if roomstate[0] == 2: # checks to see if the room has been entered before
             roomstate[0] = 1 # moves the player back into room one
             clrprint("Bedroom") # prints the text and then clears it afterwards
@@ -206,12 +216,9 @@ def command(query): # this is where all the magic happens. It contains almost ev
                 roomstate[1] = roomstate[0] # increases the count of how many rooms the player has discovered
                 FirstTime1 = False # changes the variable so that if the player enters the room again, the text is not displayed again
                 dialogue = open("./dialogue.txt", "r") # opens the file that contains dialouge
-                print(dialogue.readline()) # cycles through each line of the text file to the correct line, then prints it
-                print(dialogue.readline()) # cycles through each line of the text file to the correct line, then prints it
-                clrprint(dialogue.readline()) # cycles through each line of the text file to the correct line, then prints it
+                gotoline(2) # cycles through each line of the text file to the correct line, then prints it
                 input("Press ENTER to continue.") # wait for user input
-                print(dialogue.readline()) # cycles through each line of text file to the correct line, then prints it
-                clrprint(dialogue.readline()) # prints the correct line of text and then clears it
+                gotoline(1) # prints the correct line of text and then clears it
                 dialogue.close() # closes the files that contains dialouge
             else: # if the player is not here for their first time, then this starts the sequence below
                 clrprint("Corridor") # prints corridor and then clears the text
@@ -229,13 +236,7 @@ def command(query): # this is where all the magic happens. It contains almost ev
                 roomstate[1] = roomstate[0] # increases the count of how many rooms the player has discovered
                 FirstTime2 = False # changes the variable to false so that if the player enters the room again, the text is not displayed again
                 dialogue = open("./dialogue.txt", "r") # opens the file that contains dialouge 
-                print(dialogue.readline()) # cycles through each line of the text file to the correct line, then prints it
-                print(dialogue.readline()) # cycles through each line of the text file to the correct line, then prints it
-                print(dialogue.readline()) # cycles through each line of the text file to the correct line, then prints it
-                print(dialogue.readline()) # cycles through each line of the text file to the correct line, then prints it
-                print(dialogue.readline()) # cycles through each line of the text file to the correct line, then prints it
-                print(dialogue.readline()) # cycles through each line of the text file to the correct line, then prints it
-                clrprint(dialogue.readline()) # cycles through each line of the text file to the correct line and then prints it, then clears it
+                gotoline(6) # cycles through each line of the text file to the correct line and then prints it, then clears it
                 input("Press ENTER to continue.") # wait for user input
                 print(dialogue.readline()) # cycles through each line of the text file to the correct line, then prints it
                 clrprint(dialogue.readline()) # cycles through each line of the text file to the correct line and then prints it, then clears it
